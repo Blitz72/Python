@@ -134,7 +134,11 @@ GPIO.output(4, GPIO.LOW)
 set_power(MAC_ADDRESS, 'on', MESHNAME, MESHPASS)
 set_rgb(MAC_ADDRESS, 0, 0, 50, MESHNAME, MESHPASS)
 
-# time.sleep(5)
+time.sleep(5)
+
+set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
+
+time.sleep(1)
 
 #light_turned_off = False
 
@@ -151,8 +155,9 @@ while True:
     else:
         light_enable = False
 
-    if not light_enable:
-        set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
+    # if light_enable is False:
+    #     print('Turning light off!')
+    #     set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
 #        light_enable_flag = False
 #       light_turned_off = True
 
@@ -166,6 +171,8 @@ while True:
 #             fill_mode_flag = True
             if light_enable:
                 set_rgb(MAC_ADDRESS, 50, 50, 0, MESHNAME, MESHPASS)
+            else:
+                set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
             fill_reservoir()
         elif chan.voltage >= LOW_LIMIT:
             print('Water level OK!')
@@ -177,6 +184,8 @@ while True:
             print('red_level: ', red_level)
             if light_enable:
                 set_rgb(MAC_ADDRESS, red_level, 50, 0, MESHNAME, MESHPASS)
+            else:
+                set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
             GPIO.output(4, GPIO.LOW)
 
     time.sleep(DELAY_RUN_MODE)
