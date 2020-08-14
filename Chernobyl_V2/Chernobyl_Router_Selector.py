@@ -2,10 +2,10 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
-import smbus
+# import smbus
 import time
 import sqlite3 as db
-import pijuice
+# import pijuice
 
 root = Tk()
 
@@ -61,7 +61,7 @@ IODIRB = 0x01
 GPIOA = 0x12
 GPIOB = 0x13
 
-bus = smbus.SMBus(channel)
+# bus = smbus.SMBus(channel)
 
 try:
   bus.write_byte_data(address1, IODIRA, 0x00)
