@@ -52,6 +52,7 @@ def sensor_error():
     GPIO.output(4, GPIO.LOW)
     # turn bulb red
     set_rgb(MAC_ADDRESS, 50, 0, 0, MESHNAME, MESHPASS)
+    set_power(MAC_ADDRESS, 'on', MESHNAME, MESHPASS)
 
 
 def fill_reservoir():
@@ -136,10 +137,6 @@ set_rgb(MAC_ADDRESS, 0, 0, 50, MESHNAME, MESHPASS)
 
 time.sleep(5)
 
-set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
-
-time.sleep(1)
-
 #light_turned_off = False
 
 # 8.0 inches = ~2.20 volts
@@ -148,18 +145,17 @@ time.sleep(1)
 while True:
 
     # check time, enable ./ble-backend between HOURS_MIN and HOURS_MAX
-    if HOURS_MIN <= time.localtime()[3] <= HOURS_MAX:
+    if HOURS_MIN <= time.localtime()[3] < HOURS_MAX:
         light_enable = True
 #        light_enable_flag = True
-#       light_turned_off = False
+#   light_turned_off = False
     else:
         light_enable = False
 
-    # if light_enable is False:
-    #     print('Turning light off!')
-    #     set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
+#    if light_enable is False:
+#        set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
 #        light_enable_flag = False
-#       light_turned_off = True
+#   light_turned_off = True
 
     if chan.voltage <= SENSOR_MIN:
         sensor_error()
@@ -169,13 +165,14 @@ while True:
         if SENSOR_MIN < chan.voltage < LOW_LIMIT:
             print('LOW WATER LEVEL!')
 #             fill_mode_flag = True
-            if light_enable:
-                set_rgb(MAC_ADDRESS, 50, 50, 0, MESHNAME, MESHPASS)
-            else:
-                set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
+#            if light_enable:
+#                set_rgb(MAC_ADDRESS, 50, 50, 0, MESHNAME, MESHPASS)
+#               set_power(MAC_ADDRESS, 'on', MESHNAME, MESHPASS)
             fill_reservoir()
-        elif chan.voltage >= LOW_LIMIT:
-            print('Water level OK!')
+        else:
+#            set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
+            if chan.voltage >= LOW_LIMIT:
+                print('Water level OK!')
             red_level = int((MID_LEVEL - (chan.voltage))*50/(MID_LEVEL - LOW_LIMIT))
             if red_level < 0:
                 red_level = 0
@@ -184,6 +181,7 @@ while True:
             print('red_level: ', red_level)
             if light_enable:
                 set_rgb(MAC_ADDRESS, red_level, 50, 0, MESHNAME, MESHPASS)
+                set_power(MAC_ADDRESS, 'on', MESHNAME, MESHPASS)
             else:
                 set_power(MAC_ADDRESS, 'off', MESHNAME, MESHPASS)
             GPIO.output(4, GPIO.LOW)
