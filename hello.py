@@ -72,7 +72,7 @@ if isFound:
   prefName = input(msg)
   jedi[indexer].update({'prefName': prefName})
   masterLastName = master.split(" ")[1]
-  msg = f"Ok, {firstName}, from now on {masterLastName} will call you \"{prefName}.\""
+  msg = f"Ok, {firstName}, from now on {masterLastName} will call you \"{prefName}.\"\nMay the force be with you!"
   
   print()
   print(msg)
