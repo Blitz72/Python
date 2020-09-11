@@ -75,12 +75,16 @@ def shut_down():
     output = process.communicate()[0]
     print(output)
 
+
+time.sleep(120)  # wait 2 minutes before allowing the shutdown button to be pushed
+
 # Check button if we want to shutdown the Pi safely
 while True:
 
     # For troubleshooting, uncomment this line to output button status on command line
     #print GPIO.input(shutdown_pin)
     if GPIO.input(shutdown_pin) == False:
+        print("Shutdown button pushed...")
         time.sleep(3)
         if GPIO.input(shutdown_pin) == False:
             shut_down()
