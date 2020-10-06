@@ -2,9 +2,11 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
-# import smbus
+import smbus
 import time
 import sqlite3 as db
+import router_info as router
+import Router_Frame
 # import pijuice
 
 root = Tk()
@@ -61,7 +63,12 @@ IODIRB = 0x01
 GPIOA = 0x12
 GPIOB = 0x13
 
-# bus = smbus.SMBus(channel)
+try:
+    bus = smbus.SMBus(channel)
+    print('I2C bus initialized!\n')
+except Exception as ex:
+    print(ex)
+    print('Could not initialize I2C bus!\n')
 
 try:
   bus.write_byte_data(address1, IODIRA, 0x00)
@@ -69,12 +76,14 @@ try:
 except Exception as ex:
   print(ex)
   print('An error occurred writing to:', hex(address1))
+  print()
 try:
   bus.write_byte_data(address2, IODIRA, 0x00)
   bus.write_byte_data(address2, IODIRB, 0x00)
 except Exception as ex:
   print(ex)
   print('An error occurred writing to:', hex(address2))
+  print()
 
 
 # layout variables
@@ -83,7 +92,7 @@ except Exception as ex:
 
 
 # database creation and connection
-path = '/home/pi/Chernobyl Router Selector/db/Chernobyl.db'
+path = '/home/pi/Python/Chernobyl_V2/db/Chernobyl.db'
 connection = db.connect(path)
 c = connection.cursor()
 
@@ -416,15 +425,15 @@ root.config(menu=menu)
 
 dbValues = c.execute("SELECT * FROM config").fetchone()
 print()
-print('GPIOA1 GPIOB1 GPIOA2  GPIOB2  pwrFlg  cnfrm   drkMd')
+print('GPIOA1\tGPIOB1\tGPIOA2\tGPIOB2\tpwrFlg\tcnfrm\tdrkMd')
 print(
- str(dbValues[0]) + '\t ' +
- str(dbValues[1]) + '\t' +
- str(dbValues[2]) + '\t' +
- str(dbValues[3]) + '\t' +
- str(dbValues[4]) + '\t' +
- str(dbValues[5]) + '\t' +
- str(dbValues[6])
+    str(dbValues[0]) + '\t' +
+    str(dbValues[1]) + '\t' +
+    str(dbValues[2]) + '\t' +
+    str(dbValues[3]) + '\t' +
+    str(dbValues[4]) + '\t' +
+    str(dbValues[5]) + '\t' +
+    str(dbValues[6])
 )
 print()
 
@@ -508,7 +517,7 @@ else:
 frame1 = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame1.grid(column=0, row=0)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Linksys_AC1750_EA7300.jpg'
+imgURL = router.router1['img_URL']
 img1 = Image.open(imgURL)
 if img1.mode != 'RGBA':
   img1.convert('RGBA')
@@ -519,7 +528,7 @@ render1 = ImageTk.PhotoImage(img1)
 image1 = Label(frame1, image=render1, bg=bgColor)
 image1.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel1 = Label(frame1, text='Linksys EA7300 AC1750', bg=bgColorFrame, fg=fgColorFrame)
+myLabel1 = Label(frame1, text=router.router1['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel1.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton1 = Button(frame1, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame1, myLabel1, image1, 1))
 yesButton1.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -534,7 +543,7 @@ else:
 frame2 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame2.grid(column=1, row=0)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Linksys_AC1900_EA7500.jpg'
+imgURL = router.router2['img_URL']
 img2 = Image.open(imgURL)
 if img2.mode != 'RGBA':
   img2.convert('RGBA')
@@ -545,7 +554,7 @@ render2 = ImageTk.PhotoImage(img2)
 image2 = Label(frame2, image=render2, bg=bgColor)
 image2.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel2 = Label(frame2, text='Linksys EA7500 AC1900', bg=bgColorFrame, fg=fgColorFrame)
+myLabel2 = Label(frame2, text=router.router2['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel2.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton2 = Button(frame2, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame2, myLabel2, image2, 2))
 yesButton2.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -560,7 +569,7 @@ else:
 frame3 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame3.grid(column=2, row=0)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/ASUS_AC-3100.jpg'
+imgURL = router.router3['img_URL']
 img3 = Image.open(imgURL)
 if img3.mode != 'RGBA':
   img3.convert('RGBA')
@@ -571,7 +580,7 @@ render3 = ImageTk.PhotoImage(img3)
 image3 = Label(frame3, image=render3, bg=bgColor)
 image3.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel3 = Label(frame3, text='ASUS Wireles AC-3100', bg=bgColorFrame, fg=fgColorFrame)
+myLabel3 = Label(frame3, text=router.router3['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel3.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton3 = Button(frame3, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame3, myLabel3, image3, 3))
 yesButton3.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -586,7 +595,7 @@ else:
 frame4 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame4.grid(column=3, row=0)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Google_WiFi.jpg'
+imgURL = router.router4['img_URL']
 img4 = Image.open(imgURL)
 if img4.mode != 'RGBA':
   img4.convert('RGBA')
@@ -597,7 +606,7 @@ render4 = ImageTk.PhotoImage(img4)
 image4 = Label(frame4, image=render4, bg=bgColor)
 image4.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel4 = Label(frame4, text='Google WiFi', bg=bgColorFrame, fg=fgColorFrame)
+myLabel4 = Label(frame4, text=router.router4['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel4.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton4 = Button(frame4, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame4, myLabel4, image4, 4))
 yesButton4.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -612,7 +621,7 @@ else:
 frame5 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame5.grid(column=4, row=0)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/TP_Link_Archer_C50_AC1200.jpg'
+imgURL = router.router5['img_URL']
 img5 = Image.open(imgURL)
 if img5.mode != 'RGBA':
   img5.convert('RGBA')
@@ -623,7 +632,7 @@ render5 = ImageTk.PhotoImage(img5)
 image5 = Label(frame5, image=render5, bg=bgColor)
 image5.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel5 = Label(frame5, text='TP Link Archer C50 AC1200', bg=bgColorFrame, fg=fgColorFrame)
+myLabel5 = Label(frame5, text=router.router5['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel5.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton5 = Button(frame5, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame5, myLabel5, image5, 5))
 yesButton5.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -638,7 +647,7 @@ else:
 frame6 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame6.grid(column=5, row=0)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Netgear_Nighthawk_X6S.jpg'
+imgURL = router.router6['img_URL']
 img6 = Image.open(imgURL)
 if img6.mode != 'RGBA':
   img6.convert('RGBA')
@@ -649,7 +658,7 @@ render6 = ImageTk.PhotoImage(img6)
 image6 = Label(frame6, image=render6, bg=bgColor)
 image6.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel6 = Label(frame6, text='Netgear Nighthawk X6S', bg=bgColorFrame, fg=fgColorFrame)
+myLabel6 = Label(frame6, text=router.router6['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel6.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton6 = Button(frame6, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame6, myLabel6, image6, 6))
 yesButton6.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -664,7 +673,7 @@ else:
 frame7 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame7.grid(column=0, row=1)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Netgear_Nighthawk_AC1900.jpg'
+imgURL = router.router7['img_URL']
 img7 = Image.open(imgURL)
 if img7.mode != 'RGBA':
   img7.convert('RGBA')
@@ -675,7 +684,7 @@ render7 = ImageTk.PhotoImage(img7)
 image7 = Label(frame7, image=render7, bg=bgColor)
 image7.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel7 = Label(frame7, text='Netgear Nighthawk AC1900', bg=bgColorFrame, fg=fgColorFrame)
+myLabel7 = Label(frame7, text=router.router7['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel7.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton7 = Button(frame7, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame7, myLabel7, image7, 7))
 yesButton7.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -690,7 +699,7 @@ else:
 frame8 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame8.grid(column=1, row=1)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/eero_WiFi.jpg'
+imgURL = router.router8['img_URL']
 img8 = Image.open(imgURL)
 if img8.mode != 'RGBA':
   img8.convert('RGBA')
@@ -701,7 +710,7 @@ render8 = ImageTk.PhotoImage(img8)
 image8 = Label(frame8, image=render8, bg=bgColor)
 image8.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel8 = Label(frame8, text='eero Pro Mesh WiFi', bg=bgColorFrame, fg=fgColorFrame)
+myLabel8 = Label(frame8, text=router.router8['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel8.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton8 = Button(frame8, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame8, myLabel8, image8, 8))
 yesButton8.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -716,7 +725,7 @@ else:
 frame9 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame9.grid(column=2, row=1)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Netgear_Nighthawk_AC3200.jpg'
+imgURL = router.router9['img_URL']
 img9 = Image.open(imgURL)
 if img9.mode != 'RGBA':
   img9.convert('RGBA')
@@ -727,7 +736,7 @@ render9 = ImageTk.PhotoImage(img9)
 image9 = Label(frame9, image=render9, bg=bgColor)
 image9.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel9 = Label(frame9, text='Netgear Nighthawk X6 AC3200', bg=bgColorFrame, fg=fgColorFrame)
+myLabel9 = Label(frame9, text=router.router9['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel9.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton9 = Button(frame9, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame9, myLabel9, image9, 9))
 yesButton9.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -742,7 +751,7 @@ else:
 frame10 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame10.grid(column=3, row=1)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/TP_Link_Archer_C90_AC1900.jpg'
+imgURL = router.router10['img_URL']
 img10 = Image.open(imgURL)
 if img10.mode != 'RGBA':
   img10.convert('RGBA')
@@ -753,7 +762,7 @@ render10 = ImageTk.PhotoImage(img10)
 image10 = Label(frame10, image=render10, bg=bgColor)
 image10.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel10 = Label(frame10, text='TP Link Archer C90 AC1900', bg=bgColorFrame, fg=fgColorFrame)
+myLabel10 = Label(frame10, text=router.router10['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel10.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton10 = Button(frame10, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame10, myLabel10, image10, 10))
 yesButton10.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -768,7 +777,7 @@ else:
 frame11 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame11.grid(column=4, row=1)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Netgear_Nighthawk_AX8.jpg'
+imgURL = router.router11['img_URL']
 img11 = Image.open(imgURL)
 if img11.mode != 'RGBA':
   img11.convert('RGBA')
@@ -779,7 +788,7 @@ render11 = ImageTk.PhotoImage(img11)
 image11 = Label(frame11, image=render11, bg=bgColor)
 image11.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel11 = Label(frame11, text='Netgear Nighthawk AX8', bg=bgColorFrame, fg=fgColorFrame)
+myLabel11 = Label(frame11, text=router.router11['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel11.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton11 = Button(frame11, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame11, myLabel11, image11, 11))
 yesButton11.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -794,7 +803,7 @@ else:
 frame12 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame12.grid(column=5, row=1)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/TP_Link_Archer_CR700_AC1750.jpg'
+imgURL = router.router12['img_URL']
 img12 = Image.open(imgURL)
 if img12.mode != 'RGBA':
   img12.convert('RGBA')
@@ -805,7 +814,7 @@ render12 = ImageTk.PhotoImage(img12)
 image12 = Label(frame12, image=render12, bg=bgColor)
 image12.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel12 = Label(frame12, text='TP Link Archer CR700 AC1750', bg=bgColorFrame, fg=fgColorFrame)
+myLabel12 = Label(frame12, text=router.router12['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel12.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton12 = Button(frame12, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame12, myLabel12, image12, 12))
 yesButton12.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -820,7 +829,7 @@ else:
 frame13 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame13.grid(column=0, row=2)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Cisco_RV320K9NA.jpg'
+imgURL = router.router13['img_URL']
 img13 = Image.open(imgURL)
 if img13.mode != 'RGBA':
   img13.convert('RGBA')
@@ -831,7 +840,7 @@ render13 = ImageTk.PhotoImage(img13)
 image13 = Label(frame13, image=render13, bg=bgColor)
 image13.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel13 = Label(frame13, text='Cisco RV320 Dual WAN VPN Router', bg=bgColorFrame, fg=fgColorFrame)
+myLabel13 = Label(frame13, text=router.router13['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel13.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton13 = Button(frame13, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame13, myLabel13, image13, 13))
 yesButton13.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -846,7 +855,7 @@ else:
 frame14 = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame14.grid(column=1, row=2)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Orbi_RBR40.jpg'
+imgURL = router.router14['img_URL']
 img14 = Image.open(imgURL)
 if img14.mode != 'RGBA':
   img14.convert('RGBA')
@@ -857,7 +866,7 @@ render14 = ImageTk.PhotoImage(img14)
 image14 = Label(frame14, image=render14, bg=bgColor)
 image14.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel14 = Label(frame14, text='Netgear Orbi RBR40', bg=bgColorFrame, fg=fgColorFrame)
+myLabel14 = Label(frame14, text=router.router14['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel14.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton14 = Button(frame14, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame14, myLabel14, image14, 14))
 yesButton14.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -872,7 +881,7 @@ else:
 frame15 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame15.grid(column=2, row=2)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/ATT_Arris_NVG589.jpg'
+imgURL = router.router15['img_URL']
 img15 = Image.open(imgURL)
 if img15.mode != 'RGBA':
   img15.convert('RGBA')
@@ -883,7 +892,7 @@ render15 = ImageTk.PhotoImage(img15)
 image15 = Label(frame15, image=render15, bg=bgColor)
 image15.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel15 = Label(frame15, text='AT&T Arris NVG589', bg=bgColorFrame, fg=fgColorFrame)
+myLabel15 = Label(frame15, text=router.router15['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel15.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton15 = Button(frame15, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame15, myLabel15, image15, 15))
 yesButton15.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -898,7 +907,7 @@ else:
 frame16 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame16.grid(column=3, row=2)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Spectrum_Netgear_R6300-100PAS.jpg'
+imgURL = router.router16['img_URL']
 img16 = Image.open(imgURL)
 if img16.mode != 'RGBA':
   img16.convert('RGBA')
@@ -909,7 +918,7 @@ render16 = ImageTk.PhotoImage(img16)
 image16 = Label(frame16, image=render16, bg=bgColor)
 image16.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel16 = Label(frame16, text='Spectrum Netgear R6300v2', bg=bgColorFrame, fg=fgColorFrame)
+myLabel16 = Label(frame16, text=router.router16['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel16.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton16 = Button(frame16, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame16, myLabel16, image16, 16))
 yesButton16.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -924,7 +933,7 @@ else:
 frame17 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame17.grid(column=4, row=2)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/ATT_Pace_3801HGV.png'
+imgURL = router.router17['img_URL']
 img17 = Image.open(imgURL)
 if img17.mode != 'RGBA':
   img17.convert('RGBA')
@@ -935,7 +944,7 @@ render17 = ImageTk.PhotoImage(img17)
 image17 = Label(frame17, image=render17, bg=bgColor)
 image17.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel17 = Label(frame17, text='AT&T PPace 3801HGV', bg=bgColorFrame, fg=fgColorFrame)
+myLabel17 = Label(frame17, text=router.router17['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel17.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton17 = Button(frame17, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame17, myLabel17, image17, 17))
 yesButton17.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -950,7 +959,7 @@ else:
 frame18 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame18.grid(column=5, row=2)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Cisco_RV325K9NA.jpg'
+imgURL = router.router18['img_URL']
 img18 = Image.open(imgURL)
 if img18.mode != 'RGBA':
   img18.convert('RGBA')
@@ -961,7 +970,7 @@ render18 = ImageTk.PhotoImage(img18)
 image18 = Label(frame18, image=render18, bg=bgColor)
 image18.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel18 = Label(frame18, text='Cisco RV325 Dual WAN VPN Router', bg=bgColorFrame, fg=fgColorFrame)
+myLabel18 = Label(frame18, text=router.router18['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel18.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton18 = Button(frame18, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame18, myLabel18, image18, 18))
 yesButton18.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -976,7 +985,7 @@ else:
 frame19 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame19.grid(column=0, row=3)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/TP_Link_Archer_C7_AC1750.jpg'
+imgURL = router.router19['img_URL']
 img19 = Image.open(imgURL)
 if img19.mode != 'RGBA':
   img19.convert('RGBA')
@@ -987,7 +996,7 @@ render19 = ImageTk.PhotoImage(img19)
 image19 = Label(frame19, image=render19, bg=bgColor)
 image19.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel19 = Label(frame19, text='TP Link Archer C7 AC1750', bg=bgColorFrame, fg=fgColorFrame)
+myLabel19 = Label(frame19, text=router.router19['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel19.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton19 = Button(frame19, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame19, myLabel19, image19, 19))
 yesButton19.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1002,7 +1011,7 @@ else:
 frame20 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame20.grid(column=1, row=3)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/LUXUL_XAP-1500.jpg'
+imgURL = router.router20['img_URL']
 img20 = Image.open(imgURL)
 if img20.mode != 'RGBA':
   img20.convert('RGBA')
@@ -1013,7 +1022,7 @@ render20 = ImageTk.PhotoImage(img20)
 image20 = Label(frame20, image=render20, bg=bgColor)
 image20.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel20 = Label(frame20, text='LUXUL XAP-1500 (POE)', bg=bgColorFrame, fg=fgColorFrame)
+myLabel20 = Label(frame20, text=router.router20['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel20.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton20 = Button(frame20, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame20, myLabel20, image20, 20))
 yesButton20.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1028,7 +1037,7 @@ else:
 frame21 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame21.grid(column=2, row=3)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Packedge_WK-2.jpg'
+imgURL = router.router21['img_URL']
 img21 = Image.open(imgURL)
 if img21.mode != 'RGBA':
   img21.convert('RGBA')
@@ -1039,7 +1048,7 @@ render21 = ImageTk.PhotoImage(img21)
 image21 = Label(frame21, image=render21, bg=bgColor)
 image21.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel21 = Label(frame21, text='Packedge WK-23 3x3 WAP', bg=bgColorFrame, fg=fgColorFrame)
+myLabel21 = Label(frame21, text=router.router21['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel21.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton21 = Button(frame21, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame21, myLabel21, image21, 21))
 yesButton21.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1054,7 +1063,7 @@ else:
 frame22 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame22.grid(column=3, row=3)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Technicolor_TC8715D.jpg'
+imgURL = router.router22['img_URL']
 img22 = Image.open(imgURL)
 if img22.mode != 'RGBA':
   img22.convert('RGBA')
@@ -1065,7 +1074,7 @@ render22 = ImageTk.PhotoImage(img22)
 image22 = Label(frame22, image=render22, bg=bgColor)
 image22.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel22 = Label(frame22, text='Spectrum Technicolor TC8715D ', bg=bgColorFrame, fg=fgColorFrame)
+myLabel22 = Label(frame22, text=router.router22['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel22.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton22 = Button(frame22, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame22, myLabel22, image22, 22))
 yesButton22.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1080,7 +1089,7 @@ else:
 frame23 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame23.grid(column=4, row=3)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Spectrum_Wave_2_RAC2V1S.jpg'
+imgURL = router.router23['img_URL']
 img23 = Image.open(imgURL)
 if img23.mode != 'RGBA':
   img23.convert('RGBA')
@@ -1091,7 +1100,7 @@ render23 = ImageTk.PhotoImage(img23)
 image23 = Label(frame23, image=render23, bg=bgColor)
 image23.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel23 = Label(frame23, text='Spectrum Wave 2 RAC2V1S', bg=bgColorFrame, fg=fgColorFrame)
+myLabel23 = Label(frame23, text=router.router23['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel23.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton23 = Button(frame23, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame23, myLabel23, image23, 23))
 yesButton23.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1106,7 +1115,7 @@ else:
 frame24 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame24.grid(column=5, row=3)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/ATT_Arris_BGW210-700.jpg'
+imgURL = router.router24['img_URL']
 img24 = Image.open(imgURL)
 if img24.mode != 'RGBA':
   img24.convert('RGBA')
@@ -1117,7 +1126,7 @@ render24 = ImageTk.PhotoImage(img24)
 image24 = Label(frame24, image=render24, bg=bgColor)
 image24.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel24 = Label(frame24, text='AT&T Arris BGW210-700', bg=bgColorFrame, fg=fgColorFrame)
+myLabel24 = Label(frame24, text=router.router24['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel24.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton24 = Button(frame24, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame24, myLabel24, image24, 24))
 yesButton24.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1132,7 +1141,7 @@ else:
 frame25 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame25.grid(column=0, row=4)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/Netgear_WNDAP360.jpg'
+imgURL = router.router25['img_URL']
 img25 = Image.open(imgURL)
 if img25.mode != 'RGBA':
   img25.convert('RGBA')
@@ -1143,7 +1152,7 @@ render25 = ImageTk.PhotoImage(img25)
 image25 = Label(frame25, image=render25, bg=bgColor)
 image25.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
 
-myLabel25 = Label(frame25, text='Netgear WNDAP360', bg=bgColorFrame, fg=fgColorFrame)
+myLabel25 = Label(frame25, text=router.router25['label_text'], bg=bgColorFrame, fg=fgColorFrame)
 myLabel25.place(relwidth=0.9, relheight=0.2, relx=0.05)
 yesButton25 = Button(frame25, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: relayON(frame25, myLabel25, image25, 25))
 yesButton25.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
@@ -1158,7 +1167,7 @@ else:
 frame26 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame26.grid(column=1, row=4)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/C_by_GE_logo.jpg'
+imgURL = router.router26['img_URL']
 img26 = Image.open(imgURL)
 if img26.mode != 'RGBA':
   img26.convert('RGBA')
@@ -1184,7 +1193,7 @@ else:
 frame27 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame27.grid(column=2, row=4)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/GE_logo.jpg'
+imgURL = router.router27['img_URL']
 img27 = Image.open(imgURL)
 if img27.mode != 'RGBA':
   img27.convert('RGBA')
@@ -1210,7 +1219,7 @@ else:
 frame28 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame28.grid(column=3, row=4)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/C_by_GE_Spark.jpg'
+imgURL = router.router28['img_URL']
 img28 = Image.open(imgURL)
 if img28.mode != 'RGBA':
   img28.convert('RGBA')
@@ -1236,7 +1245,7 @@ else:
 frame29 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame29.grid(column=4, row=4)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/GE_logo.jpg'
+imgURL = router.router29['img_URL']
 img29 = Image.open(imgURL)
 if img29.mode != 'RGBA':
   img29.convert('RGBA')
@@ -1262,7 +1271,7 @@ else:
 frame30 = Frame(root, height=frameHeight, width = frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
 frame30.grid(column=5, row=4)
 
-imgURL = '/home/pi/Chernobyl Router Selector/images/C_by_GE_logo.jpg'
+imgURL = router.router30['img_URL']
 img30 = Image.open(imgURL)
 if img30.mode != 'RGBA':
   img30.convert('RGBA')
@@ -1280,6 +1289,8 @@ yesButton30.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
 noButton30 = Button(frame30, text="OFF", fg=fgColorButtonRed, bg=bgColorButton, cursor='hand2', command=lambda: relayOFF(frame30, myLabel30, image30, 30))
 noButton30.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
 
+#frame_1 = Router_Frame(router.router1)
+#frame_1.print_info()
 
 # Davey's playground!!!
 
