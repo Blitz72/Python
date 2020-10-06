@@ -28,21 +28,29 @@ FG_COLOR_DARK = 'white'
 IMG_BACKGROUND_GREEN = '#00bb00'
 IMG_BACKGROUND_RED = '#bb0000'
 
-fgColorFrame = FG_COLOR_LIGHT
-bgColorFrame = BACKGROUND_LIGHT_FRAME
-fgColorButton = LIGHT_BUTTON_GREEN
-bgColorButton = BACKGROUND_LIGHT_BUTTON
+bgColorImage = IMG_BACKGROUND_GREEN
 
-bgColorFrame = BACKGROUND_DARK_FRAME
-fgColor = FG_COLOR_DARK
-bgColorButton = BACKGROUND_DARK_BUTTON
-fgColorButtonGreen = DARK_BUTTON_GREEN
-fgColorButtonRed = DARK_BUTTON_RED
-bgColor = IMG_BACKGROUND_GREEN
+darkMode = True
+if darkMode:
+  bgColorFrame = BACKGROUND_DARK_FRAME
+  fgColorFrame = FG_COLOR_DARK
+  bgColorButton = BACKGROUND_DARK_BUTTON
+  fgColorButtonGreen = DARK_BUTTON_GREEN
+  fgColorButtonRed = DARK_BUTTON_RED
+  # root.configure(bg=BACKGROUND_DARK_BUTTON)
+  # root.configure(fg=FG_COLOR_DARK)
+else:
+  bgColorFrame = BACKGROUND_LIGHT_FRAME
+  fgColorFrame = FG_COLOR_LIGHT
+  bgColorButton = BACKGROUND_LIGHT_BUTTON
+  fgColorButtonGreen = LIGHT_BUTTON_GREEN
+  fgColorButtonRed = LIGHT_BUTTON_RED
 
 borderStyle = 'ridge'
 borderWidth = 3
 alpha = 170
+
+frames = []
 
 class Router_Frame:
     
@@ -60,15 +68,29 @@ class Router_Frame:
         
         self.img = self.img.resize((int(frameWidth-self.router_info['width_adjust'] * scale_ratio), int(frameHeight-self.router_info['height_adjust'] * scale_ratio)), Image.ANTIALIAS)
         self.render = ImageTk.PhotoImage(self.img)
-        self.image = Label(self.frame, image=self.render, bg=bgColor)
+        self.image = Label(self.frame, image=self.render, bg=bgColorImage)
         self.image.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
+        
+        self.label = Label(self.frame, text=self.router_info['label_text'], bg=bgColorFrame, fg=fgColorFrame)
+        self.label.place(relwidth=0.9, relheight=0.2, relx=0.05)
+        
+        self.yesButton = Button(self.frame, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: self.relay_on())
+        self.yesButton.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
+        self.noButton = Button(self.frame, text="OFF",  fg=fgColorButtonRed, bg=bgColorButton, cursor='hand2', command=lambda: self.relay_off())
+        self.noButton.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
+    
+    
+    def relay_on(self):
+        self.image.config(bg=IMG_BACKGROUND_GREEN)
+    
+    
+    def relay_off(self):
+        self.image.config(bg=IMG_BACKGROUND_RED)
     
     
     def print_info(self):
         print(self.router_info)
 
-
-frames = []
 
 frame1 = Router_Frame(router.router1)
 frames.append(frame1)
@@ -131,6 +153,6 @@ frames.append(frame29)
 frame30 = Router_Frame(router.router30)
 frames.append(frame30)
 
-for frame in frames:
-    print(frame.router_info['img_URL'])
+#for frame in frames:
+#    print(frame.router_info['img_URL'])
 #print(frame1.router_info)

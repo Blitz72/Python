@@ -5,7 +5,7 @@ router1 = {
     'x_pos': 0,
     'y_pos': 0,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -16,7 +16,7 @@ router2 = {
     'x_pos': 1,
     'y_pos': 0,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -26,8 +26,8 @@ router3 = {
     'label_text':'ASUS Wireles AC-3100',
     'x_pos': 2,
     'y_pos': 0,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 164,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -38,7 +38,7 @@ router4 = {
     'x_pos': 3,
     'y_pos': 0,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -49,7 +49,7 @@ router5 = {
     'x_pos': 4,
     'y_pos': 0,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -59,8 +59,8 @@ router6 = {
     'label_text':'Netgear Nighthawk X6S',
     'x_pos': 5,
     'y_pos': 0,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 160,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -71,7 +71,7 @@ router7 = {
     'x_pos': 0,
     'y_pos': 1,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -82,7 +82,7 @@ router8 = {
     'x_pos': 1,
     'y_pos': 1,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -93,7 +93,7 @@ router9 = {
     'x_pos': 2,
     'y_pos': 1,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -104,7 +104,7 @@ router10 = {
     'x_pos': 3,
     'y_pos': 1,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -115,7 +115,7 @@ router11 = {
     'x_pos': 4,
     'y_pos': 1,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -126,7 +126,7 @@ router12 = {
     'x_pos': 5,
     'y_pos': 1,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -136,8 +136,8 @@ router13 = {
     'label_text':'Cisco RV320 Dual WAN VPN Router',
     'x_pos': 0,
     'y_pos': 2,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 160,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -147,8 +147,8 @@ router14 = {
     'label_text':'Netgear Orbi RBR40',
     'x_pos': 1,
     'y_pos': 2,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 158,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -158,8 +158,8 @@ router15 = {
     'label_text':'AT&T Arris NVG589',
     'x_pos': 2,
     'y_pos': 2,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 158,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -170,7 +170,7 @@ router16 = {
     'x_pos': 3,
     'y_pos': 2,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -181,7 +181,7 @@ router17 = {
     'x_pos': 4,
     'y_pos': 2,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -191,8 +191,8 @@ router18 = {
     'label_text':'Cisco RV325 Dual WAN VPN Router',
     'x_pos': 5,
     'y_pos': 2,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 158,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -203,7 +203,7 @@ router19 = {
     'x_pos': 0,
     'y_pos': 3,
     'width_adjust': 155,
-    'height_adjust': 100,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -213,8 +213,8 @@ router20 = {
     'label_text':'LUXUL XAP-1500 (POE)',
     'x_pos': 1,
     'y_pos': 3,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -224,8 +224,8 @@ router21 = {
     'label_text':'Packedge WK-23 3x3 WAP',
     'x_pos': 2,
     'y_pos': 3,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -235,8 +235,8 @@ router22 = {
     'label_text':'Spectrum Technicolor TC8715D',
     'x_pos': 3,
     'y_pos': 3,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -246,8 +246,8 @@ router23 = {
     'label_text':'Spectrum Wave 2 RAC2V1S',
     'x_pos': 4,
     'y_pos': 3,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -257,8 +257,8 @@ router24 = {
     'label_text':'AT&T Arris BGW210-700',
     'x_pos': 5,
     'y_pos': 3,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -268,8 +268,8 @@ router25 = {
     'label_text':'Netgear WNDAP360',
     'x_pos': 0,
     'y_pos': 4,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -279,8 +279,8 @@ router26 = {
     'label_text':'',
     'x_pos': 1,
     'y_pos': 4,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -290,8 +290,8 @@ router27 = {
     'label_text':'',
     'x_pos': 2,
     'y_pos': 4,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -301,8 +301,8 @@ router28 = {
     'label_text':'',
     'x_pos': 3,
     'y_pos': 4,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -312,8 +312,8 @@ router29 = {
     'label_text':'',
     'x_pos': 4,
     'y_pos': 4,
-    'width_adjust': 155,
-    'height_adjust': 100,
+    'width_adjust': 163,
+    'height_adjust': 99,
     'router_links': []
     }
 
@@ -324,6 +324,6 @@ router30 = {
     'x_pos': 5,
     'y_pos': 4,
     'router_links': [],
-    'width_adjust': 155,
-    'height_adjust': 100
+    'width_adjust': 163,
+    'height_adjust': 99
     }
