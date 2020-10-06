@@ -6,7 +6,7 @@ import smbus
 import time
 import sqlite3 as db
 import router_info as router
-import Router_Frame
+#import Router_Frame
 # import pijuice
 
 root = Tk()
