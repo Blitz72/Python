@@ -226,7 +226,7 @@ def update_root():
         frame.frame.configure(bg=bg_color_frame)
         frame.label.configure(bg=bg_color_frame, fg=fg_color_frame)
         frame.yes_button.configure(bg=bg_color_button, fg=fg_color_button_green)
-        frame.no_button.configure(bg=bg_color_button, fg=fg_color_button_green)
+        frame.no_button.configure(bg=bg_color_button, fg=fg_color_button_red)
 
 def create_window():
     settings_window = Toplevel()
