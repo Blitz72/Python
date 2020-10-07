@@ -74,12 +74,6 @@ except Exception as ex:
 
 frames = []
 
-bg_color_frame = BACKGROUND_DARK_FRAME
-fg_color_frame = FG_COLOR_DARK
-bg_color_button = BACKGROUND_DARK_BUTTON
-fg_color_button_green = DARK_BUTTON_GREEN
-fg_color_button_red = DARK_BUTTON_RED
-
 def check_dark_mode():
     # Check dark_mode from the config table of the database before rendering tkinter frames
     with Database(db_path, 'SELECT * FROM config') as db_values:
@@ -100,7 +94,7 @@ def check_dark_mode():
         fg_color_button_red = LIGHT_BUTTON_RED
     return bg_color_frame, fg_color_frame, bg_color_button, fg_color_button_green, fg_color_button_red
 
-check_dark_mode()
+bg_color_frame, fg_color_frame, bg_color_button, fg_color_button_green, fg_color_button_red = check_dark_mode()
 
 class Router_Frame:
     
@@ -125,6 +119,14 @@ class Router_Frame:
             self.mcp_address = 0x21
             self.mcp_gpio_reg = GPIOB
             self.gpio_reg = 'gpiob2'
+        db_query = 'SELECT ' + str(self.gpio_reg) + ' from config'
+        with Database(db_path, db_query) as gpio_value:
+            print(gpio_value)
+        _gpio_value = gpio_value[0]
+        if _gpio_value & (1 << (self.relay_num - 1) % 8):
+            bg_color_image = IMG_BACKGROUND_GREEN
+        else:
+            bg_color_image = IMG_BACKGROUND_RED
         self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bg_color_frame, relief=borderStyle)
         self.frame.grid(column=self.router_info['x_pos'], row=self.router_info['y_pos'])
         
@@ -137,7 +139,7 @@ class Router_Frame:
         self.img = self.img.resize((int(frameWidth-self.router_info['width_adjust'] * scale_ratio),
                                     int(frameHeight-self.router_info['height_adjust'] * scale_ratio)), Image.ANTIALIAS)
         self.render = ImageTk.PhotoImage(self.img)
-        self.image = Label(self.frame, image=self.render, bg=bgColorImage)
+        self.image = Label(self.frame, image=self.render, bg=bg_color_image)
         self.image.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
         
         self.label = Label(self.frame, text=self.router_info['label_text'], bg=bg_color_frame, fg=fg_color_frame)
