@@ -1,10 +1,8 @@
 from tkinter import Tk, Frame, Label, Button, Menu, Toplevel, IntVar, Radiobutton, Checkbutton, messagebox
-#from tkinter import *
 import router_info as router
 from PIL import Image, ImageTk
 from Database import *
 import smbus
-#import sqlite3
 
 root = Tk()
 
@@ -35,8 +33,6 @@ IMG_BACKGROUND_RED = '#bb0000'
 borderStyle = 'ridge'
 borderWidth = 3
 alpha = 170
-
-bgColorImage = IMG_BACKGROUND_GREEN
 
 db_path = '/home/pi/Python/Chernobyl_V2/db/Chernobyl.db'
 
@@ -99,10 +95,10 @@ bg_color_frame, fg_color_frame, bg_color_button, fg_color_button_green, fg_color
 class Router_Frame:
     
     def __init__(self, router_info, bus):
-        
         self.router_info = router_info
         self.bus = bus
         self.relay_num = (self.router_info['x_pos'] + 1) + (self.router_info['y_pos'] * 6)
+        
         if 1 <= self.relay_num <= 8:
             self.mcp_address = 0x20
             self.mcp_gpio_reg = GPIOA
@@ -119,6 +115,7 @@ class Router_Frame:
             self.mcp_address = 0x21
             self.mcp_gpio_reg = GPIOB
             self.gpio_reg = 'gpiob2'
+            
         db_query = 'SELECT ' + str(self.gpio_reg) + ' from config'
         with Database(db_path, db_query) as gpio_value:
             print(gpio_value)
@@ -127,6 +124,7 @@ class Router_Frame:
             bg_color_image = IMG_BACKGROUND_GREEN
         else:
             bg_color_image = IMG_BACKGROUND_RED
+        
         self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bg_color_frame, relief=borderStyle)
         self.frame.grid(column=self.router_info['x_pos'], row=self.router_info['y_pos'])
         
@@ -135,7 +133,6 @@ class Router_Frame:
         if self.img.mode != 'RGBA':
             self.img.convert('RGBA')
             self.img.putalpha(alpha)
-        
         self.img = self.img.resize((int(frameWidth-self.router_info['width_adjust'] * scale_ratio),
                                     int(frameHeight-self.router_info['height_adjust'] * scale_ratio)), Image.ANTIALIAS)
         self.render = ImageTk.PhotoImage(self.img)
@@ -148,6 +145,7 @@ class Router_Frame:
         self.yes_button = Button(self.frame, text="ON", fg=fg_color_button_green, bg=bg_color_button,
                                 cursor='hand2', command=lambda: self.relay_on())
         self.yes_button.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
+        
         self.no_button = Button(self.frame, text="OFF",  fg=fg_color_button_red, bg=bg_color_button,
                                cursor='hand2', command=lambda: self.relay_off())
         self.no_button.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
@@ -235,6 +233,7 @@ def create_window():
     settings_window.title('C by GE\u2122 Chernobyl Router Selector\u2122 Settings')
     settings_window.geometry('450x200')
     settings_window.focus_set()
+    
     db_query = 'SELECT confirm, dark_mode from config'
     with Database(db_path, db_query) as db_settings:
         print(db_settings)
@@ -343,12 +342,6 @@ frame29 = Router_Frame(router.router29, bus)
 frames.append(frame29)
 frame30 = Router_Frame(router.router30, bus)
 frames.append(frame30)
-
-update_root()
-
-#for frame in frames:
-#    print(frame.router_info['img_URL'])
-#print(frame1.router_info)
 
 root.protocol('WM_DELETE_WINDOW', on_close)
 root.mainloop()
