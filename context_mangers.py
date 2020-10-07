@@ -9,7 +9,7 @@
 
 # class Open_File():
 
-#     def __init__(self, filename, mode, encoding_type='UTF-8'):
+ #     def __init__(self, filename, mode, encoding_type='UTF-8'):
 #         self.filename = filename
 #         self.mode = mode
 #         self.encoding_type = encoding_type

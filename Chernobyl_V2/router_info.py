@@ -6,6 +6,8 @@ router1 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -17,6 +19,8 @@ router2 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -28,6 +32,8 @@ router3 = {
     'y_pos': 0,
     'width_adjust': 164,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -39,6 +45,8 @@ router4 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -50,6 +58,8 @@ router5 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -61,6 +71,8 @@ router6 = {
     'y_pos': 0,
     'width_adjust': 160,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -72,6 +84,8 @@ router7 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -83,6 +97,8 @@ router8 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpioa1',
     'router_links': []
     }
 
@@ -93,6 +109,8 @@ router9 = {
     'x_pos': 2,
     'y_pos': 1,
     'width_adjust': 155,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'height_adjust': 99,
     'router_links': []
     }
@@ -105,6 +123,8 @@ router10 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -116,6 +136,8 @@ router11 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -127,6 +149,8 @@ router12 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -138,6 +162,8 @@ router13 = {
     'y_pos': 2,
     'width_adjust': 160,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -149,6 +175,8 @@ router14 = {
     'y_pos': 2,
     'width_adjust': 158,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -160,6 +188,8 @@ router15 = {
     'y_pos': 2,
     'width_adjust': 158,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -171,6 +201,8 @@ router16 = {
     'y_pos': 2,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x20,
+    'gpio_reg': 'gpiob1',
     'router_links': []
     }
 
@@ -182,6 +214,8 @@ router17 = {
     'y_pos': 2,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -193,6 +227,8 @@ router18 = {
     'y_pos': 2,
     'width_adjust': 158,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -204,6 +240,8 @@ router19 = {
     'y_pos': 3,
     'width_adjust': 155,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -215,6 +253,8 @@ router20 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -226,6 +266,8 @@ router21 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -237,6 +279,8 @@ router22 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -248,6 +292,8 @@ router23 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -259,6 +305,8 @@ router24 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpioa2',
     'router_links': []
     }
 
@@ -270,6 +318,8 @@ router25 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpiob2',
     'router_links': []
     }
 
@@ -281,6 +331,8 @@ router26 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpiob2',
     'router_links': []
     }
 
@@ -292,6 +344,8 @@ router27 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpiob2',
     'router_links': []
     }
 
@@ -303,6 +357,8 @@ router28 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpiob2',
     'router_links': []
     }
 
@@ -314,6 +370,8 @@ router29 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpiob2',
     'router_links': []
     }
 
@@ -325,5 +383,8 @@ router30 = {
     'y_pos': 4,
     'router_links': [],
     'width_adjust': 163,
-    'height_adjust': 99
+    'height_adjust': 99,
+    'mcp_address': 0x21,
+    'gpio_reg': 'gpiob2',
+    'router_links': []
     }

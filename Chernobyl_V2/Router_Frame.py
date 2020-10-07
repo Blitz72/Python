@@ -1,6 +1,7 @@
 from tkinter import Frame, Label, Button, Tk
 import router_info as router
 from PIL import Image, ImageTk
+from Database import *
 
 root = Tk()
 
@@ -14,7 +15,7 @@ frameHeight = int(root.winfo_screenheight()/5) - 20
 
 scale_ratio = root.winfo_screenheight()/1080
 
-# style variables
+# Style variables
 BACKGROUND_LIGHT_FRAME = '#dddddd'
 BACKGROUND_LIGHT_BUTTON = '#eeeeee'
 FG_COLOR_LIGHT = 'black'
@@ -28,27 +29,62 @@ FG_COLOR_DARK = 'white'
 IMG_BACKGROUND_GREEN = '#00bb00'
 IMG_BACKGROUND_RED = '#bb0000'
 
-bgColorImage = IMG_BACKGROUND_GREEN
-
-darkMode = True
-if darkMode:
-  bgColorFrame = BACKGROUND_DARK_FRAME
-  fgColorFrame = FG_COLOR_DARK
-  bgColorButton = BACKGROUND_DARK_BUTTON
-  fgColorButtonGreen = DARK_BUTTON_GREEN
-  fgColorButtonRed = DARK_BUTTON_RED
-  # root.configure(bg=BACKGROUND_DARK_BUTTON)
-  # root.configure(fg=FG_COLOR_DARK)
-else:
-  bgColorFrame = BACKGROUND_LIGHT_FRAME
-  fgColorFrame = FG_COLOR_LIGHT
-  bgColorButton = BACKGROUND_LIGHT_BUTTON
-  fgColorButtonGreen = LIGHT_BUTTON_GREEN
-  fgColorButtonRed = LIGHT_BUTTON_RED
-
 borderStyle = 'ridge'
 borderWidth = 3
 alpha = 170
+
+bgColorImage = IMG_BACKGROUND_GREEN
+
+db_path = '/home/pi/Python/Chernobyl_V2/db/Chernobyl.db'
+
+# MCP23017 config variables
+channel = 1
+address1 = 0x20
+address2 = 0x21
+IODIRA = 0x00
+IODIRB = 0x01
+GPIOA = 0x12
+GPIOB = 0x13
+
+# Setup MCP23017, set IODIR registers as outputs with 0's, or inputs as 1's
+try:
+    bus = smbus.SMBus(channel)
+    print('I2C bus initialized!\n')
+except Exception as ex:
+    print(ex)
+    print('Could not initialize I2C bus!\n')
+
+try:
+    bus.write_byte_data(address1, IODIRA, 0x00)
+    bus.write_byte_data(address1, IODIRB, 0x00)
+except Exception as ex:
+    print(ex)
+    print('An error occurred writing to:', hex(address1))
+    print()
+try:
+    bus.write_byte_data(address2, IODIRA, 0x00)
+    bus.write_byte_data(address2, IODIRB, 0x00)
+except Exception as ex:
+    print(ex)
+    print('An error occurred writing to:', hex(address2))
+    print()
+
+# Check dark_mode from the config table of the database before rendering tkinter frames
+with Database(db_path, 'SELECT dark_mode FROM config') as dark_mode:
+    print(dark_mode[0])
+    
+if dark_mode:
+    bgColorFrame = BACKGROUND_DARK_FRAME
+    fgColorFrame = FG_COLOR_DARK
+    bgColorButton = BACKGROUND_DARK_BUTTON
+    fgColorButtonGreen = DARK_BUTTON_GREEN
+    fgColorButtonRed = DARK_BUTTON_RED
+else:
+    bgColorFrame = BACKGROUND_LIGHT_FRAME
+    fgColorFrame = FG_COLOR_LIGHT
+    bgColorButton = BACKGROUND_LIGHT_BUTTON
+    fgColorButtonGreen = LIGHT_BUTTON_GREEN
+    fgColorButtonRed = LIGHT_BUTTON_RED
 
 frames = []
 
@@ -79,14 +115,15 @@ class Router_Frame:
         self.noButton = Button(self.frame, text="OFF",  fg=fgColorButtonRed, bg=bgColorButton, cursor='hand2', command=lambda: self.relay_off())
         self.noButton.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
     
-    
     def relay_on(self):
+        with Database(db_path, 'select ' + self.router_info['gpio_reg'] + ' from config') as gpio:
+            print(gpio[0])
         self.image.config(bg=IMG_BACKGROUND_GREEN)
     
-    
     def relay_off(self):
+        with Database(db_path, 'select ' + self.router_info['gpio_reg'] + ' from config') as gpio:
+            print(gpio[0])
         self.image.config(bg=IMG_BACKGROUND_RED)
-    
     
     def print_info(self):
         print(self.router_info)
