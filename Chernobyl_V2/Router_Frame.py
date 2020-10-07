@@ -2,6 +2,7 @@ from tkinter import Frame, Label, Button, Tk
 import router_info as router
 from PIL import Image, ImageTk
 from Database import *
+import smbus
 
 root = Tk()
 
@@ -70,8 +71,9 @@ except Exception as ex:
     print()
 
 # Check dark_mode from the config table of the database before rendering tkinter frames
-with Database(db_path, 'SELECT dark_mode FROM config') as dark_mode:
-    print(dark_mode[0])
+with Database(db_path, 'SELECT * FROM config') as db_values:
+    print(db_values)
+dark_mode = db_values[6]
     
 if dark_mode:
     bgColorFrame = BACKGROUND_DARK_FRAME
@@ -90,9 +92,27 @@ frames = []
 
 class Router_Frame:
     
-    def __init__(self, router_info):
+    def __init__(self, router_info, bus):
         
         self.router_info = router_info
+        self.bus = bus
+        self.relay_num = (self.router_info['x_pos'] + 1) + (self.router_info['y_pos'] * 6)
+        if 1 <= self.relay_num <= 8:
+            self.mcp_address = 0x20
+            self.mcp_gpio_reg = GPIOA
+            self.gpio_reg = 'gpioa1'
+        elif 9 <= self.relay_num <= 16:
+            self.mcp_address = 0x20
+            self.mcp_gpio_reg = GPIOB
+            self.gpio_reg = 'gpiob1'
+        elif 17 <= self.relay_num <= 24:
+            self.mcp_address = 0x21
+            self.mcp_gpio_reg = GPIOA
+            self.gpio_reg = 'gpioa2'
+        else:
+            self.mcp_address = 0x21
+            self.mcp_gpio_reg = GPIOB
+            self.gpio_reg = 'gpiob2'
         self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
         self.frame.grid(column=self.router_info['x_pos'], row=self.router_info['y_pos'])
         
@@ -102,7 +122,8 @@ class Router_Frame:
             self.img.convert('RGBA')
             self.img.putalpha(alpha)
         
-        self.img = self.img.resize((int(frameWidth-self.router_info['width_adjust'] * scale_ratio), int(frameHeight-self.router_info['height_adjust'] * scale_ratio)), Image.ANTIALIAS)
+        self.img = self.img.resize((int(frameWidth-self.router_info['width_adjust'] * scale_ratio),
+                                    int(frameHeight-self.router_info['height_adjust'] * scale_ratio)), Image.ANTIALIAS)
         self.render = ImageTk.PhotoImage(self.img)
         self.image = Label(self.frame, image=self.render, bg=bgColorImage)
         self.image.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
@@ -110,84 +131,142 @@ class Router_Frame:
         self.label = Label(self.frame, text=self.router_info['label_text'], bg=bgColorFrame, fg=fgColorFrame)
         self.label.place(relwidth=0.9, relheight=0.2, relx=0.05)
         
-        self.yesButton = Button(self.frame, text="ON", fg=fgColorButtonGreen, bg=bgColorButton, cursor='hand2', command=lambda: self.relay_on())
+        self.yesButton = Button(self.frame, text="ON", fg=fgColorButtonGreen, bg=bgColorButton,
+                                cursor='hand2', command=lambda: self.relay_on())
         self.yesButton.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
-        self.noButton = Button(self.frame, text="OFF",  fg=fgColorButtonRed, bg=bgColorButton, cursor='hand2', command=lambda: self.relay_off())
+        self.noButton = Button(self.frame, text="OFF",  fg=fgColorButtonRed, bg=bgColorButton,
+                               cursor='hand2', command=lambda: self.relay_off())
         self.noButton.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
     
     def relay_on(self):
-        with Database(db_path, 'select ' + self.router_info['gpio_reg'] + ' from config') as gpio:
-            print(gpio[0])
-        self.image.config(bg=IMG_BACKGROUND_GREEN)
+        db_query = 'SELECT ' + str(self.gpio_reg) + ', confirm from config'
+        with Database(db_path, db_query) as values:
+            print(values[0])
+            print(values[1])
+        gpio_value = values[0]
+        confirm = values[1]
+        if gpio_value & (1 << (self.relay_num - 1) % 8):
+            return
+        else:
+            if confirm < 2:
+                confirmation = True
+            else:
+                if messagebox.askyesno("Confirm to energize relay", "Do you want energize the relay?"):
+                    confirmation = True
+                else:
+                    confirmation = False
+            print('confirmation', confirmation)
+            if confirmation:
+                new_value = gpio_value | (1 << (self.relay_num - 1) % 8)
+                db_query = 'UPDATE config SET ' + self.gpio_reg + ' = ' + str(new_value)
+                with Database(db_path, db_query) as update:
+                    print(update)
+                try:
+                    self.bus.write_byte_data(self.mcp_address, self.mcp_gpio_reg, new_value)
+                except Exception as ex:
+                    print(ex)
+                    print('An error ocurred writing to: ', self.mcp_address)
+                print(self.gpio_reg + ' = ', new_value)
+                self.image.config(bg=IMG_BACKGROUND_GREEN)
+            else:
+                return
     
     def relay_off(self):
-        with Database(db_path, 'select ' + self.router_info['gpio_reg'] + ' from config') as gpio:
-            print(gpio[0])
-        self.image.config(bg=IMG_BACKGROUND_RED)
+        db_query = 'SELECT ' + str(self.gpio_reg) + ', confirm from config'
+        with Database(db_path, db_query) as values:
+            print(values[0])
+            print(values[1])
+        gpio_value = values[0]
+        confirm = values[1]
+        if (gpio_value >> (self.relay_num - 1) % 8) & 1 == 0:
+            return
+        else:
+            if confirm < 1:
+                confirmation = True 
+            else:
+                if messagebox.askyesno("Confirm to energize relay", "Do you want de-energize the relay?"):
+                    confirmation = True
+                else:
+                    confirmation = False
+            print('confirmation', confirmation)
+            if confirmation:
+                new_value =  gpio_value & ~(1 << (self.relay_num - 1) % 8)
+                db_query = 'UPDATE config SET ' + self.gpio_reg + ' = ' + str(new_value)
+                with Database(db_path, db_query) as update:
+                    print(update)
+                try:
+                    self.bus.write_byte_data(self.mcp_address, self.mcp_gpio_reg, new_value)
+                except Exception as ex:
+                    print(ex)
+                    print('An error ocurred writing to: ', self.mcp_address)
+                print(self.gpio_reg + ' = ', new_value)
+                self.image.config(bg=IMG_BACKGROUND_RED)
+            else:
+                return
     
     def print_info(self):
         print(self.router_info)
 
 
-frame1 = Router_Frame(router.router1)
+frame1 = Router_Frame(router.router1, bus)
 frames.append(frame1)
-frame2 = Router_Frame(router.router2)
+frame2 = Router_Frame(router.router2, bus)
 frames.append(frame2)
-frame3 = Router_Frame(router.router3)
+frame3 = Router_Frame(router.router3, bus)
 frames.append(frame3)
-frame4 = Router_Frame(router.router4)
+frame4 = Router_Frame(router.router4, bus)
 frames.append(frame4)
-frame5 = Router_Frame(router.router5)
+frame5 = Router_Frame(router.router5, bus)
 frames.append(frame5)
-frame6 = Router_Frame(router.router6)
+frame6 = Router_Frame(router.router6, bus)
 frames.append(frame6)
-frame7 = Router_Frame(router.router7)
+frame7 = Router_Frame(router.router7, bus)
 frames.append(frame7)
-frame8 = Router_Frame(router.router8)
+frame8 = Router_Frame(router.router8, bus)
 frames.append(frame8)
-frame9 = Router_Frame(router.router9)
+frame9 = Router_Frame(router.router9, bus)
 frames.append(frame9)
-frame10 = Router_Frame(router.router10)
+frame10 = Router_Frame(router.router10, bus)
 frames.append(frame10)
-frame11 = Router_Frame(router.router11)
+frame11 = Router_Frame(router.router11, bus)
 frames.append(frame11)
-frame12 = Router_Frame(router.router12)
+frame12 = Router_Frame(router.router12, bus)
 frames.append(frame12)
-frame13 = Router_Frame(router.router13)
+frame13 = Router_Frame(router.router13, bus)
 frames.append(frame13)
-frame14 = Router_Frame(router.router14)
+frame14 = Router_Frame(router.router14, bus)
 frames.append(frame14)
-frame15 = Router_Frame(router.router15)
+frame15 = Router_Frame(router.router15, bus)
 frames.append(frame15)
-frame16 = Router_Frame(router.router16)
+frame16 = Router_Frame(router.router16, bus)
 frames.append(frame16)
-frame17 = Router_Frame(router.router17)
+frame17 = Router_Frame(router.router17, bus)
 frames.append(frame17)
-frame18 = Router_Frame(router.router18)
+frame18 = Router_Frame(router.router18, bus)
 frames.append(frame18)
-frame19 = Router_Frame(router.router19)
+frame19 = Router_Frame(router.router19, bus)
 frames.append(frame19)
-frame20 = Router_Frame(router.router20)
+frame20 = Router_Frame(router.router20, bus)
 frames.append(frame20)
-frame21 = Router_Frame(router.router21)
+frame21 = Router_Frame(router.router21, bus)
 frames.append(frame21)
-frame22 = Router_Frame(router.router22)
+frame22 = Router_Frame(router.router22, bus)
 frames.append(frame22)
-frame23 = Router_Frame(router.router23)
+frame23 = Router_Frame(router.router23, bus)
 frames.append(frame23)
-frame24 = Router_Frame(router.router24)
+frame24 = Router_Frame(router.router24, bus)
 frames.append(frame24)
-frame25 = Router_Frame(router.router25)
+frame25 = Router_Frame(router.router25, bus)
 frames.append(frame25)
-frame26 = Router_Frame(router.router26)
+frame26 = Router_Frame(router.router26, bus)
 frames.append(frame26)
-frame27 = Router_Frame(router.router27)
+frame27 = Router_Frame(router.router27, bus)
 frames.append(frame27)
-frame28 = Router_Frame(router.router28)
+frame28 = Router_Frame(router.router28, bus)
 frames.append(frame28)
-frame29 = Router_Frame(router.router29)
+frame29 = Router_Frame(router.router29, bus)
 frames.append(frame29)
-frame30 = Router_Frame(router.router30)
+frame30 = Router_Frame(router.router30, bus)
 frames.append(frame30)
 
 #for frame in frames:
