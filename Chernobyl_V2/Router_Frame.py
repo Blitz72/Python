@@ -1,8 +1,10 @@
-from tkinter import Frame, Label, Button, Tk
+from tkinter import Tk, Frame, Label, Button, Menu, Toplevel, IntVar, Radiobutton, Checkbutton, messagebox
+#from tkinter import *
 import router_info as router
 from PIL import Image, ImageTk
 from Database import *
 import smbus
+#import sqlite3
 
 root = Tk()
 
@@ -70,25 +72,35 @@ except Exception as ex:
     print('An error occurred writing to:', hex(address2))
     print()
 
-# Check dark_mode from the config table of the database before rendering tkinter frames
-with Database(db_path, 'SELECT * FROM config') as db_values:
-    print(db_values)
-dark_mode = db_values[6]
-    
-if dark_mode:
-    bgColorFrame = BACKGROUND_DARK_FRAME
-    fgColorFrame = FG_COLOR_DARK
-    bgColorButton = BACKGROUND_DARK_BUTTON
-    fgColorButtonGreen = DARK_BUTTON_GREEN
-    fgColorButtonRed = DARK_BUTTON_RED
-else:
-    bgColorFrame = BACKGROUND_LIGHT_FRAME
-    fgColorFrame = FG_COLOR_LIGHT
-    bgColorButton = BACKGROUND_LIGHT_BUTTON
-    fgColorButtonGreen = LIGHT_BUTTON_GREEN
-    fgColorButtonRed = LIGHT_BUTTON_RED
-
 frames = []
+
+bg_color_frame = BACKGROUND_DARK_FRAME
+fg_color_frame = FG_COLOR_DARK
+bg_color_button = BACKGROUND_DARK_BUTTON
+fg_color_button_green = DARK_BUTTON_GREEN
+fg_color_button_red = DARK_BUTTON_RED
+
+def check_dark_mode():
+    # Check dark_mode from the config table of the database before rendering tkinter frames
+    with Database(db_path, 'SELECT * FROM config') as db_values:
+        print('GPIOA1, GPIOB1, GPIOA2, GPIOB2, pwrFlg, cnfrm, drkMd')
+        print(db_values)
+    dark_mode = db_values[6]
+    if dark_mode:
+        bg_color_frame = BACKGROUND_DARK_FRAME
+        fg_color_frame = FG_COLOR_DARK
+        bg_color_button = BACKGROUND_DARK_BUTTON
+        fg_color_button_green = DARK_BUTTON_GREEN
+        fg_color_button_red = DARK_BUTTON_RED
+    else:
+        bg_color_frame = BACKGROUND_LIGHT_FRAME
+        fg_color_frame = FG_COLOR_LIGHT
+        bg_color_button = BACKGROUND_LIGHT_BUTTON
+        fg_color_button_green = LIGHT_BUTTON_GREEN
+        fg_color_button_red = LIGHT_BUTTON_RED
+    return bg_color_frame, fg_color_frame, bg_color_button, fg_color_button_green, fg_color_button_red
+
+check_dark_mode()
 
 class Router_Frame:
     
@@ -113,7 +125,7 @@ class Router_Frame:
             self.mcp_address = 0x21
             self.mcp_gpio_reg = GPIOB
             self.gpio_reg = 'gpiob2'
-        self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bgColorFrame, relief=borderStyle)
+        self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bg_color_frame, relief=borderStyle)
         self.frame.grid(column=self.router_info['x_pos'], row=self.router_info['y_pos'])
         
         self.img_URL = self.router_info['img_URL']
@@ -128,15 +140,15 @@ class Router_Frame:
         self.image = Label(self.frame, image=self.render, bg=bgColorImage)
         self.image.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
         
-        self.label = Label(self.frame, text=self.router_info['label_text'], bg=bgColorFrame, fg=fgColorFrame)
+        self.label = Label(self.frame, text=self.router_info['label_text'], bg=bg_color_frame, fg=fg_color_frame)
         self.label.place(relwidth=0.9, relheight=0.2, relx=0.05)
         
-        self.yesButton = Button(self.frame, text="ON", fg=fgColorButtonGreen, bg=bgColorButton,
+        self.yes_button = Button(self.frame, text="ON", fg=fg_color_button_green, bg=bg_color_button,
                                 cursor='hand2', command=lambda: self.relay_on())
-        self.yesButton.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
-        self.noButton = Button(self.frame, text="OFF",  fg=fgColorButtonRed, bg=bgColorButton,
+        self.yes_button.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
+        self.no_button = Button(self.frame, text="OFF",  fg=fg_color_button_red, bg=bg_color_button,
                                cursor='hand2', command=lambda: self.relay_off())
-        self.noButton.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
+        self.no_button.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
     
     def relay_on(self):
         db_query = 'SELECT ' + str(self.gpio_reg) + ', confirm from config'
@@ -208,6 +220,67 @@ class Router_Frame:
         print(self.router_info)
 
 
+def update_root():
+    bg_color_frame, fg_color_frame, bg_color_button, fg_color_button_green, fg_color_button_red = check_dark_mode()
+    for frame in frames:
+        frame.frame.configure(bg=bg_color_frame)
+        frame.label.configure(bg=bg_color_frame, fg=fg_color_frame)
+        frame.yes_button.configure(bg=bg_color_button, fg=fg_color_button_green)
+        frame.no_button.configure(bg=bg_color_button, fg=fg_color_button_green)
+
+def create_window():
+    settings_window = Toplevel()
+    settings_window.title('C by GE\u2122 Chernobyl Router Selector\u2122 Settings')
+    settings_window.geometry('450x200')
+    settings_window.focus_set()
+    db_query = 'SELECT confirm, dark_mode from config'
+    with Database(db_path, db_query) as db_settings:
+        print(db_settings)
+    confirm = db_settings[0]
+    dark_mode = db_settings[1]
+    
+    confirm_state = IntVar()
+    confirm_state.set(confirm)
+    dark_mode_state = IntVar()
+    dark_mode_state.set(dark_mode)
+    height = 0.15
+    width = 0.5
+    
+    def save_option():
+        # print(confirm_setting.get())
+        with Database(db_path, 'UPDATE config SET confirm = ' + str(confirm_state.get())) as confirm_update:
+            print('Updated confirn setting.')
+        with Database(db_path, 'UPDATE config SET dark_mode = ' + str(dark_mode_state.get())) as dark_mode_update:
+            print('Updated dark_mode setting.')
+        settings_label = Label(settings_window, text="Settings Saved!", pady=10)
+        settings_label.place(relwidth=0.5, relheight=0.2, relx=0.25, rely=0.8)
+        update_root()
+        settings_window.destroy()
+    
+    radio1 = Radiobutton(settings_window, text="No Confirmation Required", pady=2, variable=confirm_state, value=0)
+    radio1.place(relwidth=width, relheight=height, relx=0.25, rely=0)
+
+    radio2 = Radiobutton(settings_window, text="Confirm for OFF Only        ", pady=2, variable=confirm_state, value=1)
+    radio2.place(relwidth=width, relheight=height, relx=0.25, rely=0.15)
+
+    radio3 = Radiobutton(settings_window, text="Confirm for ON and OFF   ", pady=2, variable=confirm_state, value=2)
+    radio3.place(relwidth=width, relheight=height, relx=0.25, rely=0.3)
+
+    checkDarkMode = Checkbutton(settings_window, text="Dark Mode", pady=2, variable=dark_mode_state)
+    checkDarkMode.place(relwidth=width, relheight=height, relx=0.24, rely=.45)
+
+    applyButton = Button(settings_window, text="Apply", pady=2, command=save_option)
+    applyButton.place(relwidth=0.2, relheight=height, relx=0.4, rely=0.63)
+
+def on_close():
+    if messagebox.askyesno("Quit C by GE\u2122 Chernobyl Router Selector\u2122", "Do you want to exit the C by GE\u2122 Chernobyl Router Selector\u2122?"):
+        root.destroy()
+
+menu = Menu(root)
+new_item = Menu(menu)
+menu.add_command(label='Settings', command=create_window)
+root.config(menu=menu)
+
 frame1 = Router_Frame(router.router1, bus)
 frames.append(frame1)
 frame2 = Router_Frame(router.router2, bus)
@@ -269,6 +342,11 @@ frames.append(frame29)
 frame30 = Router_Frame(router.router30, bus)
 frames.append(frame30)
 
+update_root()
+
 #for frame in frames:
 #    print(frame.router_info['img_URL'])
 #print(frame1.router_info)
+
+root.protocol('WM_DELETE_WINDOW', on_close)
+root.mainloop()
