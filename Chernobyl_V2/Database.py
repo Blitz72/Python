@@ -31,6 +31,7 @@ class Database:
 
 #for item in db_command(db_path, 'SELECT * FROM config'):
 #    print(item)
+
 #command = 'UPDATE config SET gpiob2 = 0'
 #with Database(db_path, command) as values:
 #    print(values)

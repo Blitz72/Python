@@ -145,20 +145,20 @@ def createWindow():
     settingsWindow.destroy()
 
 
-  radio1 = Radiobutton(settingsWindow, text="No Confirmation Required", pady=2, variable=confirm1, value=0)
-  radio1.place(relwidth=width, relheight=height, relx=0.25, rely=0)
+radio1 = Radiobutton(settingsWindow, text="No Confirmation Required", pady=2, variable=confirm1, value=0)
+radio1.place(relwidth=width, relheight=height, relx=0.25, rely=0)
 
-  radio2 = Radiobutton(settingsWindow, text="Confirm for OFF Only        ", pady=2, variable=confirm1, value=1)
-  radio2.place(relwidth=width, relheight=height, relx=0.25, rely=0.15)
+radio2 = Radiobutton(settingsWindow, text="Confirm for OFF Only        ", pady=2, variable=confirm1, value=1)
+radio2.place(relwidth=width, relheight=height, relx=0.25, rely=0.15)
 
-  radio3 = Radiobutton(settingsWindow, text="Confirm for ON and OFF   ", pady=2, variable=confirm1, value=2)
-  radio3.place(relwidth=width, relheight=height, relx=0.25, rely=0.3)
+radio3 = Radiobutton(settingsWindow, text="Confirm for ON and OFF   ", pady=2, variable=confirm1, value=2)
+radio3.place(relwidth=width, relheight=height, relx=0.25, rely=0.3)
 
-  checkDarkMode = Checkbutton(settingsWindow, text="Dark Mode", pady=2, variable=darkModeState)
-  checkDarkMode.place(relwidth=width, relheight=height, relx=0.24, rely=.45)
+checkDarkMode = Checkbutton(settingsWindow, text="Dark Mode", pady=2, variable=darkModeState)
+checkDarkMode.place(relwidth=width, relheight=height, relx=0.24, rely=.45)
 
-  applyButton = Button(settingsWindow, text="Apply", pady=2, command=saveOption)
-  applyButton.place(relwidth=0.2, relheight=height, relx=0.4, rely=0.63)
+applyButton = Button(settingsWindow, text="Apply", pady=2, command=saveOption)
+applyButton.place(relwidth=0.2, relheight=height, relx=0.4, rely=0.63)
 
 
 # update root window after changing settings, called using "Refresh" menu button
