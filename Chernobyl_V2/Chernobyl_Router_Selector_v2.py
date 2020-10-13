@@ -2,6 +2,7 @@ from tkinter import Tk, Frame, Label, Button, Menu, Toplevel, IntVar, Radiobutto
 import router_info as router
 from PIL import Image, ImageTk
 from Database import *
+# import pijuice
 try:
     import smbus
 except Exception as ex:
