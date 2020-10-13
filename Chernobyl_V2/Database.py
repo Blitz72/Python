@@ -1,6 +1,14 @@
 import sqlite3 as db
 
 #db_path = '/home/pi/Python/Chernobyl_V2/db/Chernobyl.db'
+#connection = db.connect(path)
+#c = connection.cursor()
+
+#c.execute('DROP TABLE config')
+#c.execute('CREATE TABLE config (gpioa1 INTEGER, gpiob1 INTEGER, gpioa2 INTEGER, gpiob2 INTEGER, power_flag INTEGER, confirm INTEGER, dark_mode INTEGER)')
+#c.execute('INSERT INTO config VALUES(0x00, 0x00, 0x00, 0x00, 0, 0, 0)')
+
+#connection.commit()
 
 class Database:
     
