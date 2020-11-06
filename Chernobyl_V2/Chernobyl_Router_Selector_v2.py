@@ -164,11 +164,11 @@ class Router:
         self.label.place(relwidth=0.9, relheight=0.2, relx=0.05)
         
         self.yes_button = Button(self.frame, text="ON", fg=fg_color_button_green, bg=bg_color_button,
-                                cursor='hand2', command=lambda: self.relay_on())
+                                activebackground='#aaaaaa',cursor='hand2', command=lambda: self.relay_on())
         self.yes_button.place(relwidth=0.3, relheight=0.2, relx=0.15, rely=0.75)
         
         self.no_button = Button(self.frame, text="OFF",  fg=fg_color_button_red, bg=bg_color_button,
-                               cursor='hand2', command=lambda: self.relay_off())
+                               activebackground='#aaaaaa',cursor='hand2', command=lambda: self.relay_off())
         self.no_button.place(relwidth=0.3, relheight=0.2, relx=0.55, rely=0.75)
     
     def relay_on(self):
