@@ -25,9 +25,9 @@ class Database:
     
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.connection.commit()
-        print('Connection committed.')
+#        print('Connection committed.')
         self.connection.close()
-        print('Connection closed.')
+#        print('Connection closed.')
 
 
 #command = 'SELECT * FROM config'

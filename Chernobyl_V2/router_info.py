@@ -1,12 +1,17 @@
 router1 = {
-    'description': 'router description here...',
+    'description': "Linksys EA7300 MAX-STREAM™ AC1750 MU-MIMO Gigabit WiFi Router with dual 2.4 and 5 GHz bands.  "
+                   "The MAX-STREAM™ AC1750 WiFi 5 Router offers two dedicated WiFi bands that deliver combined "
+                    "speeds of up to 1.7 Gbps. Moreover, it can connect up to 10+ devices.",
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/Linksys_AC1900_EA7500.jpg',
     'label_text':'Linksys EA7300 AC1750',
     'x_pos': 0,
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
-    'router_links': []
+    'SSID': 'Router1',
+    'password':'test1234',
+    'rf_bands': 'Dual Band 2.4 + 5 GHz',
+    'router_links': ['https://linksys.com/us/p/P-EA7300/', 'https://adafruit.com']
     }
 
 router2 = {
@@ -17,6 +22,9 @@ router2 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -28,6 +36,9 @@ router3 = {
     'y_pos': 0,
     'width_adjust': 164,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -39,6 +50,9 @@ router4 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -50,6 +64,9 @@ router5 = {
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -61,6 +78,9 @@ router6 = {
     'y_pos': 0,
     'width_adjust': 160,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -72,6 +92,9 @@ router7 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -83,6 +106,9 @@ router8 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -94,6 +120,9 @@ router9 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -105,6 +134,9 @@ router10 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -116,6 +148,9 @@ router11 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -127,6 +162,9 @@ router12 = {
     'y_pos': 1,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -138,6 +176,9 @@ router13 = {
     'y_pos': 2,
     'width_adjust': 160,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -149,6 +190,9 @@ router14 = {
     'y_pos': 2,
     'width_adjust': 158,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -160,6 +204,9 @@ router15 = {
     'y_pos': 2,
     'width_adjust': 158,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -171,6 +218,9 @@ router16 = {
     'y_pos': 2,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -182,6 +232,9 @@ router17 = {
     'y_pos': 2,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -193,6 +246,9 @@ router18 = {
     'y_pos': 2,
     'width_adjust': 158,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -204,6 +260,9 @@ router19 = {
     'y_pos': 3,
     'width_adjust': 155,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -215,6 +274,9 @@ router20 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -226,6 +288,9 @@ router21 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -237,6 +302,9 @@ router22 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -248,6 +316,9 @@ router23 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -259,6 +330,9 @@ router24 = {
     'y_pos': 3,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -270,6 +344,9 @@ router25 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -281,6 +358,9 @@ router26 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -292,6 +372,9 @@ router27 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -303,6 +386,9 @@ router28 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -314,6 +400,9 @@ router29 = {
     'y_pos': 4,
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
 
@@ -326,5 +415,8 @@ router30 = {
     'router_links': [],
     'width_adjust': 163,
     'height_adjust': 99,
+    'SSID': '',
+    'password':'',
+    'rf_bands': '',
     'router_links': []
     }
