@@ -39,11 +39,13 @@ DARK_BUTTON_GREEN = '#aaffaa'
 DARK_BUTTON_RED = '#ffaaaa'
 FG_COLOR_DARK = 'white'
 IMG_BACKGROUND_GREEN = '#00bb00'
+IMG_ACTIVEBACKGROUND_GREEN = '#005500'
 IMG_BACKGROUND_RED = '#bb0000'
+IMG_ACTIVEBACKGROUND_RED = '#440000'
 
 borderStyle = 'ridge'
 borderWidth = 3
-alpha = 170
+alpha = 168
 
 db_path = '/home/pi/Python/Chernobyl_V2/db/Chernobyl.db'
 # db_path = './db/Chernobyl.db'
@@ -134,8 +136,10 @@ class Router:
         _gpio_value = gpio_value[0]
         if _gpio_value & (1 << (self.relay_num - 1) % 8):
             bg_color_image = IMG_BACKGROUND_GREEN
+            bg_activebackground = IMG_ACTIVEBACKGROUND_GREEN
         else:
             bg_color_image = IMG_BACKGROUND_RED
+            bg_activebackground = IMG_ACTIVEBACKGROUND_RED
         
         self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bg_color_frame, relief=borderStyle)
         self.frame.grid(column=self.router_info['x_pos'], row=self.router_info['y_pos'])
@@ -153,7 +157,7 @@ class Router:
                                     int((frameHeight-self.router_info['height_adjust']) * 2)), Image.ANTIALIAS)
         self.info_render = ImageTk.PhotoImage(self.info_img)
         self.image = Button(self.frame, image=self.render, bg=bg_color_image, cursor='hand2', relief='flat',
-                                  command=lambda: self.info_window())
+                                  activebackground=bg_activebackground, command=lambda: self.info_window())
         self.image.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
         
         self.label = Label(self.frame, text=self.router_info['label_text'], bg=bg_color_frame, fg=fg_color_frame)
