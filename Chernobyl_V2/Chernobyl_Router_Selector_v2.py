@@ -87,10 +87,8 @@ frames = []
 def check_dark_mode():
     # Check dark_mode from the config table of the database before rendering tkinter frames
     with Database(db_path, 'SELECT dark_mode FROM config') as dm_value:
-        print('dark_mode')
-        print(dm_value)
-    dark_mode = dm_value[0]
-    if dark_mode:
+        print('dark_mode: ', dm_value[0])
+    if dm_value[0]:
         bg_color_frame = BACKGROUND_DARK_FRAME
         fg_color_frame = FG_COLOR_DARK
         bg_color_button = BACKGROUND_DARK_BUTTON
@@ -248,22 +246,24 @@ class Router:
         center_y = int(screen_height/2)
         win_width = 600
         win_height = 350
-        if not root.child_window:
-            root.child_window = Toplevel()
-        else:
-            root.child_window.destroy()
-            root.child_window = Toplevel()
-        root.child_window.title(self.router_info['label_text'])
-        root.child_window.geometry('%sx%s+%s+%s' % (str(win_width), str(win_height), str(center_x-int(win_width/2)),
-                                              str(center_y-int(win_height/2))))
-        root.child_window.focus_set()
+        bg = '#e7e7e7'
         
         row_index = 0
         pad_x_desc = 30
         pad_y_desc = 10
         pad_x_table = 110
         
-        desc_label = Label(root.child_window, text=self.router_info['description'], wraplength=250, justify='center',
+        if not root.child_window:
+            root.child_window = Toplevel(bg=bg)
+        else:
+            root.child_window.destroy()
+            root.child_window = Toplevel(bg=bg)
+        root.child_window.title(self.router_info['label_text'])
+        root.child_window.geometry('%sx%s+%s+%s' % (str(win_width), str(win_height), str(center_x-int(win_width/2)),
+                                              str(center_y-int(win_height/2))))
+        root.child_window.focus_set()
+        
+        desc_label = Label(root.child_window, text=self.router_info['description'], bg=bg, wraplength=250, justify='center',
                            padx=pad_x_desc)
         desc_label.grid(row=row_index, column=0, pady=pad_y_desc)
         
@@ -271,31 +271,31 @@ class Router:
         image_label.grid(row=row_index, column=1, columnspan=2, pady=pad_y_desc)
         row_index += 1
         
-        label_blank = Label(root.child_window, text='', pady=2).grid(row=row_index, column=1)
+        label_blank = Label(root.child_window, text='', bg=bg, pady=2).grid(row=row_index, column=1)
         row_index += 1
         
-        label_SSID1 = Label(root.child_window, text='SSID', padx=pad_x_table)
+        label_SSID1 = Label(root.child_window, text='SSID', bg=bg, padx=pad_x_table)
         label_SSID1.grid(row=row_index, column=0, sticky='w')
-        label_SSID2 = Label(root.child_window, text=self.router_info['SSID'])
+        label_SSID2 = Label(root.child_window, text=self.router_info['SSID'], bg=bg)
         label_SSID2.grid(row=row_index, column=1, sticky='w')
         row_index += 1
         
-        label_password1 = Label(root.child_window, text='Password', padx=pad_x_table)
+        label_password1 = Label(root.child_window, text='Password', bg=bg, padx=pad_x_table)
         label_password1.grid(row=row_index, column=0, sticky='w')
-        label_password2 = Label(root.child_window, text=self.router_info['password'])
+        label_password2 = Label(root.child_window, text=self.router_info['password'], bg=bg)
         label_password2.grid(row=row_index, column=1, sticky='w')
         row_index += 1
         
-        label_bands1 = Label(root.child_window, text='RF Bands', padx=pad_x_table)
+        label_bands1 = Label(root.child_window, text='RF Bands', bg=bg, padx=pad_x_table)
         label_bands1.grid(row=row_index, column=0, sticky='w')
-        label_bands2 = Label(root.child_window, text=self.router_info['rf_bands'])
+        label_bands2 = Label(root.child_window, text=self.router_info['rf_bands'], bg=bg)
         label_bands2.grid(row=row_index, column=1, sticky='w')
         row_index += 1
         
-        label_links1 = Label(root.child_window, text='Helpful links', padx=pad_x_table)
+        label_links1 = Label(root.child_window, text='Helpful links', bg=bg, padx=pad_x_table)
         label_links1.grid(row=5, column=0, sticky='w')
         for link in self.router_info['router_links']:
-            label = Label(root.child_window, text=link, fg='blue', cursor='hand2')
+            label = Label(root.child_window, text=link, bg=bg, fg='blue', cursor='hand2')
             label.grid(row=row_index, column=1, sticky='w')
             label.bind('<Button-1>', callback)
             row_index += 1
@@ -313,11 +313,12 @@ def update_root():
         frame.no_button.configure(bg=bg_color_button, fg=fg_color_button_red)
 
 def create_window():
+    bg = '#d7d7d7'
     if not root.child_window:
-        root.child_window = Toplevel()
+        root.child_window = Toplevel(bg=bg)
     else:
         root.child_window.destroy()
-        root.child_window = Toplevel()
+        root.child_window = Toplevel(bg=bg)
     root.child_window.title('C by GE\u2122 Chernobyl Router Selector\u2122 Settings')
     root.child_window.geometry('450x200+5+100')
     root.child_window.focus_set()
@@ -344,24 +345,32 @@ def create_window():
             print('Updated dark_mode setting.')
         settings_label = Label(root.child_window, text="Settings Saved!", pady=10)
         settings_label.place(relwidth=0.5, relheight=0.2, relx=0.25, rely=0.8)
+#        settings_label.pack()
         update_root()
         root.child_window.destroy()
     
+#    blank_label = Label(root.child_window, text='', bg=bg).pack()
+    
     radio1 = Radiobutton(root.child_window, text="No Confirmation Required", pady=2, variable=confirm_state, value=0)
     radio1.place(relwidth=width, relheight=height, relx=0.25, rely=0 + offset)
+#    radio1.pack()
 
     radio2 = Radiobutton(root.child_window, text="Confirm for OFF Only        ", pady=2, variable=confirm_state, value=1)
     radio2.place(relwidth=width, relheight=height, relx=0.25, rely=0.15 + offset)
+#    radio2.pack()
 
     radio3 = Radiobutton(root.child_window, text="Confirm for ON and OFF   ", pady=2, variable=confirm_state, value=2)
     radio3.place(relwidth=width, relheight=height, relx=0.25, rely=0.3 + offset)
-
-    checkDarkMode = Checkbutton(root.child_window, text="Dark Mode", pady=2, variable=dark_mode_state)
-    checkDarkMode.place(relwidth=width, relheight=height, relx=0.24, rely=.45 + offset)
-
-    applyButton = Button(root.child_window, text="Apply", pady=2, command=save_option)
-    applyButton.place(relwidth=0.2, relheight=height, relx=0.4, rely=0.63 + offset)
-
+#    radio3.pack()
+    
+    check_dark_mode = Checkbutton(root.child_window, text="Dark Mode", pady=2, variable=dark_mode_state)
+    check_dark_mode.place(relwidth=width, relheight=height, relx=0.24, rely=.45 + offset)
+#    check_dark_mode.pack()
+    
+    apply_button = Button(root.child_window, text="Apply", pady=2, command=save_option)
+    apply_button.place(relwidth=0.2, relheight=height, relx=0.4, rely=0.63 + offset)
+#    apply_button.pack()
+    
 def on_close():
     if messagebox.askyesno("Quit C by GE\u2122 Chernobyl Router Selector\u2122", "Do you want to exit the C by GE\u2122 Chernobyl Router Selector\u2122?"):
         root.destroy()
