@@ -45,12 +45,12 @@ IMG_ACTIVEBACKGROUND_RED = '#440000'
 
 borderStyle = 'ridge'
 borderWidth = 3
-alpha = 168
+alpha = 172
 
 db_path = '/home/pi/Python/Chernobyl_V2/db/Chernobyl.db'
 # db_path = './db/Chernobyl.db'
 
-# MCP23017 config variables
+# MCP23017 and I2C config variables
 channel = 1
 address1 = 0x20
 address2 = 0x21
@@ -133,11 +133,11 @@ class Router:
             print(gpio_value)
         _gpio_value = gpio_value[0]
         if _gpio_value & (1 << (self.relay_num - 1) % 8):
-            bg_color_image = IMG_BACKGROUND_GREEN
-            bg_activebackground = IMG_ACTIVEBACKGROUND_GREEN
+            self.bg_color_image = IMG_BACKGROUND_GREEN
+            self.bg_activebackground = IMG_ACTIVEBACKGROUND_GREEN
         else:
-            bg_color_image = IMG_BACKGROUND_RED
-            bg_activebackground = IMG_ACTIVEBACKGROUND_RED
+            self.bg_color_image = IMG_BACKGROUND_RED
+            self.bg_activebackground = IMG_ACTIVEBACKGROUND_RED
         
         self.frame = Frame(root, height=frameHeight, width=frameWidth, bd=borderWidth, bg=bg_color_frame, relief=borderStyle)
         self.frame.grid(column=self.router_info['x_pos'], row=self.router_info['y_pos'])
@@ -154,8 +154,8 @@ class Router:
         self.info_img = self.info_img.resize((int((frameWidth-self.router_info['width_adjust']) * 2),
                                     int((frameHeight-self.router_info['height_adjust']) * 2)), Image.ANTIALIAS)
         self.info_render = ImageTk.PhotoImage(self.info_img)
-        self.image = Button(self.frame, image=self.render, bg=bg_color_image, cursor='hand2', relief='flat',
-                                  activebackground=bg_activebackground, command=lambda: self.info_window())
+        self.image = Button(self.frame, image=self.render, bg=self.bg_color_image, cursor='hand2', relief='flat',
+                                  activebackground=self.bg_activebackground, command=lambda: self.info_window())
         self.image.place(relwidth=0.5, relheight=0.5, relx=0.25, rely=0.2)
         
         self.label = Label(self.frame, text=self.router_info['label_text'], bg=bg_color_frame, fg=fg_color_frame)
@@ -199,6 +199,7 @@ class Router:
                     print('An error ocurred writing to: ', self.mcp_address)
                 print(self.gpio_reg + ' = ', new_value)
                 self.image.config(bg=IMG_BACKGROUND_GREEN)
+                self.image.config(activebackground=IMG_ACTIVEBACKGROUND_GREEN)
             else:
                 return
     
@@ -231,7 +232,8 @@ class Router:
                     print(ex)
                     print('An error ocurred writing to: ', self.mcp_address)
                 print(self.gpio_reg + ' = ', new_value)
-                self.image .config(bg=IMG_BACKGROUND_RED)
+                self.image.config(bg=IMG_BACKGROUND_RED)
+                self.image.config(activebackground=IMG_ACTIVEBACKGROUND_RED)
             else:
                 return
             
@@ -312,7 +314,7 @@ def update_root():
         frame.yes_button.configure(bg=bg_color_button, fg=fg_color_button_green)
         frame.no_button.configure(bg=bg_color_button, fg=fg_color_button_red)
 
-def create_window():
+def settings_window():
     bg = '#d7d7d7'
     if not root.child_window:
         root.child_window = Toplevel(bg=bg)
@@ -340,7 +342,7 @@ def create_window():
     def save_option():
         # print(confirm_setting.get())
         with Database(db_path, 'UPDATE config SET confirm = ' + str(confirm_state.get())) as confirm_update:
-            print('Updated confirn setting.')
+            print('Updated confirm setting.')
         with Database(db_path, 'UPDATE config SET dark_mode = ' + str(dark_mode_state.get())) as dark_mode_update:
             print('Updated dark_mode setting.')
         settings_label = Label(root.child_window, text="Settings Saved!", pady=10)
@@ -377,7 +379,7 @@ def on_close():
 
 menu = Menu(root)
 new_item = Menu(menu)
-menu.add_command(label='Settings', command=create_window)
+menu.add_command(label='Settings', command=settings_window)
 root.config(menu=menu)
 
 frame1 = Router(router.router1, bus)
