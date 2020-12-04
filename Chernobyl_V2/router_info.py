@@ -11,6 +11,7 @@ router1 = {
     'SSID': 'Router1',
     'password':'test1234',
     'rf_bands': 'Dual Band 2.4 + 5 GHz',
+    'security': '64/128-bit WEP, WPA2-Personal, WPA2-Enterprise',
     'router_links': ['https://linksys.com/us/p/P-EA7300/', 'https://adafruit.com']
     }
 
@@ -25,6 +26,7 @@ router2 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -39,6 +41,7 @@ router3 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -53,6 +56,7 @@ router4 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -67,6 +71,7 @@ router5 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -81,6 +86,7 @@ router6 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -95,6 +101,7 @@ router7 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -109,6 +116,7 @@ router8 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -123,6 +131,7 @@ router9 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -137,6 +146,7 @@ router10 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -151,6 +161,7 @@ router11 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -165,6 +176,7 @@ router12 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -179,6 +191,7 @@ router13 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -193,6 +206,7 @@ router14 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -207,6 +221,7 @@ router15 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -221,6 +236,7 @@ router16 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -235,6 +251,7 @@ router17 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -249,6 +266,7 @@ router18 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -263,6 +281,7 @@ router19 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -277,6 +296,7 @@ router20 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -291,6 +311,7 @@ router21 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -305,6 +326,7 @@ router22 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -318,8 +340,8 @@ router23 = {
     'height_adjust': 99,
     'SSID': '',
     'password':'',
-    'rf_bands': '',
-    'router_links': []
+    'security': '',
+    'rf_bandsrouter_links': []
     }
 
 router24 = {
@@ -333,6 +355,7 @@ router24 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
@@ -347,13 +370,14 @@ router25 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
 router26 = {
     'description': 'router description here...',
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/C_by_GE_logo.jpg',
-    'label_text':'',
+    'label_text':'C by GE\u2122 Chernobyl Router Selector\u2122',
     'x_pos': 1,
     'y_pos': 4,
     'width_adjust': 163,
@@ -361,13 +385,14 @@ router26 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
 router27 = {
     'description': 'router description here...',
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/GE_logo.jpg',
-    'label_text':'',
+    'label_text':'C by GE\u2122 Chernobyl Router Selector\u2122',
     'x_pos': 2,
     'y_pos': 4,
     'width_adjust': 163,
@@ -375,13 +400,14 @@ router27 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
 router28 = {
     'description': 'router description here...',
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/C_by_GE_Spark.jpg',
-    'label_text':'',
+    'label_text':'C by GE\u2122 Chernobyl Router Selector\u2122',
     'x_pos': 3,
     'y_pos': 4,
     'width_adjust': 163,
@@ -389,13 +415,14 @@ router28 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
 router29 = {
     'description': 'router description here...',
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/GE_logo.jpg',
-    'label_text':'',
+    'label_text':'C by GE\u2122 Chernobyl Router Selector\u2122',
     'x_pos': 4,
     'y_pos': 4,
     'width_adjust': 163,
@@ -403,13 +430,14 @@ router29 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }
 
 router30 = {
     'description': 'router description here...',
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/C_by_GE_logo.jpg',
-    'label_text':'',
+    'label_text':'C by GE\u2122 Chernobyl Router Selector\u2122',
     'x_pos': 5,
     'y_pos': 4,
     'router_links': [],
@@ -418,5 +446,6 @@ router30 = {
     'SSID': '',
     'password':'',
     'rf_bands': '',
+    'security': '',
     'router_links': []
     }

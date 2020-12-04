@@ -22,7 +22,7 @@ geom_str = str(screen_width) + 'x' + str(screen_height)
 print('Resolution: ', geom_str)
 root.geometry(geom_str)
 
-frameWidth = int(screen_width/6)
+frameWidth = int(screen_width/6) - 1
 frameHeight = int(screen_height/5) - 20
 
 scale_ratio = screen_height/1080
@@ -43,7 +43,7 @@ IMG_ACTIVEBACKGROUND_GREEN = '#005500'
 IMG_BACKGROUND_RED = '#bb0000'
 IMG_ACTIVEBACKGROUND_RED = '#440000'
 
-borderStyle = 'ridge'
+borderStyle = 'ridge'  #'solid'  #usually ridge
 borderWidth = 3
 alpha = 172
 
@@ -172,8 +172,8 @@ class Router:
     def relay_on(self):
         db_query = 'SELECT ' + str(self.gpio_reg) + ', confirm from config'
         with Database(db_path, db_query) as values:
-            print(values[0])
-            print(values[1])
+            print('initial gpio value:', values[0])
+            # ~ print(values[1])
         gpio_value = values[0]
         confirm = values[1]
         if gpio_value & (1 << (self.relay_num - 1) % 8):
@@ -186,17 +186,17 @@ class Router:
                     confirmation = True
                 else:
                     confirmation = False
-            print('confirmation', confirmation)
+            # ~ print('confirmation', confirmation)
             if confirmation:
                 new_value = gpio_value | (1 << (self.relay_num - 1) % 8)
                 db_query = 'UPDATE config SET ' + self.gpio_reg + ' = ' + str(new_value)
                 with Database(db_path, db_query) as update:
-                    print(update)
+                    print('update:', update)
                 try:
                     self.bus.write_byte_data(self.mcp_address, self.mcp_gpio_reg, new_value)
                 except Exception as ex:
                     print(ex)
-                    print('An error ocurred writing to: ', self.mcp_address)
+                    print('An error ocurred writing to: ', hex(self.mcp_address))
                 print(self.gpio_reg + ' = ', new_value)
                 self.image.config(bg=IMG_BACKGROUND_GREEN)
                 self.image.config(activebackground=IMG_ACTIVEBACKGROUND_GREEN)
@@ -206,8 +206,8 @@ class Router:
     def relay_off(self):
         db_query = 'SELECT ' + str(self.gpio_reg) + ', confirm from config'
         with Database(db_path, db_query) as values:
-            print(values[0])
-            print(values[1])
+            print('initial gpio value:', values[0])
+            # ~ print(values[1])
         gpio_value = values[0]
         confirm = values[1]
         if (gpio_value >> (self.relay_num - 1) % 8) & 1 == 0:
@@ -220,17 +220,17 @@ class Router:
                     confirmation = True
                 else:
                     confirmation = False
-            print('confirmation', confirmation)
+            # ~ print('confirmation', confirmation)
             if confirmation:
                 new_value =  gpio_value & ~(1 << (self.relay_num - 1) % 8)
                 db_query = 'UPDATE config SET ' + self.gpio_reg + ' = ' + str(new_value)
                 with Database(db_path, db_query) as update:
-                    print(update)
+                    print('update:', update)
                 try:
                     self.bus.write_byte_data(self.mcp_address, self.mcp_gpio_reg, new_value)
                 except Exception as ex:
                     print(ex)
-                    print('An error ocurred writing to: ', self.mcp_address)
+                    print('An error ocurred writing to: ', hex(self.mcp_address))
                 print(self.gpio_reg + ' = ', new_value)
                 self.image.config(bg=IMG_BACKGROUND_RED)
                 self.image.config(activebackground=IMG_ACTIVEBACKGROUND_RED)
@@ -238,6 +238,7 @@ class Router:
                 return
             
     def info_window(self):
+        global scale_ratio, screen_width, screen_height
         import webbrowser
         
         def callback(event):
@@ -246,8 +247,8 @@ class Router:
         global screen_width, screen_height
         center_x = int(screen_width/2)
         center_y = int(screen_height/2)
-        win_width = 600
-        win_height = 350
+        win_width = int(700 * scale_ratio)
+        win_height = int(400 * scale_ratio)
         bg = '#e7e7e7'
         
         row_index = 0
@@ -267,10 +268,10 @@ class Router:
         
         desc_label = Label(root.child_window, text=self.router_info['description'], bg=bg, wraplength=250, justify='center',
                            padx=pad_x_desc)
-        desc_label.grid(row=row_index, column=0, pady=pad_y_desc)
+        desc_label.grid(row=row_index, column=0, columnspan=2, pady=pad_y_desc)
         
-        image_label = Label(root.child_window, image=self.info_render, bg='#ffffff', justify='center')
-        image_label.grid(row=row_index, column=1, columnspan=2, pady=pad_y_desc)
+        image_label = Label(root.child_window, image=self.info_render, bg='#ffffff', justify='right')
+        image_label.grid(row=row_index, column=2, columnspan=2, padx=pad_x_desc, pady=pad_y_desc)
         row_index += 1
         
         label_blank = Label(root.child_window, text='', bg=bg, pady=2).grid(row=row_index, column=1)
@@ -279,26 +280,32 @@ class Router:
         label_SSID1 = Label(root.child_window, text='SSID', bg=bg, padx=pad_x_table)
         label_SSID1.grid(row=row_index, column=0, sticky='w')
         label_SSID2 = Label(root.child_window, text=self.router_info['SSID'], bg=bg)
-        label_SSID2.grid(row=row_index, column=1, sticky='w')
+        label_SSID2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_password1 = Label(root.child_window, text='Password', bg=bg, padx=pad_x_table)
         label_password1.grid(row=row_index, column=0, sticky='w')
         label_password2 = Label(root.child_window, text=self.router_info['password'], bg=bg)
-        label_password2.grid(row=row_index, column=1, sticky='w')
+        label_password2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_bands1 = Label(root.child_window, text='RF Bands', bg=bg, padx=pad_x_table)
         label_bands1.grid(row=row_index, column=0, sticky='w')
         label_bands2 = Label(root.child_window, text=self.router_info['rf_bands'], bg=bg)
-        label_bands2.grid(row=row_index, column=1, sticky='w')
+        label_bands2.grid(row=row_index, column=1, columnspan=3, sticky='w')
+        row_index += 1
+        
+        label_security1 = Label(root.child_window, text='Security', bg=bg, padx=pad_x_table)
+        label_security1.grid(row=row_index, column=0, sticky='w')
+        label_security2 = Label(root.child_window, text=self.router_info['security'], bg=bg)
+        label_security2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_links1 = Label(root.child_window, text='Helpful links', bg=bg, padx=pad_x_table)
-        label_links1.grid(row=5, column=0, sticky='w')
+        label_links1.grid(row=row_index, column=0, sticky='w')
         for link in self.router_info['router_links']:
             label = Label(root.child_window, text=link, bg=bg, fg='blue', cursor='hand2')
-            label.grid(row=row_index, column=1, sticky='w')
+            label.grid(row=row_index, column=1, columnspan=3, sticky='w')
             label.bind('<Button-1>', callback)
             row_index += 1
     
@@ -353,7 +360,7 @@ def settings_window():
     
 #    blank_label = Label(root.child_window, text='', bg=bg).pack()
     
-    radio1 = Radiobutton(root.child_window, text="No Confirmation Required", pady=2, variable=confirm_state, value=0)
+    radio1 = Radiobutton(root.child_window, text="No Confirmation Required ", pady=2, variable=confirm_state, value=0)
     radio1.place(relwidth=width, relheight=height, relx=0.25, rely=0 + offset)
 #    radio1.pack()
 
