@@ -105,7 +105,6 @@ def check_dark_mode():
 bg_color_frame, fg_color_frame, bg_color_button, fg_color_button_green, fg_color_button_red = check_dark_mode()
 
 class Router:
-    
     def __init__(self, router_info, bus):
         self.router_info = router_info
         self.bus = bus
