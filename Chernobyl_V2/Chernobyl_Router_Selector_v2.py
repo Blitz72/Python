@@ -254,7 +254,7 @@ class Router:
         row_index = 0
         pad_x_desc = 30
         pad_y_desc = 10
-        pad_x_table = 110
+        pad_x_table = 30
         
         if not root.child_window:
             root.child_window = Toplevel(bg=bg)
@@ -268,41 +268,41 @@ class Router:
         
         desc_label = Label(root.child_window, text=self.router_info['description'], bg=bg, wraplength=250, justify='center',
                            padx=pad_x_desc)
-        desc_label.grid(row=row_index, column=0, columnspan=2, pady=pad_y_desc)
+        desc_label.grid(row=row_index, column=0, columnspan=2, pady=pad_y_desc, sticky='ew')
         
         image_label = Label(root.child_window, image=self.info_render, bg='#ffffff', justify='right')
         image_label.grid(row=row_index, column=2, columnspan=2, padx=pad_x_desc, pady=pad_y_desc)
         row_index += 1
         
-        label_blank = Label(root.child_window, text='', bg=bg, pady=2).grid(row=row_index, column=1)
+        label_blank = Label(root.child_window, text='', bg=bg, pady=0).grid(row=row_index, column=0)
         row_index += 1
         
         label_SSID1 = Label(root.child_window, text='SSID', bg=bg, padx=pad_x_table)
-        label_SSID1.grid(row=row_index, column=0, sticky='w')
+        label_SSID1.grid(row=row_index, column=0, sticky='e')
         label_SSID2 = Label(root.child_window, text=self.router_info['SSID'], bg=bg)
         label_SSID2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_password1 = Label(root.child_window, text='Password', bg=bg, padx=pad_x_table)
-        label_password1.grid(row=row_index, column=0, sticky='w')
+        label_password1.grid(row=row_index, column=0, sticky='e')
         label_password2 = Label(root.child_window, text=self.router_info['password'], bg=bg)
         label_password2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_bands1 = Label(root.child_window, text='RF Bands', bg=bg, padx=pad_x_table)
-        label_bands1.grid(row=row_index, column=0, sticky='w')
+        label_bands1.grid(row=row_index, column=0, sticky='e')
         label_bands2 = Label(root.child_window, text=self.router_info['rf_bands'], bg=bg)
         label_bands2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_security1 = Label(root.child_window, text='Security', bg=bg, padx=pad_x_table)
-        label_security1.grid(row=row_index, column=0, sticky='w')
+        label_security1.grid(row=row_index, column=0, sticky='e')
         label_security2 = Label(root.child_window, text=self.router_info['security'], bg=bg)
         label_security2.grid(row=row_index, column=1, columnspan=3, sticky='w')
         row_index += 1
         
         label_links1 = Label(root.child_window, text='Helpful links', bg=bg, padx=pad_x_table)
-        label_links1.grid(row=row_index, column=0, sticky='w')
+        label_links1.grid(row=row_index, column=0, sticky='e')
         for link in self.router_info['router_links']:
             label = Label(root.child_window, text=link, bg=bg, fg='blue', cursor='hand2')
             label.grid(row=row_index, column=1, columnspan=3, sticky='w')
