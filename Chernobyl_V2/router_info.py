@@ -12,7 +12,7 @@ router1 = {
     'password':'test1234',
     'rf_bands': 'Dual Band 2.4 + 5 GHz',
     'security': '64/128-bit WEP, WPA2-Personal, WPA2-Enterprise',
-    'router_links': ['https://linksys.com/us/p/P-EA7300/', 'https://adafruit.com', 'https://youtube.com']
+    'router_links': ['https://linksys.com/us/p/P-EA7300/', 'https://adafruit.com']
     }
 
 router2 = {
