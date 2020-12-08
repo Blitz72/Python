@@ -353,7 +353,6 @@ def settings_window():
             print('Updated dark_mode setting.')
         settings_label = Label(root.child_window, text="Settings Saved!", pady=10)
         settings_label.place(relwidth=0.5, relheight=0.2, relx=0.25, rely=0.8)
-#        settings_label.pack()
         update_root()
         root.child_window.destroy()
     
@@ -361,23 +360,18 @@ def settings_window():
     
     radio1 = Radiobutton(root.child_window, text="No Confirmation Required ", pady=2, variable=confirm_state, value=0)
     radio1.place(relwidth=width, relheight=height, relx=0.25, rely=0 + offset)
-#    radio1.pack()
 
     radio2 = Radiobutton(root.child_window, text="Confirm for OFF Only        ", pady=2, variable=confirm_state, value=1)
     radio2.place(relwidth=width, relheight=height, relx=0.25, rely=0.15 + offset)
-#    radio2.pack()
 
     radio3 = Radiobutton(root.child_window, text="Confirm for ON and OFF   ", pady=2, variable=confirm_state, value=2)
     radio3.place(relwidth=width, relheight=height, relx=0.25, rely=0.3 + offset)
-#    radio3.pack()
     
     check_dark_mode = Checkbutton(root.child_window, text="Dark Mode", pady=2, variable=dark_mode_state)
     check_dark_mode.place(relwidth=width, relheight=height, relx=0.24, rely=.45 + offset)
-#    check_dark_mode.pack()
     
     apply_button = Button(root.child_window, text="Apply", pady=2, command=save_option)
     apply_button.place(relwidth=0.2, relheight=height, relx=0.4, rely=0.63 + offset)
-#    apply_button.pack()
     
 def on_close():
     if messagebox.askyesno("Quit C by GE\u2122 Chernobyl Router Selector\u2122", "Do you want to exit the C by GE\u2122 Chernobyl Router Selector\u2122?"):
