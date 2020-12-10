@@ -39,11 +39,8 @@ i2c = busio.I2C(SCL, SDA)
 # Create the SSD1306 OLED class.
 # The first two parameters are the pixel width and pixel height.  Change these
 # to the right size for your display!
-try:
-    disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
-except Exception as ex:
-    err = True
-    print(ex)
+
+disp = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
 
 # Clear display.
 disp.fill(0)
@@ -93,8 +90,8 @@ while True:
     #SSID = subprocess.check_output(cmd, shell=True).decode("utf-8").split(' ')[5]
     #SSID = SSID.split(':')[1]
     cmd = "sudo iwgetid | cut -d' ' -f6 | cut -d':' -f2"
-    SSID = subprocess.check_output(cmd, shell=True).decode("utf-8").strip('\"')
-    print(SSID)
+    SSID = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    #print(SSID)
     #cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
     #MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
     #cmd = 'df -h | awk \'$NF=="/"{printf "Disk: %d/%d GB  %s", $3,$2,$5}\''
@@ -103,7 +100,7 @@ while True:
     # Write four lines of text.
 
     draw.text((x, top + 0), "IP: " + IP, font=font, fill=255)
-    draw.text((x, top + 8), SSID, font=font, fill=255)
+    draw.text((x, top + 8), eval(SSID), font=font, fill=255)
     #draw.text((x, top + 16), MemUsage, font=font, fill=255)
     #draw.text((x, top + 25), Disk, font=font, fill=255)
 
