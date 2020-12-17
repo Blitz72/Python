@@ -16,33 +16,37 @@ router1 = {
     }
 
 router2 = {
-    'description': 'router description here...',
+    'description': "The Linksys MAX-STREAM AC1900 features MU-MIMO.  With MU-MIMO (Multi-User, Multiple-Input, "
+                    "Multiple-Output) technology, the MAX-STREAM AC1900 wireless router sends advanced WiFi to "
+                    "multiple devices at the same time and same speed.",
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/Linksys_AC1900_EA7500.jpg',
     'label_text':'Linksys EA7500 AC1900',
     'x_pos': 1,
     'y_pos': 0,
     'width_adjust': 155,
     'height_adjust': 99,
-    'SSID': '',
-    'password':'',
-    'rf_bands': '',
-    'security': '',
-    'router_links': []
+    'SSID': 'Router2',
+    'password':'test1234',
+    'rf_bands': 'Dual Band 2.4 + 5 GHz',
+    'security': 'WPA/WPA2 encryption and an SPI firewall',
+    'router_links': ['https://www.linksys.com/us/p/P-EA7500/']
     }
 
 router3 = {
-    'description': 'router description here...',
+    'description': "The latest NitroQAM™ technology boosts the Wi-Fi speeds to everyone and everything on your busy "
+                    "network.  The RT-AC3100 enables a smarter home, supporting IP cameras, thermostats and a variety "
+                    "of devices you don't even own yet.",
     'img_URL': '/home/pi/Python/Chernobyl_V2/images/ASUS_AC-3100.jpg',
     'label_text':'ASUS Wireles AC-3100',
     'x_pos': 2,
     'y_pos': 0,
     'width_adjust': 164,
     'height_adjust': 99,
-    'SSID': '',
-    'password':'',
-    'rf_bands': '',
-    'security': '',
-    'router_links': []
+    'SSID': 'Router 3',
+    'password':'test1234',
+    'rf_bands': 'Dual Band 2.4 + 5 GHz',
+    'security': '64/128-bit WEP, WPA/WPA2-PSK, WPA/WPA2-Enterprise, WPS',
+    'router_links': ['https://www.asus.com/us/Networking/RT-AC3100/', 'https://www.asus.com/us/Networking/RT-AC3100/specifications/']
     }
 
 router4 = {
