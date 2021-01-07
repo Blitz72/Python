@@ -1,30 +1,55 @@
+from supported_colors import supported_colors_list
+import os
+from gtts import gTTS
+import random
 import subprocess
-import time
-# import os
+from time import sleep
 
-voice = '-ven+m3'
-pitch = '-p65'
-speed = '-s135'
-amplitude = '-a200'
-wake_word = 'Hey Google'
+# for color in supported_colors_list:
+#     print(color)
+
+directory = 'voice_files'
+parent_dir = '/home/pi/Python/VoiceTTS/'
+
+path = os.path.join(parent_dir, directory)
+
+if not os.path.exists(path):
+    os.mkdir(path)
+    print(f'Directory created: {path}')
+else:
+    print(f'{path} already exists. Directory not created.')
+
+colors = []
+
+def format_filename(filename):
+    formatted_filename = ''
+    name_parts = filename.split(' ')
+    if len(name_parts) <= 1:
+        return filename
+    else:
+        for part in name_parts:
+            formatted_filename += part + '_'
+        return formatted_filename[:-1]
 
 
-commands = [
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn see sleep candle lite\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn office lights, bloo\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> set lights in the office to fifty five percent\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn see sleep, cuhl wite\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn office lights, red\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> set lights in the office to five percent\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn see sleep soft wite\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn office lights, green\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> set lights in the office to one hundred percent\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word),
-    "espeak {} {} -m {} {} \"{} <break time='1250ms'/> turn lights in the office to Zero percent\" --stdout | aplay".format(voice, pitch, speed, amplitude, wake_word)
-]
+for x in range(5):
+    colors.append(supported_colors_list[random.randint(0, len(supported_colors_list))]['name'])
 
-# for cmd in commands:
-#     voice = subprocess.check_output(cmd, shell=True).decode("utf-8")
-#     time.sleep(15)
+print(colors)
 
-cmd = commands[9]
-voice = subprocess.check_output(cmd, shell=True).decode("utf-8")
+for color in colors:
+    filename = format_filename(color)
+    print(filename)
+    print(f'{path}/google_{filename}.mp3')
+    file = gTTS(f'Hey Google, turn the lights in the office {color}')
+    file.save(f'{path}/google_{filename}.mp3')
+
+files = os.listdir(path)
+for file in files:
+    print(file)
+    subprocess.check_output(f'omxplayer -o local {path}/{file}', shell=True).decode('utf-8')
+    sleep(15)
+    os.remove(f'{path}/{file}')
+
+    
+
