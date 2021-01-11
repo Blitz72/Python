@@ -31,17 +31,19 @@ def format_filename(filename):
             formatted_filename += part + '_'
         return formatted_filename[:-1]
 
+def make_color_list():
+    for x in range(5):
+        colors.append(supported_colors_list[random.randint(0, len(supported_colors_list))]['name'])
 
-for x in range(5):
-    colors.append(supported_colors_list[random.randint(0, len(supported_colors_list))]['name'])
 
+make_color_list()
 print(colors)
 
 for color in colors:
     filename = format_filename(color)
     print(filename)
     print(f'{path}/google_{filename}.mp3')
-    file = gTTS(f'Hey Google, turn the lights in the office {color}')
+    file = gTTS(f'Hey Google, turn the lights in the office to {color}')
     file.save(f'{path}/google_{filename}.mp3')
 
 files = os.listdir(path)

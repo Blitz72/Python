@@ -1,605 +1,944 @@
+# Color values can be found here: https://en.wikipedia.org/wiki/List_of_colors_(compact)
+
 supported_colors_list = [
     {
         'name': 'alice blue',
-        'rgb_values': (240, 248, 255)
+        'color_values': (240, 248, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-#     {
-#         'name': 'almond',
-#         'rgb_values': (0, 0, 0)
-#     },
-#     {
-#         'name': 'antique white',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'almond',             # Google uses color_values for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'antique white',      # Google uses color_values for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'aqua',
-        'rgb_values': (0, 255, 255)
+        'color_values': (0, 255, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'aquamarine',
-        'rgb_values': (127, 255, 212)
+        'color_values': (127, 255, 212),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'azure',
-        'rgb_values': (0, 127, 255)
+        'color_values': (0, 127, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-#     {
-#         'name': 'beige',
-#         'rgb_values': (0, 0, 0)
-#     },
-#     {
-#         'name': 'bisque',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'beige',              # Google uses color_values for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'bisque',             # Google uses color_values for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'black',
-        'rgb_values': (0, 0, 0)
+        'color_values': (0, 0, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-#     {
-#         'name': 'blanched almond',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'blanched almond',    # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'blue',
-        'rgb_values': (0, 0, 255)
+        'color_values': (0, 0, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'blue violet',
-        'rgb_values': (138, 43, 226)
+        'color_values': (138, 43, 226),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'brown',
-        'rgb_values': (150, 75, 0)
+        'color_values': (150, 75, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
-#         'name': 'burlywood',
-#         'rgb_values': (0, 0, 0)
+#         'name': 'burlywood',         # Google uses cct for this color
+#         'color_values': '',
+#         'is_rgb': False,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'cadet blue',
-        'rgb_values': (95, 158, 160)
+        'color_values': (95, 158, 160),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'charteuse',
-        'rgb_values': (223, 255, 0)
+        'color_values': (223, 255, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'chocolate',
-        'rgb_values': (123, 63, 0)
+        'color_values': (123, 63, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'coral',
-        'rgb_values': (255, 127, 80)
+        'color_values': (255, 127, 80),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'cornflower',
-        'rgb_values': (100, 149, 237)
+        'color_values': (100, 149, 237),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'cornflower blue',           # Need to test for Alexa
+        'color_values': (100, 149, 237),
+        'is_rgb': True,
+        'va_support': ['Google']
     },
 #     {
-#         'name': 'cornsilk',
-#         'rgb_values': (0, 0, 0)
+#         'name': 'corns ilk',          
+#         'color_values': '',
+#         'is_rgb': False,
+#         'va_support': ['Google', 'Alexa']
 #     },
     {
         'name': 'crimson',
-        'rgb_values': (220, 20, 60)
+        'color_values': (220, 20, 60),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'cyan',
-        'rgb_values': (0, 255, 255)
+        'color_values': (0, 255, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark blue',
-        'rgb_values': (0, 0, 139)
+        'color_values': (0, 0, 139),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark cyan',
-        'rgb_values': (0, 139, 139)
+        'color_values': (0, 139, 139),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark goldenrod',
-        'rgb_values': (184, 134, 11)
+        'color_values': (184, 134, 11),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark gray',
-        'rgb_values': (169, 169, 169)
+        'color_values': (169, 169, 169),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark green',
-        'rgb_values': (1, 50, 32)
+        'color_values': (1, 50, 32),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark khaki',
-        'rgb_values': (189, 183, 107)
+        'color_values': (189, 183, 107),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark magenta',
-        'rgb_values': (139, 0, 139)
+        'color_values': (139, 0, 139),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'dark olive green',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'dark orange',
-        'rgb_values': (85, 107, 47)
+        'color_values': (85, 107, 47),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark orchid',
-        'rgb_values': (153, 50, 204)
+        'color_values': (153, 50, 204),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark red',
-        'rgb_values': (139, 0, 0)
+        'color_values': (139, 0, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark salmon',
-        'rgb_values': (233, 150, 122)
+        'color_values': (233, 150, 122),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'dark sea green',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
 #     {
 #         'name': 'dark slate blue',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'dark slate gray',
-        'rgb_values': (47, 79, 79)
+        'color_values': (47, 79, 79),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark turquoise',
-        'rgb_values': (0, 206, 209)
+        'color_values': (0, 206, 209),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dark violet',
-        'rgb_values': (148, 0, 211)
+        'color_values': (148, 0, 211),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'deep pink',
-        'rgb_values': (255, 20, 147)
+        'color_values': (255, 20, 147),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'deep sky blue',
-        'rgb_values': (0, 191, 255)
+        'color_values': (0, 191, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dim gray',
-        'rgb_values': (105, 105, 105)
+        'color_values': (105, 105, 105),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'dodger blue',
-        'rgb_values': (30, 144, 255)
+        'color_values': (30, 144, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'firebrick',
-        'rgb_values': (178, 34, 34)
+        'color_values': (178, 34, 34),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-#     {
-#         'name': 'floral white',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'floral white',      # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'forest green',
-        'rgb_values': (34, 139, 34)
+        'color_values': (34, 139, 34),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'fuchsia',
-        'rgb_values': (193, 84, 193)
+        'color_values': (193, 84, 193),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'gainsboro',         # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
-#         'name': 'gainsboro',
-#         'rgb_values': (0, 0, 0)
-#     },
-#     {
 #         'name': 'garnet',
-#         'rgb_values': (0, 0, 0)
-#     },
-#     {
-#         'name': 'ghost white',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
+        'name': 'ghost white',       # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
         'name': 'gold',
-        'rgb_values': (220, 220, 220)
+        'color_values': (220, 220, 220),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'goldenrod',
-        'rgb_values': (218, 165, 32)
+        'color_values': (218, 165, 32),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'gray',
-        'rgb_values': (128, 128, 128)
+        'color_values': (128, 128, 128),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'green',
-        'rgb_values': (0, 255, 0)
+        'color_values': (0, 255, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'green yellow',
-        'rgb_values': (173, 255, 47)
+        'color_values': (173, 255, 47),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'honeydew',
-        'rgb_values': (240, 255, 240)
+        'color_values': (240, 255, 240),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'hot pink',
-        'rgb_values': (255, 105, 180)
+        'color_values': (255, 105, 180),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'indian red',
-        'rgb_values': (205, 92, 92)
+        'color_values': (205, 92, 92),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'indigo',
-        'rgb_values': (75, 0, 130)
+        'color_values': (75, 0, 130),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'ivory',
-        'rgb_values': (0, 0, 0)
+        'name': 'ivory',               # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'khaki',
-        'rgb_values': (195, 176, 145)
+        'color_values': (195, 176, 145),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'lavender',
-        'rgb_values': (181, 126, 220)
+        'color_values': (181, 126, 220),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'lavender blush',
-        'rgb_values': (255, 240, 245)
+        'color_values': (255, 240, 245),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'lawn green',
-        'rgb_values': (124, 252, 0)
+        'color_values': (124, 252, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'lemon chiffon',
-        'rgb_values': (255, 250, 205)
+        'color_values': (255, 250, 205),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'light blue',
-        'rgb_values': (173, 216, 230)
+        'color_values': (173, 216, 230),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'ligth coral',         # The RGB values shown here come from "hey google turn the lights to the color light coral.'
-        'rgb_values': (240, 128, 128)  # Google results vary using 'light coral' and 'the color light coral'
+        'name': 'ligth coral',          # The is_rgb values shown here come from "hey google turn the lights to the color light coral.'
+        'color_values': (240, 128, 128),  # Google results vary using 'light coral' and 'the color light coral'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light cyan',          # The RGB values shown here come from "hey google turn the lights to the color light cyan.'
-        'rgb_values': (224, 255, 255)  # Google results vary using 'light cyan' and 'the color light cyan'
-    },
-#     {
-#         'name': 'light goldenrod',
-#         'rgb_values': (0, 0, 0)
-#     },
-    {
-        'name': 'light gray',          # The RGB values shown here come from "hey google turn the lights to the color light gray.'
-        'rgb_values': (211, 211, 211)  # Google results vary using 'light gray' and 'the color light gray'
+        'name': 'light cyan',           # The is_rgb values shown here come from "hey google turn the lights to the color light cyan.'
+        'color_values': (224, 255, 255),  # Google results vary using 'light cyan' and 'the color light cyan'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light green',         # The RGB values shown here come from "hey google turn the lights to the color light green.'
-        'rgb_values': (144, 238, 144)  # Google results vary using 'light green' and 'the color light green'
+        'name': 'light goldenrod',      # The is_rgb values shown here come from "hey google turn the lights to the color light goldenrod.'
+        'color_values': (255, 236, 139),  # Google results vary using 'light goldenrod' and 'the color light goldenrod'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light pink',          # The RGB values shown here come from "hey google turn the lights to the color light pink.'
-        'rgb_values': (255, 182, 193)  # Google results vary using 'light pink' and 'the color light pink'
+        'name': 'light gray',           # The is_rgb values shown here come from "hey google turn the lights to the color light gray.'
+        'color_values': (211, 211, 211),  # Google results vary using 'light gray' and 'the color light gray'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light salmon',        # The RGB values shown here come from "hey google turn the lights to the color light salmon.'
-        'rgb_values': (255, 160, 122)  # Google results vary using 'light pink' and 'the color light salmon'
+        'name': 'light green',          # The is_rgb values shown here come from "hey google turn the lights to the color light green.'
+        'color_values': (144, 238, 144),  # Google results vary using 'light green' and 'the color light green'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light sea green',     # The RGB values shown here come from "hey google turn the lights to the color light salmon.'
-        'rgb_values': (32, 178, 170)   # Google results vary using 'light sea green' and 'the color light sea green'
+        'name': 'light pink',           # The is_rgb values shown here come from "hey google turn the lights to the color light pink.'
+        'color_values': (255, 182, 193),  # Google results vary using 'light pink' and 'the color light pink'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light sky blue',      # The RGB values shown here come from "hey google turn the lights to the color light sky blue.'
-        'rgb_values': (135, 206, 250)  # Google results vary using 'light sea sky blue' and 'the color light sea ky blue'
+        'name': 'light salmon',         # The is_rgb values shown here come from "hey google turn the lights to the color light salmon.'
+        'color_values': (255, 160, 122),  # Google results vary using 'light pink' and 'the color light salmon'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light slate gray',    # The RGB values shown here come from "hey google turn the lights to the color light slate gray.'
-        'rgb_values': (119, 136, 153)  # Google results vary using 'light sea green' and 'the color light slate gray'
+        'name': 'light sea green',      # The is_rgb values shown here come from "hey google turn the lights to the color light salmon.'
+        'color_values': (32, 178, 170),   # Google results vary using 'light sea green' and 'the color light sea green'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light steel blue',    # The RGB values shown here come from "hey google turn the lights to the color light steel blue.'
-        'rgb_values': (176, 196, 222)  # Google results vary using 'light sea green' and 'the color light steel blue'
+        'name': 'light sky blue',       # The is_rgb values shown here come from "hey google turn the lights to the color light sky blue.'
+        'color_values': (135, 206, 250),  # Google results vary using 'light sea sky blue' and 'the color light sea ky blue'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'light yellow',        # The RGB values shown here come from "hey google turn the lights to the color light yellow.'
-        'rgb_values': (255, 255, 224)  # Google results vary using 'light sea green' and 'the color light yellow'
+        'name': 'light slate gray',     # The is_rgb values shown here come from "hey google turn the lights to the color light slate gray.'
+        'color_values': (119, 136, 153),  # Google results vary using 'light sea green' and 'the color light slate gray'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'light steel blue',     # The is_rgb values shown here come from "hey google turn the lights to the color light steel blue.'
+        'color_values': (176, 196, 222),  # Google results vary using 'light sea green' and 'the color light steel blue'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'light turquoise',      # The is_rgb values shown here come from "hey google turn the lights to the color light turquoise.'
+        'color_values': (175, 228, 222),  # Google results vary using 'light turquoise' and 'the color light turquoise'
+        'is_rgb': True,
+        'va_support': ['Google']
+    },
+    {
+        'name': 'light yellow',         # The is_rgb values shown here come from "hey google turn the lights to the color light yellow.'
+        'color_values': (255, 255, 224),  # Google results vary using 'light sea green' and 'the color light yellow'
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'lime',
-        'rgb_values': (191, 255, 0)
+        'color_values': (191, 255, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'lime green',
-        'rgb_values': (50, 205, 50)
+        'color_values': (50, 205, 50),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-#     {
-#         'name': 'linen',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'linen',             # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'magenta',
-        'rgb_values': (255, 0, 255)
+        'color_values': (255, 0, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'maroon',
-        'rgb_values': (128, 0, 0)
+        'color_values': (128, 0, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'medium aquamarine',
-        'rgb_values': (102, 221, 170)
+        'color_values': (102, 221, 170),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'medium blue',
-        'rgb_values': (0, 0, 205)
+        'color_values': (0, 0, 205),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'medium orchid',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'medium purple',
-        'rgb_values': (147, 112, 219)
+        'color_values': (147, 112, 219),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'medium sea green',
-        'rgb_values': (60, 179, 113)
+        'color_values': (60, 179, 113),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'medium slate blue',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'medium spring green',
-        'rgb_values': (0, 250, 154)
+        'color_values': (0, 250, 154),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'medium turquoise',
-        'rgb_values': (72, 209, 204)
+        'color_values': (72, 209, 204),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'medium violet red',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'midnight blue',
-        'rgb_values': (25, 25, 112)
+        'color_values': (25, 25, 112),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'mint cream',
-        'rgb_values': (245, 255, 250)
+        'color_values': (245, 255, 250),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'misty rose',
-        'rgb_values': (255, 228, 225)
+        'color_values': (255, 228, 225),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'moccasin',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
-#     {
-#         'name': 'navajo white',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'navajo white',      # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'navy blue',
-        'rgb_values': (0, 0, 128)
+        'color_values': (0, 0, 128),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-#     {
-#         'name': 'old lace',
-#         'rgb_values': (0, 0, 0)
-#     },
+    {
+        'name': 'old lace',          # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
+    },
     {
         'name': 'olive',
-        'rgb_values': (128, 128, 0)
+        'color_values': (128, 128, 0),
+        'is_rgb': True,
+        'va_support': ['Alexa']
     },
-    {
-        'name': 'olive drab',
-        'rgb_values': (0, 0, 0)
-    },
+#     {
+#         'name': 'olive drab',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
     {
         'name': 'olive green',
-        'rgb_values': (107, 142, 35)
+        'color_values': (107, 142, 35),
+        'is_rgb': True,
+        'va_support': ['Alexa']
     },
     {
         'name': 'orange',
-        'rgb_values': (255, 102, 0)
+        'color_values': (255, 102, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'orange red',
-        'rgb_values': (255, 75, 0)
+        'color_values': (255, 75, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'orchid',
-        'rgb_values': (218, 112, 214)
+        'color_values': (218, 112, 214),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
 #     {
 #         'name': 'pale goldenrod',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
 #     {
 #         'name': 'pale green',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
 #     {
 #         'name': 'pale turquoise',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
 #     {
 #         'name': 'pale violet red',
-#         'rgb_values': (0, 0, 0)
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
 #     },
     {
         'name': 'papaya whip',
-        'rgb_values': (255, 239, 213)
+        'color_values': (255, 239, 213),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'peach puff',
-        'rgb_values': (255, 218, 185)
+        'color_values': (255, 218, 185),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'peru',
-        'rgb_values': (0, 0, 0)
+        'color_values': (205, 133, 63),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'pink',
-        'rgb_values': (0, 0, 0)
+        'color_values': (255, 192, 203),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'plum',
-        'rgb_values': (0, 0, 0)
+        'color_values': (142, 69, 133),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'powder blue',
-        'rgb_values': (0, 0, 0)
+        'color_values': (176, 224, 230),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'purple',
-        'rgb_values': (0, 0, 0)
+        'color_values': (128, 0, 128),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'rebecca purple',
-        'rgb_values': (0, 0, 0)
+        'name': 'pumpkin',                    # Need to test for Alexa
+        'color_values': (255, 117, 24),
+        'is_rgb': True,
+        'va_support': ['Google']
     },
+#     {
+#         'name': 'rebecca purple',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
     {
         'name': 'red',
-        'rgb_values': (255, 0, 0)
+        'color_values': (255, 0, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'rosy brown',
-        'rgb_values': (0, 0, 0)
+        'color_values': (188, 143, 143),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'royal blue',
-        'rgb_values': (0, 0, 0)
+        'color_values': (0, 35, 102),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-    {
-        'name': 'saddle brown',
-        'rgb_values': (0, 0, 0)
-    },
+#     {
+#         'name': 'saddle brown',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
     {
         'name': 'salmon',
-        'rgb_values': (0, 0, 0)
+        'color_values': (250, 128, 114),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'sandy brown',
-        'rgb_values': (0, 0, 0)
+        'color_values': (244, 164, 96),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'sea green',
-        'rgb_values': (0, 0, 0)
+        'color_values': (46, 139, 87),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'seashell',
-        'rgb_values': (0, 0, 0)
+        'name': 'seashell',          # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'sienna',
-        'rgb_values': (0, 0, 0)
+        'color_values': (136, 45, 23),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'silver',
-        'rgb_values': (0, 0, 0)
+        'color_values': (192, 192, 192),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-    {
-        'name': 'sky',
-        'rgb_values': (0, 0, 0)
-    },
+#     {
+#         'name': 'sky',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
     {
         'name': 'sky blue',
-        'rgb_values': (0, 0, 0)
+        'color_values': (135, 206, 235),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-    {
-        'name': 'slate',
-        'rgb_values': (0, 0, 0)
-    },
+#     {
+#         'name': 'slate',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
     {
         'name': 'slate blue',
-        'rgb_values': (0, 0, 0)
+        'color_values': (106, 90, 205),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'slate gray',
-        'rgb_values': (0, 0, 0)
+        'color_values': (112, 128, 144),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'snow',
-        'rgb_values': (0, 0, 0)
+        'name': 'smitten',
+        'color_values': (200, 65, 134),
+        'is_rgb': True,
+        'va_support': ['Google']
+    },
+    {
+        'name': 'snow',                # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'spring green',
-        'rgb_values': (0, 0, 0)
+        'color_values': (0, 255, 127),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'steel blue',
-        'rgb_values': (0, 0, 0)
+        'color_values': (70, 130, 180),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'tan',
-        'rgb_values': (0, 0, 0)
+        'color_values': (210, 180, 140),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'teal',
-        'rgb_values': (0, 0, 0)
+        'color_values': (0, 128, 128),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'thistle',
-        'rgb_values': (0, 0, 0)
+        'color_values': (216, 191, 216),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'tomato',
-        'rgb_values': (0, 0, 0)
+        'color_values': (255, 99, 71),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'turquoise',
-        'rgb_values': (0, 0, 0)
+        'color_values': (64, 224, 208),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
+    },
+    {
+        'name': 'ultramarine',               # Need to test for Alexa
+        'color_values': (18, 10, 143),
+        'is_rgb': True,
+        'va_support': ['Google']
+    },
+    {
+        'name': 'vermillion',                # Need to test for Alexa
+        'color_values': (217, 56, 30),
+        'is_rgb': True,
+        'va_support': ['Google']
     },
     {
         'name': 'violet',
-        'rgb_values': (0, 0, 0)
+        'color_values': (127, 0, 255),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
-    {
-        'name': 'web gray',
-        'rgb_values': (0, 0, 0)
-    },
-    {
-        'name': 'web green',
-        'rgb_values': (0, 0, 0)
-    },
+#     {
+#         'name': 'web gray',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
+#     {
+#         'name': 'web green',
+#         'color_values': (0, 0, 0),
+#         'is_rgb': True,
+#         'va_support': ['Alexa']
+#     },
     {
         'name': 'web maroon',
-        'rgb_values': (0, 0, 0)
+        'color_values': (128, 0, 0),
+        'is_rgb': True,
+        'va_support': ['Alexa']
     },
     {
         'name': 'web purple',
-        'rgb_values': (0, 0, 0)
+        'color_values': (128, 0, 128),
+        'is_rgb': True,
+        'va_support': ['Alexa']
     },
     {
         'name': 'wheat',
-        'rgb_values': (0, 0, 0)
+        'color_values': (245, 222, 179),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'white',
-        'rgb_values': (0, 0, 0)
+        'name': 'white',                   # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
     },
     {
-        'name': 'white smoke',
-        'rgb_values': (0, 0, 0)
+        'name': 'white smoke',             # Google uses cct for this color
+        'color_values': '',
+        'is_rgb': False,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'yellow',
-        'rgb_values': (0, 0, 0)
+        'color_values': (255, 255, 0),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     },
     {
         'name': 'yellow green',
-        'rgb_values': (0, 0, 0)
+        'color_values': (154, 205, 50),
+        'is_rgb': True,
+        'va_support': ['Google', 'Alexa']
     }
 ]
 
-# for color in supported_colors:
-#     print(color['name'])
+for color in supported_colors_list:
+    if 'Alexa' in color['va_support']:
+        print(color['name'])
