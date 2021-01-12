@@ -20,6 +20,7 @@ else:
     print(f'{path} already exists. Directory not created.')
 
 colors = []
+wake_word = ''
 
 def format_filename(filename):
     formatted_filename = ''
@@ -31,20 +32,30 @@ def format_filename(filename):
             formatted_filename += part + '_'
         return formatted_filename[:-1]
 
-def make_color_list():
+def make_color_list(voice_agent):
+    global wake_word
+    color_list= []
+    for color in supported_colors_list:
+        if voice_agent in color['va_support']:
+            color_list.append(color)
+    if voice_agent == 'Alexa':
+        wake_word = voice_agent
+    else:
+        wake_word = 'Hey Google'
     for x in range(5):
-        colors.append(supported_colors_list[random.randint(0, len(supported_colors_list))]['name'])
+        colors.append(color_list[random.randint(0, len(color_list))]['name'])
+#     print(wake_word)
 
 
-make_color_list()
+make_color_list('Google')  # va_support is either 'Alexa' of 'Google'
 print(colors)
 
 for color in colors:
     filename = format_filename(color)
     print(filename)
-    print(f'{path}/google_{filename}.mp3')
-    file = gTTS(f'Hey Google, turn the lights in the office to {color}')
-    file.save(f'{path}/google_{filename}.mp3')
+    print(f'{path}/voice_test_{filename}.mp3')
+    file = gTTS(f'{wake_word}, turn the lights in the office to {color}')
+    file.save(f'{path}/voice_test_{filename}.mp3')
 
 files = os.listdir(path)
 for file in files:
