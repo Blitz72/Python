@@ -13,15 +13,15 @@ supported_colors_list = [
         }
     },
     {
-        'name': 'almond',             # Google uses color_values for this color
-        'google': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
+#         'name': 'almond',             # Google uses color_values for this color
+#         'google': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         },
+#         'alexa': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         }
     },
     {
         'name': 'antique white',      # Google uses color_values for this color
@@ -30,8 +30,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (0, 0, 0)
         }
     },
     {
@@ -42,7 +42,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0),
+            'color_values': (0, 255, 255),
         }
     },
     {
@@ -53,7 +53,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0),
+            'color_values': (127, 255, 212),
         }
     },
     {
@@ -62,10 +62,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 127, 255)
         },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
+#         'alexa': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         }
     },
     {
         'name': 'beige',              # Google uses color_values for this color
@@ -74,8 +74,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (0, 0, 0)
         }
     },
     {
@@ -85,8 +85,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (0, 0, 0)
         }
     },
     {
@@ -95,20 +95,20 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 0, 0)
         },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
+#         'alexa': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         }
     },
     {
         'name': 'blanched almond',    # Google uses cct for this color
-        'google': {
-            'is_rgb': False,
-            'color_values': ''
-        },
+#         'google': {
+#             'is_rgb': False,
+#             'color_values': ''
+#         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (0, 0, 0)
         }
     },
     {
@@ -119,7 +119,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 0, 255)
         }
     },
     {
@@ -130,7 +130,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (138, 43, 226)
         }
     },
     {
@@ -1720,11 +1720,9 @@ supported_colors_list = [
     }
 ]
 
-for color in supported_colors_list:
-    try:
-        if color['alexa']:
-            print(color['name'])
-    except Exception as ex:
-        pass
-
-
+# for color in supported_colors_list:
+#     try:
+#         if not color['alexa']['is_rgb']:
+#             print(color['name'])
+#     except Exception as ex:
+#         pass

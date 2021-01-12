@@ -19,8 +19,6 @@ if not os.path.exists(path):
 else:
     print(f'{path} already exists. Directory not created.')
 
-colors = []
-wake_word = ''
 
 def format_filename(filename):
     formatted_filename = ''
@@ -33,33 +31,39 @@ def format_filename(filename):
         return formatted_filename[:-1]
 
 def make_color_list(voice_agent):
-    global wake_word
+    colors = []
     color_list= []
     for color in supported_colors_list:
-        if voice_agent in color['va_support']:
-            color_list.append(color)
-    if voice_agent == 'Alexa':
+        try:
+            if color[voice_agent]['is_rgb']:
+                print(color['name'])
+                color_list.append(color)
+        except Exception as ex:
+            pass
+    if voice_agent == 'alexa':
         wake_word = voice_agent
     else:
-        wake_word = 'Hey Google'
+        wake_word = 'hey google'
     for x in range(5):
         colors.append(color_list[random.randint(0, len(color_list))]['name'])
 #     print(wake_word)
+    return colors, wake_word
 
 
-make_color_list('Google')  # va_support is either 'Alexa' of 'Google'
+colors, wake_word = make_color_list('google')  # va_support is either 'Alexa' of 'Google'
 print(colors)
+print(wake_word)
 
 for color in colors:
     filename = format_filename(color)
-    print(filename)
-    print(f'{path}/voice_test_{filename}.mp3')
+#     print(filename)
+#     print(f'{path}/voice_test_{filename}.mp3')
     file = gTTS(f'{wake_word}, turn the lights in the office to {color}')
     file.save(f'{path}/voice_test_{filename}.mp3')
 
 files = os.listdir(path)
 for file in files:
-    print(file)
+#     print(file)
     subprocess.check_output(f'omxplayer -o local {path}/{file}', shell=True).decode('utf-8')
     sleep(15)
     os.remove(f'{path}/{file}')
