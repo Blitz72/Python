@@ -9,7 +9,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (240, 248, 255)
         }
     },
     {
@@ -31,7 +31,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (250, 235, 215)
         }
     },
     {
@@ -62,10 +62,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 127, 255)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (240, 255, 255)
+        }
     },
     {
         'name': 'beige',              # Google uses color_values for this color
@@ -75,7 +75,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (245, 245, 220)
         }
     },
     {
@@ -86,7 +86,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 228, 196)
         }
     },
     {
@@ -108,7 +108,7 @@ supported_colors_list = [
 #         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 235, 205)
         }
     },
     {
@@ -141,7 +141,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (165, 42, 42)
         }
     },
 #     {
@@ -158,7 +158,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': '2200'
         }
     },
     {
@@ -167,9 +167,9 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (95, 158, 160)
         },
-        'alexa': {
+        'alexa': {                           # Need to tell Alexa to set a Full Color bulb 'to the color cadet blue'
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (95, 158, 160)
         }
     },
     {
@@ -180,7 +180,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (127, 255, 0)
         }
     },
     {
@@ -191,7 +191,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (210, 105, 30)
         }
     },
     {
@@ -202,7 +202,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 127, 80)
         }
     },
     {
@@ -211,10 +211,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (100, 149, 237)
         },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
+#         'alexa': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         }
     },
     {
         'name': 'cornflower blue',           # Need to test for Alexa
@@ -227,17 +227,17 @@ supported_colors_list = [
 #             'color_values': (0, 0, 0)
 #         }
     },
-#     {
-#         'name': 'cornsilk',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+    {
+        'name': 'cornsilk',
+        'google': {
+            'is_rgb': False,
+            'color_values': '6500'
+        },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (255, 248, 220)
+        }
+    },
     {
         'name': 'crimson',
         'google': {
@@ -246,7 +246,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (220, 20, 60)
         }
     },
     {
@@ -257,7 +257,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 255, 255)
         }
     },
     {
@@ -268,7 +268,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 0, 139)
         }
     },
     {
@@ -279,7 +279,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 139, 139)
         }
     },
     {
@@ -290,7 +290,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (184, 134, 11)
         }
     },
     {
@@ -301,7 +301,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (169, 169, 169)
         }
     },
     {
@@ -312,7 +312,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 100, 0)
         }
     },
     {
@@ -323,7 +323,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (189, 183, 107)
         }
     },
     {
@@ -334,24 +334,29 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (139, 0, 139)
         }
     },
-#     {
-#         'name': 'dark olive green',
-#         'color_values': (0, 0, 0),
-#         'is_rgb': True,
-#         'va_support': ['Alexa']
-#     },
+    {
+        'name': 'dark olive green',
+#         'google': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (86, 103, 51)
+        }
+    },
     {
         'name': 'dark orange',
         'google': {
             'is_rgb': True,
-            'color_values': (85, 107, 47)
+            'color_values': (255, 140, 0)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 140, 0)
         }
     },
     {
@@ -362,7 +367,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (153, 50, 204)
         }
     },
     {
@@ -373,7 +378,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (139, 0, 0)
         }
     },
     {
@@ -384,40 +389,40 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (233, 150, 122)
         }
     },
-#     {
-#         'name': 'dark sea green',
+    {
+        'name': 'dark sea green',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
-#     {
-#         'name': 'dark slate blue',
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (143, 188, 143)
+        }
+    },
+    {
+        'name': 'dark slate blue',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (72, 61, 139)
+        }
+    },
     {
         'name': 'dark slate gray',
         'google': {
             'is_rgb': True,
             'color_values': (47, 79, 79)
         },
-        'alexa': {
+        'alexa': {                            # Need to tell Alexa to set a Full Color bulb 'to the color dark slate gray'
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (47, 79, 79)
         }
     },
     {
@@ -428,7 +433,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 210, 210)
         }
     },
     {
@@ -439,7 +444,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (148, 0, 211)
         }
     },
     {
@@ -450,7 +455,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 20, 147)
         }
     },
     {
@@ -461,14 +466,14 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 191, 255)
         }
     },
     {
         'name': 'dim gray',
         'google': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (105, 105, 105)
         },
         'alexa': {
             'is_rgb': True,
@@ -483,7 +488,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (30, 144, 255)
         }
     },
     {
@@ -494,7 +499,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (178, 34, 34)
         }
     },
     {
@@ -504,8 +509,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': 'color_values': (255, 250, 240)
         }
     },
     {
@@ -516,7 +521,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (34, 139, 34)
         }
     },
     {
@@ -527,7 +532,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 0, 255)
         }
     },
     {
@@ -537,16 +542,16 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (220, 0, 220)
         }
     },
 #     {
 #         'name': 'garnet',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+# #         'google': {
+# #             'is_rgb': True,
+# #             'color_values': (0, 0, 0)
+# #         },
 #         'alexa': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
@@ -558,20 +563,20 @@ supported_colors_list = [
             'is_rgb': False,
             'color_values': ''
         },
-        'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+        'alexa': {                   # Need to tell Alexa to set a Full Color bulb 'to the color dark slate gray'
+            'is_rgb': True,
+            'color_values': (248, 248, 255)
         }
     },
     {
         'name': 'gold',
         'google': {
             'is_rgb': True,
-            'color_values': (220, 220, 220)
+            'color_values': (165, 124, 0)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 215, 0)
         }
     },
     {
@@ -582,7 +587,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (218, 165, 32)
         }
     },
     {
@@ -593,7 +598,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (128, 128, 128)
         }
     },
     {
@@ -604,7 +609,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 255, 0)
         }
     },
     {
@@ -615,7 +620,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (173, 255, 47)
         }
     },
     {
@@ -626,7 +631,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (240, 255, 240)
         }
     },
     {
@@ -637,7 +642,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 105, 180)
         }
     },
     {
@@ -648,7 +653,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (200, 100, 100)
         }
     },
     {
@@ -659,7 +664,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (75, 0, 130)
         }
     },
     {
@@ -669,8 +674,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (255, 255, 240)
         }
     },
     {
@@ -681,7 +686,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (240, 230, 140)
         }
     },
     {
@@ -701,9 +706,9 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (255, 240, 245)
         },
-        'alexa': {
+        'alexa': {                               # These are custom values to match what Alexa chose for lavender
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (150, 127, 255)
         }
     },
     {
@@ -714,7 +719,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (124, 252, 0)
         }
     },
     {
@@ -725,7 +730,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 250, 205)
         }
     },
     {
@@ -1297,7 +1302,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (160, 32, 240)
         }
     },
     {
