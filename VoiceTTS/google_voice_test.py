@@ -34,12 +34,10 @@ def make_color_list(voice_agent):
     colors = []
     color_list= []
     for color in supported_colors_list:
-        try:
-            if color[voice_agent]['is_rgb']:
+        if color.get(voice_agent):
+            if color.get(voice_agent).get('is_rgb'):
                 print(color['name'])
                 color_list.append(color)
-        except Exception as ex:
-            pass
     if voice_agent == 'alexa':
         wake_word = voice_agent
     else:
@@ -58,7 +56,7 @@ for color in colors:
     filename = format_filename(color)
 #     print(filename)
 #     print(f'{path}/voice_test_{filename}.mp3')
-    file = gTTS(f'{wake_word}, turn the lights in the office to {color}')
+    file = gTTS(f'{wake_word}, turn the lights in the office to {color}, please')
     file.save(f'{path}/voice_test_{filename}.mp3')
 
 files = os.listdir(path)

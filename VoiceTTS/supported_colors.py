@@ -510,7 +510,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': 'color_values': (255, 250, 240)
+            'color_values': (255, 250, 240)
         }
     },
     {
@@ -1269,7 +1269,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (250, 185, 204)  # (250, 185, 203)
         }
     },
     {
@@ -1280,7 +1280,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (221, 160, 221)
         }
     },
     {
@@ -1291,7 +1291,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (174, 224, 221)
         }
     },
     {
@@ -1316,17 +1316,17 @@ supported_colors_list = [
 #             'color_values': (0, 0, 0)
 #         }
     },
-#     {
-#         'name': 'rebecca purple',
+    {
+        'name': 'rebecca purple',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (102, 51, 153)
+        }
+    },
     {
         'name': 'red',
         'google': {
@@ -1335,7 +1335,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 0, 0)
         }
     },
     {
@@ -1346,7 +1346,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (188, 143, 143)
         }
     },
     {
@@ -1357,29 +1357,29 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (65, 105, 225)
         }
     },
-#     {
-#         'name': 'saddle brown',
+    {
+        'name': 'saddle brown',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (139, 69, 19)
+        }
+    },
     {
         'name': 'salmon',
         'google': {
             'is_rgb': True,
             'color_values': (250, 128, 114)
         },
-        'alexa': {
+        'alexa': {                            # Alexa uses the 'light salmon' rgb values for salmon
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 160, 125)
         }
     },
     {
@@ -1390,7 +1390,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (244, 164, 96)
         }
     },
     {
@@ -1401,7 +1401,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (46, 139, 87)
         }
     },
     {
@@ -1411,8 +1411,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (255, 245, 238)
         }
     },
     {
@@ -1423,7 +1423,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (160, 82, 45)
         }
     },
     {
@@ -1434,7 +1434,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (192, 192, 192)
         }
     },
 #     {
@@ -1456,7 +1456,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (135, 206, 235)
         }
     },
 #     {
@@ -1478,7 +1478,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (106, 90, 205)
         }
     },
     {
@@ -1489,7 +1489,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (112, 128, 144)
         }
     },
     {
@@ -1498,10 +1498,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (200, 65, 134)
         },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
+#         'alexa': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         }
     },
     {
         'name': 'snow',                # Google uses cct for this color
@@ -1510,8 +1510,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (255, 250, 250)
         }
     },
     {
@@ -1522,7 +1522,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 255, 127)
         }
     },
     {
@@ -1533,7 +1533,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (70, 130, 180)
         }
     },
     {
@@ -1542,9 +1542,9 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (210, 180, 140)
         },
-        'alexa': {
+        'alexa': {                           # Need to tell Alexa turn bulb 'to the color tan'
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (210, 180, 140)
         }
     },
     {
@@ -1555,7 +1555,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 128, 128)
         }
     },
     {
@@ -1566,7 +1566,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (216, 191, 216)
         }
     },
     {
@@ -1577,7 +1577,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 99, 71)
         }
     },
     {
@@ -1588,7 +1588,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (64, 224, 208)
         }
     },
     {
@@ -1621,31 +1621,31 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (238, 130, 238)
         }
     },
-#     {
-#         'name': 'web gray',
+    {
+        'name': 'web gray',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
-#     {
-#         'name': 'web green',
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (128, 128, 128)
+        }
+    },
+    {
+        'name': 'web green',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (0, 128, 0)
+        }
+    },
     {
         'name': 'web maroon',
 #         'google': {
@@ -1654,7 +1654,7 @@ supported_colors_list = [
 #         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (178, 48, 96)
         }
     },
     {
@@ -1665,7 +1665,7 @@ supported_colors_list = [
 #         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (128, 0, 128)
         }
     },
     {
@@ -1676,7 +1676,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (245, 222, 179)
         }
     },
     {
@@ -1697,8 +1697,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (245, 245, 245)
         }
     },
     {
@@ -1709,7 +1709,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 255, 0)
         }
     },
     {
@@ -1720,7 +1720,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (154, 205, 50)
         }
     }
 ]
@@ -1731,3 +1731,14 @@ supported_colors_list = [
 #             print(color['name'])
 #     except Exception as ex:
 #         pass
+
+color_list = []
+for color in supported_colors_list:
+    if color.get('google'):
+        if not color.get('google').get('is_rgb'):
+            color_list.append(color)
+
+for color in color_list:
+    print(color)
+
+print(len(color_list))
