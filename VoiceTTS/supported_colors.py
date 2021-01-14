@@ -13,7 +13,7 @@ supported_colors_list = [
         }
     },
     {
-#         'name': 'almond',             # Google uses color_values for this color
+#         'name': 'almond',             # Google uses cct for this color
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
@@ -24,7 +24,7 @@ supported_colors_list = [
 #         }
     },
     {
-        'name': 'antique white',      # Google uses color_values for this color
+        'name': 'antique white',      # Google uses cct for this color
         'google': {
             'is_rgb': False,
             'color_values': ''
@@ -68,7 +68,7 @@ supported_colors_list = [
         }
     },
     {
-        'name': 'beige',              # Google uses color_values for this color
+        'name': 'beige',              # Google uses cct for this color
         'google': {
             'is_rgb': False,
             'color_values': ''
@@ -79,7 +79,7 @@ supported_colors_list = [
         }
     },
     {
-        'name': 'bisque',             # Google uses color_values for this color
+        'name': 'bisque',             # Google uses cct for this color
         'google': {
             'is_rgb': False,
             'color_values': ''
@@ -151,7 +151,7 @@ supported_colors_list = [
 #         'va_support': ['Alexa']
 #     },
     {
-        'name': 'candlelight',    # Google uses cct for this color
+        'name': 'candlelight',       # Google uses cct for this color
         'google': {
             'is_rgb': False,
             'color_values': '2000'
@@ -695,9 +695,9 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (181, 126, 220)
         },
-        'alexa': {
+        'alexa': {                          # These are custom values to match what Alexa chose for lavender
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values':(150, 127, 255)
         }
     },
     {
@@ -706,9 +706,9 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (255, 240, 245)
         },
-        'alexa': {                               # These are custom values to match what Alexa chose for lavender
+        'alexa': {
             'is_rgb': True,
-            'color_values': (150, 127, 255)
+            'color_values': (255, 240, 245)
         }
     },
     {
@@ -741,150 +741,150 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (191, 239, 255)
         }
     },
     {
-        'name': 'ligth coral',          # The is_rgb values shown here come from "hey google turn the lights to the color light coral.'
+        'name': 'ligth coral',          # The rgb values shown here come from "hey google turn the lights to the color light coral.'
         'google': {                     # Google results vary using 'light coral' and 'the color light coral'
             'is_rgb': True,
             'color_values': (240, 128, 128)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (240, 128, 128)
         }
     },
     {
-        'name': 'light cyan',           # The is_rgb values shown here come from "hey google turn the lights to the color light cyan.'
+        'name': 'light cyan',           # The rgb values shown here come from "hey google turn the lights to the color light cyan.'
         'google': {                     # Google results vary using 'light cyan' and 'the color light cyan'
             'is_rgb': True,
             'color_values': (224, 255, 255)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (224, 255, 255)
         }
     },
     {
-        'name': 'light goldenrod',      # The is_rgb values shown here come from "hey google turn the lights to the color light goldenrod.'
+        'name': 'light goldenrod',      # The rgb values shown here come from "hey google turn the lights to the color light goldenrod.'
         'google': {                     # Google results vary using 'light goldenrod' and 'the color light goldenrod'
             'is_rgb': True,
             'color_values': (255, 236, 139)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (250, 250, 210)
         }
     },
     {
-        'name': 'light gray',           # The is_rgb values shown here come from "hey google turn the lights to the color light gray.'
+        'name': 'light gray',           # The rgb values shown here come from "hey google turn the lights to the color light gray.'
         'google': {                     # Google results vary using 'light gray' and 'the color light gray'
             'is_rgb': True,
             'color_values': (211, 211, 211)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (211, 211, 211)
         }
     },
     {
-        'name': 'light green',          # The is_rgb values shown here come from "hey google turn the lights to the color light green.'
+        'name': 'light green',          # The rgb values shown here come from "hey google turn the lights to the color light green.'
         'google': {                     # Google results vary using 'light green' and 'the color light green'
             'is_rgb': True,
             'color_values': (144, 238, 144)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (144, 238, 144)
         }
     },
     {
-        'name': 'light pink',           # The is_rgb values shown here come from "hey google turn the lights to the color light pink.'
+        'name': 'light pink',           # The rgb values shown here come from "hey google turn the lights to the color light pink.'
         'google': {                     # Google results vary using 'light pink' and 'the color light pink'
             'is_rgb': True,
             'color_values': (255, 182, 193)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 182, 193)
         }
     },
     {
-        'name': 'light salmon',         # The is_rgb values shown here come from "hey google turn the lights to the color light salmon.'
+        'name': 'light salmon',         # The rgb values shown here come from "hey google turn the lights to the color light salmon.'
         'google': {                     # Google results vary using 'light pink' and 'the color light salmon'
             'is_rgb': True,
             'color_values': (255, 160, 122)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (250, 160, 122)
         }
     },
     {
-        'name': 'light sea green',      # The is_rgb values shown here come from "hey google turn the lights to the color light salmon.'
+        'name': 'light sea green',      # The rgb values shown here come from "hey google turn the lights to the color light salmon.'
         'google': {                     # Google results vary using 'light sea green' and 'the color light sea green'
             'is_rgb': True,
             'color_values': (32, 178, 170)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (46, 196, 182)
         }
     },
     {
-        'name': 'light sky blue',       # The is_rgb values shown here come from "hey google turn the lights to the color light sky blue.'
+        'name': 'light sky blue',       # The rgb values shown here come from "hey google turn the lights to the color light sky blue.'
         'google': {                     # Google results vary using 'light sea sky blue' and 'the color light sea ky blue'
             'is_rgb': True,
             'color_values': (135, 206, 250)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (135, 206, 250)
         }
     },
     {
-        'name': 'light slate gray',     # The is_rgb values shown here come from "hey google turn the lights to the color light slate gray.'
+        'name': 'light slate gray',     # The rgb values shown here come from "hey google turn the lights to the color light slate gray.'
         'google': {                     # Google results vary using 'light sea green' and 'the color light slate gray'
             'is_rgb': True,
             'color_values': (119, 136, 153)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (119, 136, 153)
         }
     },
     {
-        'name': 'light steel blue',     # The is_rgb values shown here come from "hey google turn the lights to the color light steel blue.'
+        'name': 'light steel blue',     # The rgb values shown here come from "hey google turn the lights to the color light steel blue.'
         'google': {                     # Google results vary using 'light sea green' and 'the color light steel blue'
             'is_rgb': True,
             'color_values': (176, 196, 222)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (174, 194, 223)
         }
     },
     {
-        'name': 'light turquoise',      # The is_rgb values shown here come from "hey google turn the lights to the color light turquoise.'
+        'name': 'light turquoise',      # The rgb values shown here come from "hey google turn the lights to the color light turquoise.'
         'google': {                     # Google results vary using 'light turquoise' and 'the color light turquoise'
             'is_rgb': True,
             'color_values': (175, 228, 222)
         },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
+#         'alexa': {
+#             'is_rgb': True,
+#             'color_values': (0, 0, 0)
+#         }
     },
     {
-        'name': 'light yellow',         # The is_rgb values shown here come from "hey google turn the lights to the color light yellow.'
+        'name': 'light yellow',         # The rgb values shown here come from "hey google turn the lights to the color light yellow.'
         'google': {                     # Google results vary using 'light sea green' and 'the color light yellow'
             'is_rgb': True,
             'color_values': (255, 255, 224)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 255, 224)  # -bVal could be 237
         }
     },
     {
@@ -895,7 +895,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (166, 214, 40)
         }
     },
     {
@@ -906,7 +906,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (50, 205, 50)
         }
     },
     {
@@ -916,8 +916,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (250, 240, 230)
         }
     },
     {
@@ -928,7 +928,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 0, 255)
         }
     },
     {
@@ -939,18 +939,18 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (178, 48, 96)
         }
     },
     {
         'name': 'medium aquamarine',
         'google': {
             'is_rgb': True,
-            'color_values': (102, 221, 170)
+            'color_values': (102, 221, 170)  # -gVal could be 205
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (97, 210, 180)
         }
     },
     {
@@ -961,20 +961,20 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 0, 205)
         }
     },
-#     {
-#         'name': 'medium orchid',
+    {
+        'name': 'medium orchid',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (186, 85, 211)
+        }
+    },
     {
         'name': 'medium purple',
         'google': {
@@ -983,7 +983,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (147, 112, 219)
         }
     },
     {
@@ -994,20 +994,20 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (60, 179, 113)
         }
     },
-#     {
-#         'name': 'medium slate blue',
+    {
+        'name': 'medium slate blue',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (123, 104, 238)
+        }
+    },
     {
         'name': 'medium spring green',
         'google': {
@@ -1016,7 +1016,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 250, 154)
         }
     },
     {
@@ -1027,20 +1027,20 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (72, 209, 204)
         }
     },
-#     {
-#         'name': 'medium violet red',
+    {
+        'name': 'medium violet red',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (199, 21, 133)
+        }
+    },
     {
         'name': 'midnight blue',
         'google': {
@@ -1049,7 +1049,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (25, 25, 112)
         }
     },
     {
@@ -1060,7 +1060,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (245, 255, 250)
         }
     },
     {
@@ -1071,20 +1071,20 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 228, 225)
         }
     },
-#     {
-#         'name': 'moccasin',
+    {
+        'name': 'moccasin',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {                   # Need to tell Alexa to set bulb 'to the color moccasin'
+            'is_rgb': True,
+            'color_values': (255, 228, 181)
+        }
+    },
     {
         'name': 'navajo white',      # Google uses cct for this color
         'google': {
@@ -1092,8 +1092,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (255, 222, 173)
         }
     },
     {
@@ -1104,7 +1104,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (0, 0, 128)
         }
     },
     {
@@ -1114,8 +1114,8 @@ supported_colors_list = [
             'color_values': ''
         },
         'alexa': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (253, 245, 230)
         }
     },
     {
@@ -1126,11 +1126,22 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (128, 128, 0)
+        }
+    },
+    {
+        'name': 'olive drab',
+        'google': {                  # Need to tell Google, set the bulb 'to the color olive drab'
+            'is_rgb': True,
+            'color_values': (107, 142, 35)
+        },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (107, 142, 35)
         }
     },
 #     {
-#         'name': 'olive drab',
+#         'name': 'olive green',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
@@ -1141,17 +1152,6 @@ supported_colors_list = [
 #         }
 #     },
     {
-        'name': 'olive green',
-        'google': {
-            'is_rgb': True,
-            'color_values': (107, 142, 35)
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        }
-    },
-    {
         'name': 'orange',
         'google': {
             'is_rgb': True,
@@ -1159,7 +1159,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 165, 0)
         }
     },
     {
@@ -1170,7 +1170,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 75, 0)
         }
     },
     {
@@ -1181,53 +1181,53 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (218, 112, 214)
         }
     },
-#     {
-#         'name': 'pale goldenrod',
+    {
+        'name': 'pale goldenrod',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
-#     {
-#         'name': 'pale green',
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (238, 232, 170)
+        }
+    },
+    {
+        'name': 'pale green',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
-#     {
-#         'name': 'pale turquoise',
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (152, 251, 152)
+        }
+    },
+    {
+        'name': 'pale turquoise',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
-#     {
-#         'name': 'pale violet red',
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (180, 255, 255)
+        }
+    },
+    {
+        'name': 'pale violet red',
 #         'google': {
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (219, 112, 147)
+        }
+    },
     {
         'name': 'papaya whip',
         'google': {
@@ -1236,7 +1236,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 239, 213)
         }
     },
     {
@@ -1247,7 +1247,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (255, 218, 185)
         }
     },
     {
@@ -1258,7 +1258,7 @@ supported_colors_list = [
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 0, 0)
+            'color_values': (205, 133, 63)
         }
     },
     {
