@@ -146,9 +146,14 @@ supported_colors_list = [
     },
 #     {
 #         'name': 'burlywood',         # Google uses cct for this color
-#         'color_values': '',
-#         'is_rgb': False,
-#         'va_support': ['Alexa']
+#         'google': {
+#             'is_rgb': False,
+#             'color_values': ''
+#         },
+#         'alexa': {
+#             'is_rgb': False,
+#             'color_values': ''
+#         }
 #     },
     {
         'name': 'candlelight',       # Google uses cct for this color
@@ -1734,11 +1739,12 @@ supported_colors_list = [
 
 color_list = []
 for color in supported_colors_list:
-    if color.get('google'):
-        if not color.get('google').get('is_rgb'):
+    voice_agent = 'alexa'
+    if color.get(voice_agent):
+        if color.get(voice_agent).get('is_rgb'):
             color_list.append(color)
 
 for color in color_list:
-    print(color)
+    print(color['name'])
 
-print(len(color_list))
+print('color_list length: ', len(color_list))
