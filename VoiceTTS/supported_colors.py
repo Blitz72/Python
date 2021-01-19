@@ -12,17 +12,17 @@ supported_colors_list = [
             'color_values': (240, 248, 255)
         }
     },
-    {
-#         'name': 'almond',             # Google uses cct for this color
+#     {
+#         'name': 'almond',
 #         'google': {
 #             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
+#             'color_values': (239, 222, 205)
 #         }
-    },
+# #         'alexa': {
+# #             'is_rgb': True,
+# #             'color_values': (0, 0, 0)
+# #         }
+#     },
     {
         'name': 'antique white',      # Google uses cct for this color
         'google': {
