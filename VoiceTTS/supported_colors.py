@@ -1737,14 +1737,14 @@ supported_colors_list = [
 #     except Exception as ex:
 #         pass
 
-color_list = []
-for color in supported_colors_list:
-    voice_agent = 'alexa'
-    if color.get(voice_agent):
-        if color.get(voice_agent).get('is_rgb'):
-            color_list.append(color)
-
-for color in color_list:
-    print(color['name'])
-
-print('color_list length: ', len(color_list))
+# color_list = []
+# for color in supported_colors_list:
+#     voice_agent = 'alexa'
+#     if color.get(voice_agent):
+#         if color.get(voice_agent).get('is_rgb'):
+#             color_list.append(color)
+# 
+# for color in color_list:
+#     print(color['name'])
+# 
+# print('color_list length: ', len(color_list))
