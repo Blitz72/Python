@@ -178,7 +178,7 @@ supported_colors_list = [
         }
     },
     {
-        'name': 'charteuse',
+        'name': 'chartreuse',
         'google': {
             'is_rgb': True,
             'color_values': (223, 255, 0)
@@ -197,6 +197,28 @@ supported_colors_list = [
         'alexa': {
             'is_rgb': True,
             'color_values': (210, 105, 30)
+        }
+    },
+    {
+        'name': 'cool',                # Google uses cct for this color
+#         'google': {
+#             'is_rgb': False,
+#             'color_values': ''
+#         },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '7000'
+        }
+    },
+    {
+        'name': 'cool white',                # Google uses cct for this color
+        'google': {
+            'is_rgb': False,
+            'color_values': '4000'
+        },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '7000'
         }
     },
     {
@@ -453,6 +475,17 @@ supported_colors_list = [
         }
     },
     {
+        'name': 'daylight',                # Google uses cct for this color
+        'google': {
+            'is_rgb': False,
+            'color_values': '5000'
+        },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '5500'
+        }
+    },
+    {
         'name': 'deep pink',
         'google': {
             'is_rgb': True,
@@ -543,12 +576,12 @@ supported_colors_list = [
     {
         'name': 'gainsboro',         # Google uses cct for this color
         'google': {
-            'is_rgb': False,
-            'color_values': ''
+            'is_rgb': True,
+            'color_values': (220, 220, 220)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (220, 0, 220)
+            'color_values': (220, 220, 220)
         }
     },
 #     {
@@ -651,6 +684,17 @@ supported_colors_list = [
         }
     },
     {
+        'name': 'incandescent',                # Google uses cct for this color
+        'google': {
+            'is_rgb': False,
+            'color_values': '2700'
+        },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '2700'
+        }
+    },
+    {
         'name': 'indian red',
         'google': {
             'is_rgb': True,
@@ -676,7 +720,7 @@ supported_colors_list = [
         'name': 'ivory',               # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': '6100'
         },
         'alexa': {
             'is_rgb': True,
@@ -1512,11 +1556,22 @@ supported_colors_list = [
         'name': 'snow',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': '6500'
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 250, 250)
+        }
+    },
+    {
+        'name': 'soft white',                # Google uses cct for this color
+        'google': {
+            'is_rgb': False,
+            'color_values': '3000'
+        },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '2700'
         }
     },
     {
@@ -1630,6 +1685,28 @@ supported_colors_list = [
         }
     },
     {
+        'name': 'warm',                # Google uses cct for this color
+#         'google': {
+#             'is_rgb': False,
+#             'color_values': ''
+#         },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '2200'
+        }
+    },
+    {
+        'name': 'warm white',                # Google uses cct for this color
+        'google': {
+            'is_rgb': False,
+            'color_values': '3000'
+        },
+        'alexa': {
+            'is_rgb': False,
+            'color_values': '2200'
+        }
+    },
+    {
         'name': 'web gray',
 #         'google': {
 #             'is_rgb': True,
@@ -1688,11 +1765,11 @@ supported_colors_list = [
         'name': 'white',                   # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': '5000'
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': '4000'
         }
     },
     {
