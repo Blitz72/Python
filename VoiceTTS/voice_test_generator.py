@@ -12,6 +12,9 @@ import hashlib
 directory = 'voice_files'
 parent_dir = '/home/pi/Python/VoiceTTS/'
 
+device_name = 'full color br30'
+group_name = 'office lights'
+
 path = os.path.join(parent_dir, directory)
 
 if not os.path.exists(path):
@@ -52,7 +55,7 @@ def make_color_list(voice_agent):
     else:
         wake_word = 'hey google'
     for x in range(5):
-        colors.append(color_list[random.randint(0, len(color_list))])
+        colors.append(color_list[random.randint(0, len(color_list)) - 1])
 #     print(wake_word)
     return colors, wake_word
 
@@ -63,7 +66,7 @@ print(colors)
 
 for color in colors:
     color_name = color['name']
-    message = f'{wake_word}, turn the lights in the office to {color_name}, please'
+    message = f'{wake_word}, turn {device_name} to the color {color_name}, please'
     filename = create_filename(message)
     attempts = 0
     file_creation = False
@@ -73,8 +76,8 @@ for color in colors:
 #     print(f'{path}/{filename}.mp3')
         while attempts < 3 and not file_creation:
 #             try:
-            print('Attempts:', attempts)
-            file = gTTS(message)
+            print('Attempting to save file: take', attempts + 1)
+            file = gTTS(message, slow=False)
 #             print(dir(file))
 #             print(file.get_urls())
     #                 if file:
@@ -97,7 +100,7 @@ for color in colors:
                 attempts += 1
                 if attempts == 3:
                     file_creation = False
-                    
+                sleep(1)           
     else:
         print(f'{filename}.mp3 already exists, file not created.')
 
@@ -107,7 +110,7 @@ for color in colors:
     except Exception as ex:
         print('Subprocess exception:', ex)
     
-    sleep(15)
+    sleep(15)  # end of - for color in colors:
 
 # files = os.listdir(path)
 # for file in files:
