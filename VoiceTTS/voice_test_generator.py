@@ -61,7 +61,8 @@ def make_color_list(voice_agent):
 
 
 colors, wake_word = make_color_list('google')  # va_support is either 'Alexa' of 'Google'
-print(colors)
+for color in colors:
+    print(color['name'])
 # print(wake_word)
 
 for color in colors:
