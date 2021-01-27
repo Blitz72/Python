@@ -24,16 +24,6 @@ else:
     print(f'{path} already exists. Directory not created.')
 
 
-# def format_filename(filename):
-#     formatted_filename = ''
-#     name_parts = filename.split(' ')
-#     if len(name_parts) <= 1:
-#         return filename
-#     else:
-#         for part in name_parts:
-#             formatted_filename += part + '_'
-#         return formatted_filename[:-1]
-
 def create_filename(text):
     print(text)
     hash = hashlib.sha256()
@@ -41,7 +31,6 @@ def create_filename(text):
 #     print(hash.hexdigest())
     return hash.hexdigest()
     
-
 def make_color_list(voice_agent):
     colors = []
     color_list = []
@@ -59,7 +48,6 @@ def make_color_list(voice_agent):
 #     print(wake_word)
     return colors, wake_word
 
-
 colors, wake_word = make_color_list('google')  # va_support is either 'Alexa' of 'Google'
 for color in colors:
     print(color['name'])
@@ -71,27 +59,14 @@ for color in colors:
     filename = create_filename(message)
     attempts = 0
     file_creation = False
-    
     if not os.path.exists(path + f'/{filename}.mp3'):
 #     print(filename)
 #     print(f'{path}/{filename}.mp3')
         while attempts < 3 and not file_creation:
-#             try:
             print('Attempting to save file: take', attempts + 1)
             file = gTTS(message, slow=False)
 #             print(dir(file))
 #             print(file.get_urls())
-    #                 if file:
-    #                     attempts = 3
-    #                     print(dir(file))
-    #                     print('gTTS file created!')
-    #                 else:
-    #                     print('Error creating gTTS file!')
-    #                     attempts += 1
-#             except Exception as ex:
-#                 attempts += 1
-#                 print(f'Trying to create gTTS file again... (take {attempts})')
-#                 print('File creation exception:', ex)
             try:
                 file.save(f'{path}/{filename}.mp3')
                 print(f'Saving file: {filename}.mp3')
@@ -104,8 +79,6 @@ for color in colors:
                 sleep(1)           
     else:
         print(f'{filename}.mp3 already exists, file not created.')
-
-#     if file_creation:
     try:
         subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
     except Exception as ex:
@@ -113,9 +86,3 @@ for color in colors:
     
     sleep(15)  # end of - for color in colors:
 
-# files = os.listdir(path)
-# for file in files:
-# #     print(file)
-#     subprocess.check_output(f'omxplayer -o local {path}/{file}', shell=True).decode('utf-8')
-#     sleep(15)
-#     os.remove(f'{path}/{file}')
