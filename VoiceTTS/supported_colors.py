@@ -1,5 +1,7 @@
 # Color values can be found here: https://en.wikipedia.org/wiki/List_of_colors_(compact)
 
+# RGB color values given in tuples are (R, G, B)
+
 supported_colors_list = [
     {
         'name': 'alice blue',
@@ -1344,17 +1346,6 @@ supported_colors_list = [
         }
     },
     {
-        'name': 'purple',
-        'google': {
-            'is_rgb': True,
-            'color_values': (128, 0, 128)
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (160, 32, 240)
-        }
-    },
-    {
         'name': 'pumpkin',                    # Need to test for Alexa
         'google': {
             'is_rgb': True,
@@ -1364,6 +1355,17 @@ supported_colors_list = [
 #             'is_rgb': True,
 #             'color_values': (0, 0, 0)
 #         }
+    },
+    {
+        'name': 'purple',
+        'google': {
+            'is_rgb': True,
+            'color_values': (128, 0, 128)
+        },
+        'alexa': {
+            'is_rgb': True,
+            'color_values': (160, 32, 240)
+        }
     },
     {
         'name': 'rebecca purple',
@@ -1807,21 +1809,28 @@ supported_colors_list = [
     }
 ]
 
-# for color in supported_colors_list:
-#     try:
-#         if not color['alexa']['is_rgb']:
-#             print(color['name'])
-#     except Exception as ex:
-#         pass
 
-# color_list = []
-# for color in supported_colors_list:
-#     voice_agent = 'alexa'
-#     if color.get(voice_agent):
-#         if color.get(voice_agent).get('is_rgb'):
-#             color_list.append(color)
-# 
-# for color in color_list:
-#     print(color['name'])
-# 
-# print('color_list length: ', len(color_list))
+if __name__ == '__main__':
+#     for color in supported_colors_list:
+#         try:
+#             if not color['alexa']['is_rgb']:
+#                 print(color['name'])
+#         except Exception as ex:
+#             pass
+
+    voice_agent = 'google'
+    color_list = []
+    for color in supported_colors_list:
+        if color.get(voice_agent):
+            if not color.get(voice_agent).get('is_rgb'):
+                color_list.append(color)
+
+    for color in color_list:
+        print(color['name'], color[voice_agent]['color_values'])
+
+    print('color_list length: ', len(color_list))
+
+else:
+    print('Successfully imported supported colors.py')
+
+
