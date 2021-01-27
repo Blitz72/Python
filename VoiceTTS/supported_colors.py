@@ -796,7 +796,7 @@ supported_colors_list = [
         }
     },
     {
-        'name': 'ligth coral',          # The rgb values shown here come from "hey google turn the lights to the color light coral.'
+        'name': 'light coral',          # The rgb values shown here come from "hey google turn the lights to the color light coral.'
         'google': {                     # Google results vary using 'light coral' and 'the color light coral'
             'is_rgb': True,
             'color_values': (240, 128, 128)

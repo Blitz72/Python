@@ -13,6 +13,7 @@ directory = 'voice_files'
 parent_dir = '/home/pi/Python/VoiceTTS/'
 
 device_name = 'full color br30'
+device_name2 = 'C sleep'
 group_name = 'office lights'
 
 path = os.path.join(parent_dir, directory)
@@ -31,14 +32,22 @@ def create_filename(text):
 #     print(hash.hexdigest())
     return hash.hexdigest()
     
-def make_color_list(voice_agent):
+def make_color_list(voice_agent, is_rgb):
+    print(is_rgb)
+    print(voice_agent)
     colors = []
     color_list = []
     for color in supported_colors_list:
-        if color.get(voice_agent):
-#             if color.get(voice_agent):  # color.get(voice_agent).get('is_rgb')
-#                 print(color['name'])
-            color_list.append(color)
+        if is_rgb:
+            if color.get(voice_agent):
+                if color.get(voice_agent).get('is_rgb'):
+    #                 print(color['name'])
+                    color_list.append(color)
+        else:
+            if color.get(voice_agent):
+                if not color.get(voice_agent).get('is_rgb'):
+    #                 print(color['name'])
+                    color_list.append(color)
     if voice_agent == 'alexa':
         wake_word = voice_agent
     else:
@@ -48,14 +57,20 @@ def make_color_list(voice_agent):
 #     print(wake_word)
     return colors, wake_word
 
-colors, wake_word = make_color_list('google')  # va_support is either 'Alexa' of 'Google'
-for color in colors:
-    print(color['name'])
-# print(wake_word)
+
+voice_agent = 'google'
+colors, wake_word = make_color_list(voice_agent, is_rgb=True)  # va_support is either 'alexa' of 'google'
+
 
 for color in colors:
     color_name = color['name']
-    message = f'{wake_word}, turn {device_name} to the color {color_name}, please'
+    if voice_agent == 'google' and 'light' in color['name']:
+        added_str = 'the color'
+    else:
+        added_str = ''
+#     print(color)
+    message = f'{wake_word}, set {group_name} to {added_str} {color_name}, please'
+#     message = f'{wake_word}, make the {device_name2}, cooler, please'
     filename = create_filename(message)
     attempts = 0
     file_creation = False
@@ -65,8 +80,6 @@ for color in colors:
         while attempts < 3 and not file_creation:
             print('Attempting to save file: take', attempts + 1)
             file = gTTS(message, slow=False)
-#             print(dir(file))
-#             print(file.get_urls())
             try:
                 file.save(f'{path}/{filename}.mp3')
                 print(f'Saving file: {filename}.mp3')
