@@ -6,6 +6,12 @@ import subprocess
 from time import sleep
 import hashlib
 
+# Alexa Voice Service protocol (what I think the C by GE Skill maps to, at least)
+#
+#                                                         | slot |
+#     Alexa,     set     <device_name>/<group_name>    to   red.
+# | wake word | launch |      invocation name       | utterance (the intent of the command)
+
 # for color in supported_colors_list:
 #     print(color)
 
@@ -15,6 +21,7 @@ parent_dir = '/home/pi/Python/VoiceTTS/'
 device_name = 'full color br30'
 device_name2 = 'C sleep'
 group_name = 'office lights'
+launch_word = 'set'
 
 path = os.path.join(parent_dir, directory)
 
@@ -33,8 +40,8 @@ def create_filename(text):
     return hash.hexdigest()
     
 def make_color_list(voice_agent, is_rgb):
-    print(is_rgb)
-    print(voice_agent)
+#     print(is_rgb)
+#     print(voice_agent)
     colors = []
     color_list = []
     for color in supported_colors_list:
@@ -59,7 +66,7 @@ def make_color_list(voice_agent, is_rgb):
 
 
 voice_agent = 'google'
-colors, wake_word = make_color_list(voice_agent, is_rgb=True)  # va_support is either 'alexa' of 'google'
+colors, wake_word = make_color_list(voice_agent, is_rgb=True)  # voice_agent is either 'alexa' of 'google'
 
 
 for color in colors:
@@ -69,7 +76,7 @@ for color in colors:
     else:
         added_str = ''
 #     print(color)
-    message = f'{wake_word}, set {group_name} to {added_str} {color_name}, please'
+    message = f'{wake_word}, {launch_word} {group_name} to {added_str} {color_name}, please'
 #     message = f'{wake_word}, make the {device_name2}, cooler, please'
     filename = create_filename(message)
     attempts = 0
@@ -87,13 +94,13 @@ for color in colors:
             except Exception as ex:
                 print('File save exception:', ex)
                 attempts += 1
-                if attempts == 3:
-                    file_creation = False
                 sleep(1)           
     else:
         print(f'{filename}.mp3 already exists, file not created.')
     try:
-        subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+        process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+        if 'have' in process:
+            print('File finished playing successfully!')
     except Exception as ex:
         print('Subprocess exception:', ex)
     
