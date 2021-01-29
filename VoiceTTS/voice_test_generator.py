@@ -66,7 +66,8 @@ def make_color_list(voice_agent, is_rgb):
 
 
 voice_agent = 'google'
-colors, wake_word = make_color_list(voice_agent, is_rgb=False)  # voice_agent is either 'alexa' of 'google'
+is_rgb = True
+colors, wake_word = make_color_list(voice_agent, is_rgb)  # voice_agent is either 'alexa' of 'google'
 
 
 for color in colors:
@@ -81,6 +82,7 @@ for color in colors:
     filename = create_filename(message)
     attempts = 0
     file_creation = False
+    file_exists = False
     if not os.path.exists(path + f'/{filename}.mp3'):
 #     print(filename)
 #     print(f'{path}/{filename}.mp3')
@@ -93,16 +95,19 @@ for color in colors:
                 file.save(f'{path}/{filename}.mp3')
                 print(f'Saving file: {filename}.mp3')
                 file_creation = True
+                file_exists = True
             except Exception as ex:
                 print('File save exception:', ex)
                 attempts += 1
                 sleep(1)           
     else:
         print(f'{filename}.mp3 already exists, file not created.')
+        file_exists = True
     try:
-        process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
-        if 'have' in process:
-            print('File finished playing successfully!')
+        if file_exists:
+            process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+            if 'have' in process:
+                print('File finished playing successfully!')
     except Exception as ex:
         print('Subprocess exception:', ex)
     
