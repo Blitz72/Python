@@ -18,7 +18,7 @@ import hashlib
 directory = 'voice_files'
 parent_dir = '/home/pi/Python/VoiceTTS/'
 
-device_name = 'full color br30'
+device_name = 'full color bulb'
 device_name2 = 'C sleep'
 group_name = 'office lights'
 launch_word = 'set'
@@ -33,7 +33,7 @@ else:
 
 
 def create_filename(text):
-    print(text)
+#     print(text)
     hash = hashlib.sha256()
     hash.update(text.encode('utf-8'))
 #     print(hash.hexdigest())
@@ -66,7 +66,7 @@ def make_color_list(voice_agent, is_rgb):
 
 
 voice_agent = 'google'
-colors, wake_word = make_color_list(voice_agent, is_rgb=True)  # voice_agent is either 'alexa' of 'google'
+colors, wake_word = make_color_list(voice_agent, is_rgb=False)  # voice_agent is either 'alexa' of 'google'
 
 
 for color in colors:
@@ -76,7 +76,7 @@ for color in colors:
     else:
         added_str = ''
 #     print(color)
-    message = f'{wake_word}, {launch_word} {group_name} to {added_str} {color_name}, please'
+    message = f'{wake_word}, {launch_word} {device_name} to {added_str} {color_name} please'
 #     message = f'{wake_word}, make the {device_name2}, cooler, please'
     filename = create_filename(message)
     attempts = 0
@@ -85,8 +85,10 @@ for color in colors:
 #     print(filename)
 #     print(f'{path}/{filename}.mp3')
         while attempts < 3 and not file_creation:
+            print('Attempting to say:', message)
+            print('Message length:', len(message))
             print('Attempting to save file: take', attempts + 1)
-            file = gTTS(message, slow=False)
+            file = gTTS(message, lang='en', slow=False)
             try:
                 file.save(f'{path}/{filename}.mp3')
                 print(f'Saving file: {filename}.mp3')
