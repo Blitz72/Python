@@ -18,7 +18,7 @@ import hashlib
 directory = 'voice_files'
 parent_dir = '/home/pi/Python/VoiceTTS/'
 
-device_name = 'full color bulb'
+device_name = 'color bulb'
 device_name2 = 'C sleep'
 group_name = 'office lights'
 launch_word = 'set'
@@ -31,6 +31,12 @@ if not os.path.exists(path):
 else:
     print(f'{path} already exists. Directory not created.')
 
+def get_wake_word(voice_agent):
+    if voice_agent == 'alexa':
+        wake_word = voice_agent
+    else:
+        wake_word = 'hey google'
+    return wake_word
 
 def create_filename(text):
 #     print(text)
@@ -38,6 +44,43 @@ def create_filename(text):
     hash.update(text.encode('utf-8'))
 #     print(hash.hexdigest())
     return hash.hexdigest()
+
+def initialize(voice_agent):
+    power(voice_agent, ['100%'])
+    wake_word = get_wake_word(voice_agent)
+    message = f'{wake_word}. set {device_name} to soft white please'
+    filename = create_filename(message)
+    attempts = 0
+    file_creation = False
+    file_exists = False
+    print('Attempting to say:', message)
+    print('Message length:', len(message))
+    if not os.path.exists(path + f'/{filename}.mp3'):
+#     print(filename)
+#     print(f'{path}/{filename}.mp3')
+        while attempts < 3 and not file_creation:
+            print('Attempting to save file: take', attempts + 1)
+            file = gTTS(message, lang='en', slow=False)
+            try:
+                file.save(f'{path}/{filename}.mp3')
+                print(f'Saving file: {filename}.mp3')
+                file_creation = True
+                file_exists = True
+            except Exception as ex:
+                print('File save exception:', ex)
+                attempts += 1
+                sleep(1)
+    else:
+        print(f'{filename}.mp3 already exists, file not created.')
+        file_exists = True
+    try:
+        if file_exists:
+            process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+            if 'have' in process:
+                print('File finished playing successfully!')
+    except Exception as ex:
+        print('Subprocess exception:', ex)
+    sleep(15)  # end of - brightness()
     
 def make_color_list(voice_agent, is_rgb):
 #     print(is_rgb)
@@ -55,61 +98,155 @@ def make_color_list(voice_agent, is_rgb):
                 if not color.get(voice_agent).get('is_rgb'):
     #                 print(color['name'])
                     color_list.append(color)
-    if voice_agent == 'alexa':
-        wake_word = voice_agent
+    wake_word = get_wake_word(voice_agent)
+    if is_rgb:
+        iterations = 5
     else:
-        wake_word = 'hey google'
-    for x in range(5):
+        iterations = 1
+    for x in range(iterations):
         colors.append(color_list[random.randint(0, len(color_list)) - 1])
 #     print(wake_word)
     return colors, wake_word
 
+def power(voice_agent, values):
+    wake_word = get_wake_word(voice_agent)
+    launch_word = 'turn'
+    for value in values:
+        message = f'{wake_word}. {launch_word} {device_name} {value} please'
+    #     message = f'{wake_word}, make the {device_name2}, cooler, please'
+        filename = create_filename(message)
+        attempts = 0
+        file_creation = False
+        file_exists = False
+        print('Attempting to say:', message)
+        print('Message length:', len(message))
+        if not os.path.exists(path + f'/{filename}.mp3'):
+    #     print(filename)
+    #     print(f'{path}/{filename}.mp3')
+            while attempts < 3 and not file_creation:
+                print('Attempting to save file: take', attempts + 1)
+                file = gTTS(message, lang='en', slow=False)
+                try:
+                    file.save(f'{path}/{filename}.mp3')
+                    print(f'Saving file: {filename}.mp3')
+                    file_creation = True
+                    file_exists = True
+                except Exception as ex:
+                    print('File save exception:', ex)
+                    attempts += 1
+                    sleep(1)           
+        else:
+            print(f'{filename}.mp3 already exists, file not created.')
+            file_exists = True
+        try:
+            if file_exists:
+                process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+                if 'have' in process:
+                    print('File finished playing successfully!')
+        except Exception as ex:
+            print('Subprocess exception:', ex)
+        sleep(15)  # end of - brightness()
+
+def brightness(voice_agent, values):
+    wake_word = get_wake_word(voice_agent)
+    for value in values:
+        if value == 'dim' or value == 'brighten':
+            added_str = ''
+            launch_word = value
+        else:
+            added_str = f'to {value}'
+            launch_word = 'set'
+        message = f'{wake_word}. {launch_word} {device_name} {added_str} please'
+    #     message = f'{wake_word}, make the {device_name2}, cooler, please'
+        filename = create_filename(message)
+        attempts = 0
+        file_creation = False
+        file_exists = False
+        print('Attempting to say:', message)
+        print('Message length:', len(message))
+        if not os.path.exists(path + f'/{filename}.mp3'):
+    #     print(filename)
+    #     print(f'{path}/{filename}.mp3')
+            while attempts < 3 and not file_creation:
+                print('Attempting to save file: take', attempts + 1)
+                file = gTTS(message, lang='en', slow=False)
+                try:
+                    file.save(f'{path}/{filename}.mp3')
+                    print(f'Saving file: {filename}.mp3')
+                    file_creation = True
+                    file_exists = True
+                except Exception as ex:
+                    print('File save exception:', ex)
+                    attempts += 1
+                    sleep(1)           
+        else:
+            print(f'{filename}.mp3 already exists, file not created.')
+            file_exists = True
+        try:
+            if file_exists:
+                process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+                if 'have' in process:
+                    print('File finished playing successfully!')
+        except Exception as ex:
+            print('Subprocess exception:', ex)
+        sleep(15)  # end of - brightness()
+
+def color_test(voice_agent, is_rgb):
+    colors, wake_word = make_color_list(voice_agent, is_rgb)
+    for color in colors:
+        color_name = color['name']
+        if voice_agent == 'google' and 'light' in color['name']:
+            added_str = 'the color'
+        else:
+            added_str = ''
+    #     print(color)
+        message = f'{wake_word}. {launch_word} {device_name} to {added_str} {color_name} please'
+    #     message = f'{wake_word}, make the {device_name2}, cooler, please'
+        filename = create_filename(message)
+        attempts = 0
+        file_creation = False
+        file_exists = False
+        print('Attempting to say:', message)
+        print('Message length:', len(message))
+        if not os.path.exists(path + f'/{filename}.mp3'):
+    #     print(filename)
+    #     print(f'{path}/{filename}.mp3')
+            while attempts < 3 and not file_creation:
+                print('Attempting to save file: take', attempts + 1)
+                file = gTTS(message, lang='en', slow=False)
+                try:
+                    file.save(f'{path}/{filename}.mp3')
+                    print(f'Saving file: {filename}.mp3')
+                    file_creation = True
+                    file_exists = True
+                except Exception as ex:
+                    print('File save exception:', ex)
+                    attempts += 1
+                    sleep(1)           
+        else:
+            print(f'{filename}.mp3 already exists, file not created.')
+            file_exists = True
+        try:
+            if file_exists:
+                process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
+                if 'have' in process:
+                    print('File finished playing successfully!')
+        except Exception as ex:
+            print('Subprocess exception:', ex)
+        sleep(15)  # end of - color_test()
+
+
 
 voice_agent = 'google'
+initialize(voice_agent)
+power(voice_agent, ['on', 'off', 'on'])
+brightness(voice_agent, ['72%', '0%', '3%', '125%'])
+brightness(voice_agent, ['0%', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten'])
+brightness(voice_agent, ['6%', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten'])
+brightness(voice_agent, ['100%', 'dim', 'dim', 'dim', 'dim', 'dim', 'dim'])
+brightness(voice_agent, ['88%', 'dim', 'dim', 'dim', 'dim', 'dim', 'dim'])
+is_rgb = False
+color_test(voice_agent, is_rgb)  # voice_agent is either 'alexa' or 'google'
 is_rgb = True
-colors, wake_word = make_color_list(voice_agent, is_rgb)  # voice_agent is either 'alexa' of 'google'
-
-
-for color in colors:
-    color_name = color['name']
-    if voice_agent == 'google' and 'light' in color['name']:
-        added_str = 'the color'
-    else:
-        added_str = ''
-#     print(color)
-    message = f'{wake_word}, {launch_word} {device_name} to {added_str} {color_name} please'
-#     message = f'{wake_word}, make the {device_name2}, cooler, please'
-    filename = create_filename(message)
-    attempts = 0
-    file_creation = False
-    file_exists = False
-    if not os.path.exists(path + f'/{filename}.mp3'):
-#     print(filename)
-#     print(f'{path}/{filename}.mp3')
-        while attempts < 3 and not file_creation:
-            print('Attempting to say:', message)
-            print('Message length:', len(message))
-            print('Attempting to save file: take', attempts + 1)
-            file = gTTS(message, lang='en', slow=False)
-            try:
-                file.save(f'{path}/{filename}.mp3')
-                print(f'Saving file: {filename}.mp3')
-                file_creation = True
-                file_exists = True
-            except Exception as ex:
-                print('File save exception:', ex)
-                attempts += 1
-                sleep(1)           
-    else:
-        print(f'{filename}.mp3 already exists, file not created.')
-        file_exists = True
-    try:
-        if file_exists:
-            process = subprocess.check_output(f'omxplayer -o local {path}/{filename}.mp3', shell=True).decode('utf-8')
-            if 'have' in process:
-                print('File finished playing successfully!')
-    except Exception as ex:
-        print('Subprocess exception:', ex)
-    
-    sleep(15)  # end of - for color in colors:
+color_test(voice_agent, is_rgb)  # voice_agent is either 'alexa' or 'google'
 
