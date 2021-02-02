@@ -238,7 +238,7 @@ def color_test(voice_agent, is_rgb):
 
 
 
-voice_agent = 'alexa'
+voice_agent = 'google'
 initialize(voice_agent)
 power(voice_agent, ['off the', 'on the', 'off the', 'on the'])
 brightness(voice_agent, ['72%', '0%', '3%', '125%'])
@@ -250,4 +250,5 @@ is_rgb = False
 color_test(voice_agent, is_rgb)  # voice_agent is either 'alexa' or 'google'
 is_rgb = True
 color_test(voice_agent, is_rgb)  # voice_agent is either 'alexa' or 'google'
+
 
