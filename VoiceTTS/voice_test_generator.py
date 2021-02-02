@@ -196,12 +196,12 @@ def color_test(voice_agent, is_rgb):
     colors, wake_word = make_color_list(voice_agent, is_rgb)
     for color in colors:
         color_name = color['name']
-        if voice_agent == 'google' and 'light' or 'tan' in color['name']:
-            added_str = 'the color'
+        if 'light' or 'tan' in color['name']:
+            added_str = 'the color '
         else:
             added_str = ''
     #     print(color)
-        message = f'{wake_word}. {launch_word} {device_name} to {added_str} {color_name}'
+        message = f'{wake_word}. {launch_word} {device_name} to {added_str}{color_name}'
     #     message = f'{wake_word}, make the {device_name2}, cooler'
         filename = create_filename(message)
         attempts = 0
