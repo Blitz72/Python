@@ -5,6 +5,11 @@ import random
 import subprocess
 from time import sleep
 import hashlib
+from google.cloud import texttospeech
+from dotenv import load_dotenv
+
+load_dotenv('.env')
+os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
 
 # Alexa Voice Service protocol (what I think the C by GE Skill maps to, at least)
 #
@@ -44,6 +49,9 @@ def create_filename(text):
     hash.update(text.encode('utf-8'))
 #     print(hash.hexdigest())
     return hash.hexdigest()
+
+def speak(message):
+    pass
 
 def initialize(voice_agent):
     power(voice_agent, ['on'])
