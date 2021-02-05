@@ -18,7 +18,7 @@ path = '/home/pi/Python/GoogleTTSdemo/'
 #     print(f'{path} already exists. Directory not created.')
 
 load_dotenv('.env')
-os.getenv('GOOGLE_APPLICATION_CREDENTIALS'))
+os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
 # Instantiates a client
 client = texttospeech.TextToSpeechClient()
