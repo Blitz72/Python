@@ -1,9 +1,12 @@
 from supported_colors import supported_colors_list
 import os
 import subprocess
+import pathlib
 import hashlib
+import html
 from google.cloud import texttospeech
 from dotenv import load_dotenv
+from time import sleep
 
 class Voice_agent:
     def __init__(self, voice_agent, filepath):
@@ -12,6 +15,11 @@ class Voice_agent:
         self.client = texttospeech.TextToSpeechClient()
         self.voice_agent = voice_agent
         self.filepath = filepath
+        if not os.path.exists(self.filepath):
+            pathlib.Path(self.filepath).mkdir(parents=1, exist_ok=1)
+            print(f'Directory created: {self.filepath}')
+        else:
+            print(f'{self.filepath} already exists. Directory not created.')
         if voice_agent == 'alexa':
             self.wake_word = voice_agent
         else:
@@ -35,42 +43,48 @@ class Voice_agent:
     def speak(self, message):
         _filename = self.create_filename(message)
         # print(_filename)
-        # file_exists = False
+        print(f'Attempting to say: {self.wake_word}, {message}')
         if not os.path.exists(self.filepath + f'{_filename}.mp3'):
-            synthesis_input = texttospeech.SynthesisInput(text=message)
+            ssml_text = f'<speak>{self.wake_word}, <break time="1s"/> {message}</speak>'
+            synthesis_input = texttospeech.SynthesisInput(ssml=ssml_text)
             voice = texttospeech.VoiceSelectionParams(
                 language_code="en-US",
-                name="en-US-Standard-B"
-                # ssml_gender=texttospeech.SsmlVoiceGender.MALE
+                name="en-US-Standard-B",
+                ssml_gender=texttospeech.SsmlVoiceGender.MALE
             )
             audio_config = texttospeech.AudioConfig(
                 audio_encoding=texttospeech.AudioEncoding.MP3
             )
             error = None
             _response = None
-            try:
-                _response = self.client.synthesize_speech(
-                    input=synthesis_input, voice=voice, audio_config=audio_config
-                )
-            except Exception as ex:
-                error = ex
-            finally:
-                if error:
-                    print('google-cloud-texttospeech exception:', error)
-                elif _response:
-                    print('Audio content created!')
-            with open(f"{self.filepath}{_filename}.mp3", "wb") as out:
-                # Write the response to the output file.
-                out.write(_response.audio_content)
-                print(f'Audio content written to file "{self.filepath}{_filename}.mp3"')
-                # file_exists = True
+            attempts = 0
+            audio_content = False
+            while attempts < 3 and not audio_content:
+                try:
+                    _response = self.client.synthesize_speech(
+                        input=synthesis_input, voice=voice, audio_config=audio_config
+                    )
+                except Exception as ex:
+                    error = ex
+                    attempts += 1
+                    sleep(2)
+                finally:
+                    if error:
+                        print('Failed to create audio content!')
+                        print('google-cloud-texttospeech exception:', error)
+                    elif _response:
+                        print('Audio content created!')
+                        audio_content = True
+            if audio_content:
+                with open(f"{self.filepath}{_filename}.mp3", "wb") as out:
+                    # Write the response to the output file.
+                    out.write(_response.audio_content)
+                    print(f'Audio content written to file "{self.filepath}{_filename}.mp3"')
         else:
             print(f'{_filename}.mp3 already exists, file not created.')
-            # file_exists = True
         error = None
         process = None
         try:
-            # if file_exists:
             process = subprocess.check_output(f'omxplayer -o local {self.filepath}{_filename}.mp3', shell=True).decode('utf-8')
         except Exception as ex:
             error = ex
