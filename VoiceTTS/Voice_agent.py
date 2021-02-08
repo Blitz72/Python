@@ -94,6 +94,8 @@ class Voice_agent:
             elif process:
                 if 'have' in process:
                     print('File finished playing successfully!')
+                    success = True
+                    return {'success': True}
 
 
 # path = '/home/pi/Python/VoiceTTS/voice_files/'
