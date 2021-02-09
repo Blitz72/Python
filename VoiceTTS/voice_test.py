@@ -31,7 +31,7 @@ def set_color(group, values):
         #     added_str = 'the color '
         # else:
         #     added_str = ''
-        print(va.speak(f'turn the {group} to the color {value}, please'))
+        print(va.speak(f'turn the {group} to the color <emphasis> {value} </emphasis>, please'))
         sleep(15)
 
 def make_warm_cool(group, values):
