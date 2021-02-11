@@ -1,4 +1,4 @@
-import Voice_agent
+from Voice_agent import Voice_agent
 import random
 from time import sleep
 
@@ -30,33 +30,34 @@ def set_brightness(group, values):
 def set_color(group, values):
     emphasis_level = "moderate"
     for value in values:
-        # print(value)
-        # if 'light' or 'tan' in value:
-        #     added_str = 'the color '
-        # else:
-        #     added_str = ''
-        print(va.speak(f'turn the {group} to the color <emphasis level="{emphasis_level}"> {value} </emphasis>, please'))
+        # print('light' in value)
+        if 'light' in value or 'tan' in value:
+            added_str = 'the color '
+        else:
+            added_str = ''
+        print(va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {value} </emphasis>, please'))
         sleep(15)
 
 def make_warm_cool(group, values):
+    emphasis_level = "moderate"
     for value in values:
-        va.speak(f'make {group} {value}, please')
+        va.speak(f'make {group} <emphasis level="{emphasis_level}"> {value} </emphasis>, please')
         sleep(15)
 
-voice_agent = 'google'  # 'alexa' or 'google'
+voice_agent = 'alexa'  # 'alexa' or 'google'
 dir_name = voice_agent.capitalize()
 # print(dir_name)
 
 # path to store generated voice files
 path = f'/home/pi/Python/VoiceTTS/{dir_name}/voice_files/'
 
-va = Voice_agent.Voice_agent(voice_agent, path)
+va = Voice_agent(voice_agent, path)
 
 # print(va.wake_word)
 # for color in va.cct_color_list:
 #     print(color['name'])
 
-group_name = 'office lights'
+group_name = 'color bulb'  # 'color bulb' or 'office lights'
 
 # set_power(group_name, ['off', 'on', 'off', 'on'])
 
@@ -64,23 +65,23 @@ group_name = 'office lights'
 
 # set_brightness(group_name, ['0%', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten'])
 # set_brightness(group_name, ['9%', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten'])
-set_brightness(group_name, ['100%', 'dim', 'dim', 'dim', 'dim', 'dim', 'dim'])
+# set_brightness(group_name, ['100%', 'dim', 'dim', 'dim', 'dim', 'dim', 'dim'])
 # set_brightness(group_name, ['92%', 'dim', 'dim', 'dim', 'dim', 'dim', 'dim'])
 
 # set_brightness(group_name, ['100%'])
-
 # color = va.cct_color_list[random.randint(0, len(va.cct_color_list) - 1)]
 # set_color(group_name, [color['name']])
 
-# set_color(group_name, ['candlelight'])
-# make_warm_cool(group_name, ['cooler', 'cooler', 'cooler', 'cooler', 'cooler', 'cooler'])
-# set_color(group_name, ['cool white'])
-# make_warm_cool(group_name, ['warmer', 'warmer', 'warmer', 'warmer', 'warmer', 'warmer'])
+# if voice_agent == 'alexa':
+#     set_color(group_name, ['candlelight'])
+#     make_warm_cool(group_name, ['cooler', 'cooler', 'cooler', 'cooler', 'cooler', 'cooler'])
+    # set_color(group_name, ['cool white'])
+    # make_warm_cool(group_name, ['warmer', 'warmer', 'warmer', 'warmer', 'warmer', 'warmer'])
 
-# color_list = []
-# color_names = []
-# for x in range(5):
-#     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
-# for color in color_list:
-#     color_names.append(color['name'])
-# set_color(group_name, color_names)
+color_list = []
+color_names = []
+for x in range(5):
+    color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+for color in color_list:
+    color_names.append(color['name'])
+set_color(group_name, color_names)

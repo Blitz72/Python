@@ -56,13 +56,23 @@ import adafruit_tsl2591
 import adafruit_tcs34725
 import adafruit_tca9548a
 
-print(board.SCL)
+# print(board.SCL)
 i2c = busio.I2C(board.SCL, board.SDA)
 tca = adafruit_tca9548a.TCA9548A(i2c)
+# print(tca[0].tca.__dict__.values)
+
+tcs = adafruit_tcs34725.TCS34725(tca[0])
+tcs.gain = 1
+tcs.integration_time = 100
 
 tsl = adafruit_tsl2591.TSL2591(tca[1])
-# tcs = adafruit_tcs34725.TCS34725(tca[0])
+tsl.gain = adafruit_tsl2591.GAIN_LOW
+tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
 
 while True:
-    print(tsl.lux)
-    sleep(1)
+    print('lux:              ', round(tsl.lux, 1))
+    print('color_raw:        ', tcs.color_raw)
+    print('color_rgb_bytes:  ', tcs.color_rgb_bytes)
+    print('color_temperature:', round(tcs.color_temperature, 1))
+    print()
+    sleep(2)
