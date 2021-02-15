@@ -8,18 +8,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (240, 248, 255),
-            'tsl_brt_100': 16500,
-            'tcs_color': (31, 10, 17),
-            'm': 177.74,
-            'b': 1476.15
+            'tsl_brt_100': 17000,
+            'tcs_color': (31, 25, 31),
+            'm': 164.67,
+            'b': 2497
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (240, 248, 255),
-            'tsl_brt_100': 16500,
-            'tcs_color': (32, 10, 17),
-            'm': 177.74,
-            'b': 1476.15
+            'tsl_brt_100': 17000,
+            'tcs_color': (31, 25, 31),
+            'm': 164.67,
+            'b': 2497
         }
     },
     # {
@@ -66,17 +66,17 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15000,
-            'tcs_color': (0, 27, 73),
-            'm': 149.85,
-            'b': 1962.33
+            'tcs_color': (0, 62, 87),
+            'm': 144.95,
+            'b': 2623
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15000,
-            'tcs_color': (0, 27, 73),
-            'm': 149.85,
-            'b': 1962.33
+            'tcs_color': (0, 62, 87),
+            'm': 144.95,
+            'b': 2623
         }
     },
     {
@@ -84,18 +84,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (127, 255, 212),
-            'tsl_brt_100': 16000,
-            'tcs_color': (19, 18, 18),
-            'm': 164.49,
-            'b': 1658.63
+            'tsl_brt_100': 16500,
+            'tcs_color': (17, 39, 29),
+            'm': 157.81,
+            'b': 2640
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (127, 255, 212),
-            'tsl_brt_100': 16000,
-            'tcs_color': (19, 18, 18),
-            'm': 164.49,
-            'b': 1658.63
+            'tsl_brt_100': 16500,
+            'tcs_color': (17, 39, 29),
+            'm': 157.81,
+            'b': 2640
         }
     },
     {
@@ -104,9 +104,9 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 127, 255),
             'tsl_brt_100': 15300,
-            'tcs_color': (0, 19, 91),
-            'm': 151.5,
-            'b': 1956.74
+            'tcs_color': (0, 52, 128),
+            'm': 155,
+            'b': 1925
         },
         'alexa': {
             'is_rgb': True,
@@ -199,17 +199,17 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 0, 255),
             'tsl_brt_100': 15600,
-            'tcs_color': (0, 10, 125),
-            'm': 155.98,
-            'b': 2059.91
+            'tcs_color': (0, 34, 223),
+            'm': 155,
+            'b': 2000
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 0, 255),
             'tsl_brt_100': 15600,
-            'tcs_color': (0, 10, 125),
-            'm': 155.98,
-            'b': 2059.91
+            'tcs_color': (0, 34, 223),
+            'm': 155,
+            'b': 2000
         }
     },
     {
@@ -217,18 +217,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (138, 43, 226),
-            'tsl_brt_100': 16700,
-            'tcs_color': (10, 5, 62),
-            'm': 173.5,
-            'b': 1493.53
+            'tsl_brt_100': 17000,
+            'tcs_color': (17, 16, 119),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (138, 43, 226),
-            'tsl_brt_100': 16700,
-            'tcs_color': (10, 5, 62),
-            'm': 173.5,
-            'b': 1493.53
+            'tsl_brt_100': 17000,
+            'tcs_color': (17, 16, 119),
+            'm': 175,
+            'b': 1450
         }
     },
     {
@@ -236,10 +236,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (150, 75, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (111, 9, 5),
+            'm': 190,
+            'b': 1150
         },
         'alexa': {
             'is_rgb': True,
@@ -293,18 +293,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (95, 158, 160),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (18, 34, 37),
+            'm': 170,
+            'b': 1600
         },
         'alexa': {                           # Need to tell Alexa to set a Full Color bulb 'to the color cadet blue'
             'is_rgb': True,
             'color_values': (95, 158, 160),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (18, 34, 37),
+            'm': 170,
+            'b': 1600
         }
     },
     {
@@ -312,10 +312,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (223, 255, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (53, 23, 7),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
@@ -331,10 +331,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (123, 63, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (109, 9, 5),
+            'm': 190,
+            'b': 1150
         },
         'alexa': {
             'is_rgb': True,
@@ -390,10 +390,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 127, 80),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (120, 7, 7),
+            'm': 190,
+            'b': 1000
         },
         'alexa': {
             'is_rgb': True,
@@ -409,10 +409,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (100, 149, 237),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (18, 31, 79),
+            'm': 165,
+            'b': 1600
         },
         # 'alexa': {
         #     'is_rgb': True,
@@ -428,10 +428,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (100, 149, 237),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (18, 31, 79),
+            'm': 165,
+            'b': 1600
         },
         # 'alexa': {
         #     'is_rgb': True,
@@ -463,10 +463,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (220, 20, 60),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (194, 1, 6),
+            'm': 195,
+            'b': 900
         },
         'alexa': {
             'is_rgb': True,
@@ -482,18 +482,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (0, 255, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 87),
+            'm': 144.95,
+            'b': 2623
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 255, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 87),
+            'm': 144.95,
+            'b': 2623
         }
     },
     {
@@ -501,18 +501,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (0, 0, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15600,
+            'tcs_color': (0, 34, 223),
+            'm': 155,
+            'b': 2000
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 0, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15600,
+            'tcs_color': (0, 34, 223),
+            'm': 155,
+            'b': 2000
         }
     },
     {
@@ -520,18 +520,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (0, 139, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 87),
+            'm': 144.95,
+            'b': 2623
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 139, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 87),
+            'm': 144.95,
+            'b': 2623
         }
     },
     {
@@ -539,18 +539,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (184, 134, 11),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (83, 14, 6),
+            'm': 185,
+            'b': 1250
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (184, 134, 11),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (83, 14, 6),
+            'm': 185,
+            'b': 1250
         }
     },
     {
@@ -558,18 +558,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (169, 169, 169),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (169, 169, 169),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         }
     },
     {
@@ -577,18 +577,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (1, 50, 32),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (12, 47, 27),
+            'm': 160,
+            'b': 1750
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 100, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 14000,
+            'tcs_color': (0, 93, 10),
+            'm': 135,
+            'b': 2250
         }
     },
     {
@@ -596,18 +596,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (189, 183, 107),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (48, 22, 14),
+            'm': 180,
+            'b': 1350
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (189, 183, 107),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (48, 22, 14),
+            'm': 180,
+            'b': 1350
         }
     },
     {
@@ -615,18 +615,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (139, 0, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (61, 8, 60),
+            'm': 185,
+            'b': 1200
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (139, 0, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (61, 8, 60),
+            'm': 185,
+            'b': 1200
         }
     },
     {
@@ -653,18 +653,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 140, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (183, 10, 5),
+            'm': 185,
+            'b': 1150
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 140, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (183, 10, 5),
+            'm': 185,
+            'b': 1150
         }
     },
     {
@@ -672,18 +672,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (153, 50, 204),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (30, 13, 85),
+            'm': 175,
+            'b': 1400
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (153, 50, 204),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (30, 13, 85),
+            'm': 175,
+            'b': 1400
         }
     },
     {
@@ -691,18 +691,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (139, 0, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (245, 0, 3),
+            'm': 200,
+            'b': 800
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (139, 0, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (245, 0, 3),
+            'm': 200,
+            'b': 800
         }
     },
     {
@@ -710,18 +710,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (233, 150, 122),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (80, 11, 14),
+            'm': 185,
+            'b': 1200
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (233, 150, 122),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (80, 11, 14),
+            'm': 185,
+            'b': 1200
         }
     },
     {
@@ -767,18 +767,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (47, 79, 79),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (19, 33, 36),
+            'm': 165,
+            'b': 1600
         },
         'alexa': {                            # Need to tell Alexa to set a Full Color bulb 'to the color dark slate gray'
             'is_rgb': True,
             'color_values': (47, 79, 79),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (19, 33, 36),
+            'm': 165,
+            'b': 1600
         }
     },
     {
@@ -786,10 +786,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (0, 206, 209),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 80),
+            'm': 150,
+            'b': 1950
         },
         'alexa': {
             'is_rgb': True,
@@ -805,18 +805,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (148, 0, 211),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (9, 21, 144),
+            'm': 170,
+            'b': 1600
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (148, 0, 211),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (9, 21, 144),
+            'm': 170,
+            'b': 1600
         }
     },
     {
@@ -843,18 +843,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 20, 147),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (138, 3, 18),
+            'm': 195,
+            'b': 1000
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 20, 147),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (138, 3, 18),
+            'm': 195,
+            'b': 1000
         }
     },
     {
@@ -862,18 +862,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (0, 191, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 57, 105),
+            'm': 155,
+            'b': 1900
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 191, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 57, 105),
+            'm': 155,
+            'b': 1900
         }
     },
     {
@@ -881,18 +881,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (105, 105, 105),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (105, 105, 105),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         }
     },
     {
@@ -900,18 +900,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (30, 144, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (5, 34, 103),
+            'm': 165,
+            'b': 1650
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (30, 144, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (5, 34, 103),
+            'm': 165,
+            'b': 1650
         }
     },
     {
@@ -919,18 +919,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (178, 34, 34),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (186, 2, 5),
+            'm': 195,
+            'b': 900
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (178, 34, 34),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (186, 2, 5),
+            'm': 195,
+            'b': 900
         }
     },
     {
@@ -957,18 +957,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (34, 139, 34),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (17, 46, 10),
+            'm': 160,
+            'b': 1750
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (34, 139, 34),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (17, 46, 10),
+            'm': 160,
+            'b': 1750
         }
     },
     {
@@ -976,18 +976,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (193, 84, 193),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (50, 11, 49),
+            'm': 180,
+            'b': 1300
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 0, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (61, 8, 60),
+            'm': 185,
+            'b': 1200
         }
     },
     {
@@ -995,18 +995,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (220, 220, 220),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (220, 220, 220),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         }
     },
     # {
@@ -1052,10 +1052,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (165, 124, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (73, 17, 6),
+            'm': 185,
+            'b': 1300
         },
         'alexa': {
             'is_rgb': True,
@@ -1071,18 +1071,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (218, 165, 32),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (78, 15, 6),
+            'm': 185,
+            'b': 1250
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (218, 165, 32),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17500,
+            'tcs_color': (78, 15, 6),
+            'm': 185,
+            'b': 1250
         }
     },
     {
@@ -1090,18 +1090,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (128, 128, 128),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (128, 128, 128),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         }
     },
     {
@@ -1109,18 +1109,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (0, 255, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 14000,
+            'tcs_color': (0, 93, 10),
+            'm': 135,
+            'b': 2250
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 255, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 14000,
+            'tcs_color': (0, 93, 10),
+            'm': 135,
+            'b': 2250
         }
     },
     {
@@ -1128,18 +1128,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (173, 255, 47),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (31, 35, 8),
+            'm': 170,
+            'b': 1600
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (173, 255, 47),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (31, 35, 8),
+            'm': 170,
+            'b': 1600
         }
     },
     {
@@ -1147,18 +1147,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (240, 255, 240),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (32, 27, 28),
+            'm': 175,
+            'b': 1500
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (240, 255, 240),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (32, 27, 28),
+            'm': 175,
+            'b': 1500
         }
     },
     {
@@ -1166,18 +1166,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 105, 180),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (87, 7, 24),
+            'm': 190,
+            'b': 1140
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 105, 180),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (87, 7, 24),
+            'm': 190,
+            'b': 1140
         }
     },
     {
@@ -1204,10 +1204,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (205, 92, 92),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (114, 6, 11),
+            'm': 190,
+            'b': 1000
         },
         'alexa': {
             'is_rgb': True,
@@ -1223,18 +1223,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (75, 0, 130),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (16, 17, 122),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (75, 0, 130),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (16, 17, 122),
+            'm': 175,
+            'b': 1450
         }
     },
     {
@@ -1261,10 +1261,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (195, 176, 145),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (46, 21, 21),
+            'm': 175,
+            'b': 1400
         },
         'alexa': {
             'is_rgb': True,
@@ -1280,10 +1280,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (181, 126, 220),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (31, 17, 55),
+            'm': 175,
+            'b': 1400
         },
         'alexa': {                          # These are custom values to match what Alexa chose for lavender
             'is_rgb': True,
@@ -1299,18 +1299,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 240, 245),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (26, 24, 46),
+            'm': 175,
+            'b': 1500
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 240, 245),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (26, 24, 46),
+            'm': 175,
+            'b': 1500
         }
     },
     {
@@ -1318,18 +1318,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (124, 252, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (28, 37, 8),
+            'm': 165,
+            'b': 1650
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (124, 252, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16000,
+            'tcs_color': (28, 37, 8),
+            'm': 165,
+            'b': 1650
         }
     },
     {
@@ -1337,18 +1337,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 250, 205),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (29, 23, 39),
+            'm': 175,
+            'b': 1400
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 250, 205),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (29, 23, 39),
+            'm': 175,
+            'b': 1400
         }
     },
     {
@@ -1356,10 +1356,10 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (173, 216, 230),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (23, 29, 37),
+            'm': 170,
+            'b': 1550
         },
         'alexa': {
             'is_rgb': True,
@@ -1375,18 +1375,18 @@ supported_colors_list = [
         'google': {                     # Google results vary using 'light coral' and 'the color light coral'
             'is_rgb': True,
             'color_values': (240, 128, 128),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (93, 9, 15),
+            'm': 185,
+            'b': 1200
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (240, 128, 128),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18000,
+            'tcs_color': (93, 9, 15),
+            'm': 185,
+            'b': 1200
         }
     },
     {
@@ -1394,18 +1394,18 @@ supported_colors_list = [
         'google': {                     # Google results vary using 'light cyan' and 'the color light cyan'
             'is_rgb': True,
             'color_values': (224, 255, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 88),
+            'm': 150,
+            'b': 1950
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (224, 255, 255),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 15000,
+            'tcs_color': (0, 62, 88),
+            'm': 150,
+            'b': 1950
         }
     },
     {
@@ -1413,10 +1413,10 @@ supported_colors_list = [
         'google': {                     # Google results vary using 'light goldenrod' and 'the color light goldenrod'
             'is_rgb': True,
             'color_values': (255, 236, 139),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (44, 23, 18),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
@@ -1432,18 +1432,18 @@ supported_colors_list = [
         'google': {                     # Google results vary using 'light gray' and 'the color light gray'
             'is_rgb': True,
             'color_values': (211, 211, 211),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (211, 211, 211),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 17000,
+            'tcs_color': (34, 24, 29),
+            'm': 175,
+            'b': 1450
         }
     },
     {
@@ -1451,18 +1451,18 @@ supported_colors_list = [
         'google': {                     # Google results vary using 'light green' and 'the color light green'
             'is_rgb': True,
             'color_values': (144, 238, 144),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (23, 37, 18),
+            'm': 165,
+            'b': 1650
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (144, 238, 144),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 16500,
+            'tcs_color': (23, 37, 18),
+            'm': 165,
+            'b': 1650
         }
     },
     {
@@ -2382,18 +2382,18 @@ supported_colors_list = [
         'google': {
             'is_rgb': True,
             'color_values': (255, 0, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (245, 0, 3),
+            'm': 200,
+            'b': 800
         },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 0, 0),
-            'tsl_brt_100': None,
-            'tcs_color': None,
-            'm': None,
-            'b': None
+            'tsl_brt_100': 18500,
+            'tcs_color': (245, 0, 3),
+            'm': 200,
+            'b': 800
         }
     },
     {

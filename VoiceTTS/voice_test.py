@@ -16,7 +16,7 @@ from time import sleep
 
 def set_power(group, value):
     emphasis_level = 'moderate'
-    success = va.speak(f'turn <emphasis level="{emphasis_level}"> {value} </emphasis> the {group}, please')
+    success = va.speak(f'turn <emphasis level="{emphasis_level}"> {value} </emphasis> the {group}, pleeze')
     print(success)
     return success
     # sleep(15)
@@ -30,7 +30,7 @@ def set_brightness(group, value):
         added_str = f'to {value}'
         launch_word = 'set'
         emphasis_level = 'none'
-    success = va.speak(f'<emphasis level="{emphasis_level}"> {launch_word} </emphasis> the {group} {added_str}, please')
+    success = va.speak(f'<emphasis level="{emphasis_level}"> {launch_word} </emphasis> the {group} {added_str}, pleeze')
     print(success)
     return success
     # sleep(15)
@@ -38,11 +38,11 @@ def set_brightness(group, value):
 def set_color(group, name):
     emphasis_level = "moderate"
     # print('light' in name)
-    if 'light' in name or 'tan' in name:
-        added_str = 'the color '
+    if 'light' in name or 'tan' in name or 'gainsboro' in name:
+        added_str = 'to the color '
     else:
         added_str = ''
-    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, please')
+    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, pleeze')
     print(success)
     return success
     # sleep(15)
@@ -50,10 +50,50 @@ def set_color(group, name):
 def make_warm_cool(group, value):
     emphasis_level = "moderate"
     print(color_name)
-    success = va.speak(f'make {group} <emphasis level="{emphasis_level}"> {value} </emphasis>, please')
+    success = va.speak(f'make {group} <emphasis level="{emphasis_level}"> {value} </emphasis>, pleeze')
     print(success)
     return success
     # sleep(15)
+
+def median(readings):
+    readings.sort()
+    indexer = int(len(readings)/2)
+    median = readings[indexer]
+    return median
+
+def get_cct():
+    tcs.gain = 16
+    # tcs.integration_time = 100
+    readings = []
+    while len(readings) <= 10:
+        readings.append(tcs.color_temperature)
+        sleep(0.25)
+    readings.sort()
+    print(readings)
+    cct_value = median(readings)
+    return cct_value
+
+def get_lux():
+    readings = []
+    while len(readings) <= 10:
+        readings.append(tsl.lux)
+        sleep(0.25)
+    readings.sort()
+    print(readings)
+    lux_value = median(readings)
+    return lux_value
+
+def get_rgb():
+    tcs.gain = 60
+    # tcs.integration_time = 100
+    readings = []
+    while len(readings) <= 10:
+        readings.append(tcs.color_rgb_bytes)
+        sleep(0.25)
+    readings.sort()
+    print(readings)
+    rgb_value = median(readings)
+    return rgb_value
 
 voice_agent = 'google'  # 'alexa' or 'google'
 dir_name = voice_agent.capitalize()
@@ -71,11 +111,6 @@ tca = adafruit_tca9548a.TCA9548A(i2c)
 # print(tca[0].tca.__dict__.values)
 
 tcs = adafruit_tcs34725.TCS34725(tca[0])
-is_rgb = True
-if is_rgb:
-    tcs.gain = 60
-else:
-    tcs.gain = 16
 tcs.integration_time = 100
 
 tsl = adafruit_tsl2591.TSL2591(tca[1])
@@ -116,55 +151,47 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #     color_names.append(color['name'])
 # set_color(group_name, color_names)
 
-color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'blue violet'), None)
+color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'aqua'), None)
 print(color_index)
 color = va.rgb_color_list[color_index]
 print(color)
 set_color(group_name, color['name'])
 sleep(5)
-readings = []
-color_readings = []
 check_100 = set_brightness(group_name, '100%')
 if check_100['success']:
-    sleep(2)
-    while len(readings) <= 10:
-        readings.append(tsl.lux)
-        color_readings.append(tcs.color_rgb_bytes)
-        sleep(1)
-    readings.sort()
-    indexer = int(len(readings)/2)
-    median_100 = readings[indexer]
-    median_color = color_readings[indexer]
-    print('100% =', median_100)
-readings = []
+    sleep(3)
+    median_100 = get_lux()
+    median_color_100 = get_rgb()
 check_75 = set_brightness(group_name, '75%')
 if check_75['success']:
-    sleep(2)
-    while len(readings) <= 10:
-        readings.append(tsl.lux)
-        sleep(1)
-    readings.sort()
-    indexer = int(len(readings)/2)
-    median_75 = readings[indexer]
-    print('75% =', median_75)
-readings = []
+    sleep(3)
+    median_75 = get_lux()
+    median_color_75 = get_rgb()
 check_25 = set_brightness(group_name, '25%')
 if check_25['success']:
-    sleep(2)
-    while len(readings) <= 10:
-        readings.append(tsl.lux)
-        sleep(1)
-    readings.sort()
-    indexer = int(len(readings)/2)
-    median_25 = readings[indexer]
-    print('25% =', median_25)
-print('brt_100 =', median_100)
-print('tcs_color =', median_color)
-slope = round((median_75 - median_25) / 50, 2)
-print('m =', slope)
+    sleep(3)
+    median_25 = get_lux()
+    median_color_25 = get_rgb()
+check_5 = set_brightness(group_name, '5%')
+if check_5['success']:
+    sleep(3)
+    median_5 = get_lux()
+    median_color_5 = get_rgb()
+print()
+print('brt_100       =', median_100)
+print('75%           =', median_75)
+print('25%           =', median_25)
+print('5%            =', median_5)
+print('tcs_color_100 =', median_color_100)
+print('tcs_color_75  =', median_color_75)
+print('tcs_color_25  =', median_color_25)
+print('tcs_color_5   =', median_color_5)
+
+slope = round((median_100 - median_5) / 95, 2)
+print('m             =', slope)
 # supported_colors_list[color_index][voice_agent].update({'slope': slope})
 offset = round(median_75 - (slope * 75), 2)
 # supported_colors_list[color_index][voice_agent].update({'offset': offset})
-print('b =', offset)
+print('b             =', offset)
 
 #  TODO: need to redo tcs_color with tcs.gain at 60
