@@ -16,7 +16,7 @@ from time import sleep
 
 def set_power(group, value):
     emphasis_level = 'moderate'
-    success = va.speak(f'turn <emphasis level="{emphasis_level}"> {value} </emphasis> the {group}, pleeze')
+    success = va.speak(f'turn <emphasis level="{emphasis_level}"> {value} </emphasis> the {group}, <break time="1s"/>')
     print(success)
     return success
     # sleep(15)
@@ -30,7 +30,7 @@ def set_brightness(group, value):
         added_str = f'to {value}'
         launch_word = 'set'
         emphasis_level = 'none'
-    success = va.speak(f'<emphasis level="{emphasis_level}"> {launch_word} </emphasis> the {group} {added_str}, pleeze')
+    success = va.speak(f'<emphasis level="{emphasis_level}"> {launch_word} </emphasis> the {group} {added_str}, <break time="1s"/>')
     print(success)
     return success
     # sleep(15)
@@ -42,7 +42,7 @@ def set_color(group, name):
         added_str = 'to the color '
     else:
         added_str = ''
-    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, pleeze')
+    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
     print(success)
     return success
     # sleep(15)
@@ -50,7 +50,7 @@ def set_color(group, name):
 def make_warm_cool(group, value):
     emphasis_level = "moderate"
     print(color_name)
-    success = va.speak(f'make {group} <emphasis level="{emphasis_level}"> {value} </emphasis>, pleeze')
+    success = va.speak(f'make {group} <emphasis level="{emphasis_level}"> {value} </emphasis>, <break time="1s"/>')
     print(success)
     return success
     # sleep(15)
@@ -66,7 +66,7 @@ def get_cct():
     # tcs.integration_time = 100
     readings = []
     while len(readings) <= 10:
-        readings.append(tcs.color_temperature)
+        readings.append(round(tcs.color_temperature))
         sleep(0.25)
     readings.sort()
     print(readings)
@@ -76,7 +76,7 @@ def get_cct():
 def get_lux():
     readings = []
     while len(readings) <= 10:
-        readings.append(tsl.lux)
+        readings.append(round(tsl.lux))
         sleep(0.25)
     readings.sort()
     print(readings)
@@ -94,6 +94,37 @@ def get_rgb():
     print(readings)
     rgb_value = median(readings)
     return rgb_value
+
+def validate_brightness(voice_agent, brightness, color):
+    median = get_lux()
+    print('median =', median)
+    b2 = color.get(voice_agent).get('b2')
+    b1 = color.get(voice_agent).get('b1')
+    b = color.get(voice_agent).get('b')
+    prediction = round(brightness*brightness*b2 + brightness*b1 + b)
+    print('prediction =', prediction)
+    print('residual =', prediction - median)
+    if prediction-500 < median < prediction+500:
+        print('SUCCESS!!!')
+    else:
+        print('Brightness =', median)
+        print('Looking for:', prediction)
+
+def validate_color(voice_agent, color):
+    median = get_rgb()
+    print('median =', median)
+    color_values = color.get(voice_agent).get('tcs_color_100')
+    print('tcs_color_100 =', color_values)
+    r_diff = color_values[0] - median[0]
+    g_diff = color_values[1] - median[1]
+    b_diff = color_values[2] - median[2]
+    print('r difference =', r_diff)
+    print('g difference =', g_diff)
+    print('b difference =', b_diff)
+    if abs(r_diff) < 3 and abs(g_diff) < 3 and abs(b_diff < 3):
+        print('SUCCESS!!!')
+    else:
+        print('Looking for differnece values less than 3!')
 
 voice_agent = 'google'  # 'alexa' or 'google'
 dir_name = voice_agent.capitalize()
@@ -151,47 +182,41 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #     color_names.append(color['name'])
 # set_color(group_name, color_names)
 
-color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'aqua'), None)
+color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'silver'), None)
 print(color_index)
 color = va.rgb_color_list[color_index]
 print(color)
 set_color(group_name, color['name'])
 sleep(5)
-check_100 = set_brightness(group_name, '100%')
-if check_100['success']:
-    sleep(3)
-    median_100 = get_lux()
-    median_color_100 = get_rgb()
-check_75 = set_brightness(group_name, '75%')
-if check_75['success']:
-    sleep(3)
-    median_75 = get_lux()
-    median_color_75 = get_rgb()
-check_25 = set_brightness(group_name, '25%')
-if check_25['success']:
-    sleep(3)
-    median_25 = get_lux()
-    median_color_25 = get_rgb()
-check_5 = set_brightness(group_name, '5%')
-if check_5['success']:
-    sleep(3)
-    median_5 = get_lux()
-    median_color_5 = get_rgb()
-print()
-print('brt_100       =', median_100)
-print('75%           =', median_75)
-print('25%           =', median_25)
-print('5%            =', median_5)
-print('tcs_color_100 =', median_color_100)
-print('tcs_color_75  =', median_color_75)
-print('tcs_color_25  =', median_color_25)
-print('tcs_color_5   =', median_color_5)
+print('tsl_brt_100   =', get_lux())
+print('tcs_color_100 =', get_rgb())
+# brightness = 100
+# check_success = set_brightness(group_name, f'{brightness}%')
+# sleep(5)
+# validate_brightness(voice_agent, brightness, color)
+# validate_color(voice_agent, color)
 
-slope = round((median_100 - median_5) / 95, 2)
-print('m             =', slope)
+
+# brt_readings = []
+# color_readings = []
+# for value in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100:
+#     check_success = set_brightness(group_name, f'{value}%')
+#     if check_success['success']:
+#         sleep(3)
+#         median_brt = get_lux()
+#         brt_readings.append(round(median_brt))
+#         median_color = get_rgb()
+#         color_readings.append(median_color)
+# for item in brt_readings:
+#     print(item)
+# for item in color_readings:
+#     print(item)
+
+# slope = round((median_100 - median_5) / 95, 2)
+# print('m             =', slope)
 # supported_colors_list[color_index][voice_agent].update({'slope': slope})
-offset = round(median_75 - (slope * 75), 2)
+# offset = round(median_75 - (slope * 75), 2)
 # supported_colors_list[color_index][voice_agent].update({'offset': offset})
-print('b             =', offset)
+# print('b             =', offset)
 
 #  TODO: need to redo tcs_color with tcs.gain at 60
