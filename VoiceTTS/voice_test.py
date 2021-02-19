@@ -44,10 +44,17 @@ def set_color(group, name):
     emphasis_level = "moderate"
     # print('light' in name)
     if 'light' in name or 'tan' in name or 'gainsboro' in name:
-        added_str = 'to the color '
+        added_str = 'the color '
     else:
         added_str = ''
-    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
+    success = va.speak(f'turn the {group} to {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
+    # print(success)
+    return success
+    # sleep(15)
+
+def set_cct(group, cct):
+    emphasis_level = "moderate"
+    success = va.speak(f'set the {group} to <emphasis level="{emphasis_level}"> {cct} </emphasis> degrees Kelvin, <break time="1s"/>')
     # print(success)
     return success
     # sleep(15)
@@ -102,6 +109,7 @@ def get_rgb():
 
 def validate_brightness(voice_agent, brightness, color):
     print('Checking brightness...')
+    margin = 500
     median = get_lux()
     print('median =', median)
     b2 = color.get(voice_agent).get('b2')
@@ -110,34 +118,63 @@ def validate_brightness(voice_agent, brightness, color):
     prediction = round(brightness*brightness*b2 + brightness*b1 + b0)
     print('prediction =', prediction)
     print('residual =', prediction - median)
-    if prediction-500 < median < prediction+500:
-        print('SUCCESS!!!')
+    diff = prediction - median
+    if abs(diff) <= margin:
+        print('SUCCESS!!! Coreect brightness detected!')
         return {'success': True}
     else:
-        print('Brightness =', median)
-        print('Looking for:', prediction)
+        print('Brightness (lux) =', median)
+        print('Looking for:', prediction, f'+/- {margin}')
         return {'success': False}
 
 def validate_color(voice_agent, color):
     print('Checking color...')
+    margin = 0.2
+    color_values = color.get(voice_agent).get('tcs_color_100')
+    r_margin = int(margin*color_values[0])
+    if r_margin < 3: r_margin = 3
+    g_margin = int(margin*color_values[1])
+    if g_margin < 3: g_margin = 3
+    b_margin = int(margin*color_values[2])
+    if b_margin < 3: b_margin = 3
     median = get_rgb()
     print('median =', median)
-    color_values = color.get(voice_agent).get('tcs_color_100')
     print('Color values should be', color_values)
     r_diff = color_values[0] - median[0]
     g_diff = color_values[1] - median[1]
     b_diff = color_values[2] - median[2]
-    print('r difference =', r_diff)
-    print('g difference =', g_diff)
-    print('b difference =', b_diff)
-    if abs(r_diff) < 3 and abs(g_diff) < 3 and abs(b_diff < 3):
-        print('SUCCESS!!!')
+    print('r difference =', r_diff, '\tr_margin =', r_margin)
+    print('g difference =', g_diff, '\tg_margin =', g_margin)
+    print('b difference =', b_diff, '\tb_margin =', b_margin)
+    if abs(r_diff) <= r_margin and abs(g_diff) <= g_margin and abs(b_diff <= b_margin):
+        print('SUCCESS!!! Correct color detected!')
         return {'success': True}
     else:
-        print('Looking for difference values less than 3!')
+        print(f'Looking for difference values less than {margin*100}%!')
         return {'success': False}
 
+def validate_cct(voice_agent, cct):
+    print('Checking CCT...')
+    if cct > 4500:
+        margin = 150
+    else:
+        margin = 75
+    calculated_sensor_value = round(0.6091*cct + 986.41)
+    print('calculated_sensor_value =', calculated_sensor_value)
+    median = get_cct()
+    print('median =', median)
+    cct_diff = calculated_sensor_value - median
+    print('difference =', cct_diff)
+    if abs(cct_diff) <= margin:
+        print('SUCCESS!!! Coreect CCT detected!')
+        return {'success': True}
+    else:
+        print(f'Looking for a difference less than {margin}!')
+        return {'success': False}
+
+
 voice_agent = 'google'  # 'alexa' or 'google'
+
 dir_name = voice_agent.capitalize()
 # print(dir_name)
 
@@ -185,13 +222,14 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
     # set_color(group_name, ['cool white'])
     # make_warm_cool(group_name, ['warmer', 'warmer', 'warmer', 'warmer', 'warmer', 'warmer'])
 
-# color_list = []
-# for x in range(5):
-#     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
-# for color in color_list:
-#     set_color(group_name, color['name'])
-#     sleep(5)
-#     validate_color(voice_agent, color)
+color_list = []
+for x in range(5):
+    color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+for color in color_list:
+    set_color(group_name, color['name'])
+    sleep(5)
+    validate_color(voice_agent, color)
+    print()
 
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'red'), None)
 # print(color_index)
@@ -253,17 +291,39 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #         # model = LinearRegression().fit(x_, y)
 #         # print('coefficients:', model.coef_)
 
-# sensor_values = {}
+# # sensor_values = {}
 # for color in va.cct_color_list:
 #     success = set_color(group_name, color['name'])
 #     if success['success']:
-#         color_name = color['name']
-#         cct_value = get_cct()
-#         print(cct_value)
-#         sensor_values[f'{color_name}'] = str(cct_value)
-# print(sensor_values)
+#         sleep(3)
+#         # color_name = color['name']
+#         cct_value = color.get(voice_agent).get('color_values')
+#         # cct_value = get_cct()
+#         # print(cct_value)
+#         # sensor_values[f'{color_name}'] = str(cct_value)
+#         validate_cct(voice_agent, cct_value)
+#         print()
+# # print(sensor_values)
 
-print(get_cct())
+# for cct in [2000, 2800, 3100]:
+#     set_cct(group_name, cct)
+#     sleep(3)
+#     validate_cct(voice_agent, cct)
+#     print()
+
+# color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'yellow green'), None)
+# for color in va.rgb_color_list[color_index:]:
+# for color in va.rgb_color_list:
+#     set_color(group_name, color['name'])
+#     sleep(3)
+#     print(get_lux())
+#     print(get_rgb())
+#     print()
+#     sleep(5)
+
+# print(get_cct())
+# print(get_lux())
+# print(get_rgb())
 
 
 #  DONE: need to redo tcs_color with tcs.gain at 60
