@@ -1,6 +1,11 @@
 # Color values can be found here: https://en.wikipedia.org/wiki/List_of_colors_(compact)
 
-# RGB color values given in tuples are (R, G, b0)
+# RGB color values given in tuples are (R, G, B)
+# tcs34725 color temperature equation y = 0.596(x) + 1029.4, where x = CCT value spoken to the voice agent
+# and y = calculated sensor value to verify with (values around 5000 deg. K will be less than sensor reading).
+# TCS34725 sesnor gain is set at 4.
+
+# tcs_color_100 values are tcs.rgb_bytes values taken at 100% brightness and sensor gain set to 60.
 
 supported_colors_list = [
     {
@@ -303,7 +308,7 @@ supported_colors_list = [
             'is_rgb': False,
             'color_values': 2000,
             'tsl_brt_100': None,
-            'tcs_color_100': 2000,
+            'tcs_color_100': 2200,
             'b2': None,
             'b1': None,
             'b0': None

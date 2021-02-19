@@ -68,6 +68,7 @@ def median(readings):
 
 def get_cct():
     tcs.gain = 16
+    sleep(0.5)
     # tcs.integration_time = 100
     readings = []
     while len(readings) <= 10:
@@ -230,29 +231,40 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 # supported_colors_list[color_index][voice_agent].update({'offset': offset})
 # print('b             =', offset)
 
-for color in va.rgb_color_list:
-    set_color(group_name, color['name'])
-    sleep(5)
-    success = validate_color(voice_agent, color)
-    if success['success']:
-        x_values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        # x_values = [80, 90, 100]
-        y_values = []
-        # x = np.array(values).reshape((-1, 1))
-        for value in x_values:
-            set_brightness(group_name, [f'{value}%'])
-            sleep(5)
-            new_y_value = get_lux()
-            y_values.append(new_y_value)
-        # y = np.array(y_values)
-        with open("brightness_config.txt", "a") as out:
-            out.write(color['name'] + '\n')
-            for value in y_values:
-                out.write(str(value) + '\n')
-        # x_ = PolynomialFeatures(degree=2, include_bias=False).fit_transform(x)
-        # model = LinearRegression().fit(x_, y)
-        # print('coefficients:', model.coef_)
+# for color in va.rgb_color_list:
+#     set_color(group_name, color['name'])
+#     sleep(5)
+#     success = validate_color(voice_agent, color)
+#     if success['success']:
+#         x_values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+#         # x_values = [80, 90, 100]
+#         y_values = []
+#         # x = np.array(values).reshape((-1, 1))
+#         for value in x_values:
+#             set_brightness(group_name, [f'{value}%'])
+#             sleep(5)
+#             new_y_value = get_lux()
+#             y_values.append(new_y_value)
+#         # y = np.array(y_values)
+#         with open("brightness_config.txt", "a") as out:
+#             out.write(color['name'] + '\n')
+#             for value in y_values:
+#                 out.write(str(value) + '\n')
+#         # x_ = PolynomialFeatures(degree=2, include_bias=False).fit_transform(x)
+#         # model = LinearRegression().fit(x_, y)
+#         # print('coefficients:', model.coef_)
 
+# sensor_values = {}
+# for color in va.cct_color_list:
+#     success = set_color(group_name, color['name'])
+#     if success['success']:
+#         color_name = color['name']
+#         cct_value = get_cct()
+#         print(cct_value)
+#         sensor_values[f'{color_name}'] = str(cct_value)
+# print(sensor_values)
+
+# print(get_cct())
 
 
 #  DONE: need to redo tcs_color with tcs.gain at 60

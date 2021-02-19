@@ -1,4 +1,4 @@
-from supported_colors import supported_colors_list
+pipfrom supported_colors import supported_colors_list
 import os
 import subprocess
 import pathlib
