@@ -129,14 +129,25 @@ def validate_brightness(voice_agent, brightness, color):
 
 def validate_color(voice_agent, color):
     print('Checking color...')
-    margin = 0.2
+    margin_pct = 0.2
+    margin_min = 3
+    margin_max = 25
     color_values = color.get(voice_agent).get('tcs_color_100')
-    r_margin = int(margin*color_values[0])
-    if r_margin < 3: r_margin = 3
-    g_margin = int(margin*color_values[1])
-    if g_margin < 3: g_margin = 3
-    b_margin = int(margin*color_values[2])
-    if b_margin < 3: b_margin = 3
+    r_margin = int(margin_pct*color_values[0])
+    g_margin = int(margin_pct*color_values[1])
+    b_margin = int(margin_pct*color_values[2])
+    if r_margin < margin_min:
+        r_margin = margin_min
+    elif r_margin > margin_max:
+        r_margin = margin_max
+    if g_margin < margin_min:
+        g_margin = margin_min
+    elif g_margin > margin_max:
+        g_margin = margin_max
+    if b_margin < margin_min:
+        b_margin = margin_min
+    elif b_margin > margin_max:
+        b_margin = margin_max
     median = get_rgb()
     print('median =', median)
     print('Color values should be', color_values)
