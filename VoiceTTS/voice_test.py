@@ -32,7 +32,7 @@ def set_brightness(group, value):
         launch_word = value
         emphasis_level = 'moderate'
     else:
-        added_str = f'to {value}'
+        added_str = f'to {value}%'
         launch_word = 'set'
         emphasis_level = 'none'
     success = va.speak(f'<emphasis level="{emphasis_level}"> {launch_word} </emphasis> the {group} {added_str}, <break time="1s"/>')
@@ -41,12 +41,18 @@ def set_brightness(group, value):
     # sleep(15)
 
 def set_color(group, name):
-    emphasis_level = "moderate"
+    # color names that need to have 'to the color' added when using va.speak
+    weird_names = ['gainsboro', 'old lace', 'tan', 'wheat']
     # print('light' in name)
-    if 'light' in name or 'tan' in name or 'gainsboro' in name:
+    if name in weird_names:
+        added_str = ''
+        emphasis_level = 'strong'
+    elif 'light' in name:
         added_str = 'the color '
+        emphasis_level = "moderate"
     else:
         added_str = ''
+        emphasis_level = "moderate"
     success = va.speak(f'turn the {group} to {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
     # print(success)
     return success
@@ -109,15 +115,15 @@ def get_rgb():
 
 def validate_brightness(voice_agent, brightness, color):
     print('Checking brightness...')
-    margin = 500
+    margin = 2000
     median = get_lux()
     print('median =', median)
-    b2 = color.get(voice_agent).get('b2')
-    b1 = color.get(voice_agent).get('b1')
-    b0 = color.get(voice_agent).get('b0')
+    b2 = color.get(voice_agent).get('b2_lux')
+    b1 = color.get(voice_agent).get('b1_lux')
+    b0 = color.get(voice_agent).get('b0_lux')
     prediction = round(brightness*brightness*b2 + brightness*b1 + b0)
     print('prediction =', prediction)
-    print('residual =', prediction - median)
+    print('difference =', prediction - median)
     diff = prediction - median
     if abs(diff) <= margin:
         print('SUCCESS!!! Coreect brightness detected!')
@@ -129,43 +135,35 @@ def validate_brightness(voice_agent, brightness, color):
 
 def validate_color(voice_agent, color):
     print('Checking color...')
-    margin_pct = 0.2
+    margin_pct = 0.1
     margin_min = 3
     margin_max = 25
-    color_values = color.get(voice_agent).get('tcs_color_100')
-    r_margin = int(margin_pct*color_values[0])
-    g_margin = int(margin_pct*color_values[1])
-    b_margin = int(margin_pct*color_values[2])
-    if r_margin < margin_min:
-        r_margin = margin_min
-    elif r_margin > margin_max:
-        r_margin = margin_max
-    if g_margin < margin_min:
-        g_margin = margin_min
-    elif g_margin > margin_max:
-        g_margin = margin_max
-    if b_margin < margin_min:
-        b_margin = margin_min
-    elif b_margin > margin_max:
-        b_margin = margin_max
+    (r, g, b) = color.get(voice_agent).get('tcs_color_100')
+    r_error = round(margin_pct*r)
+    g_error = round(margin_pct*g)
+    b_error = round(margin_pct*b)
+    r_margin = margin_min if r_error < margin_min else margin_max if r_error > margin_max else r_error
+    g_margin = margin_min if g_error < margin_min else margin_max if g_error > margin_max else g_error
+    b_margin = margin_min if b_error < margin_min else margin_max if b_error > margin_max else b_error
     median = get_rgb()
     print('median =', median)
-    print('Color values should be', color_values)
-    r_diff = color_values[0] - median[0]
-    g_diff = color_values[1] - median[1]
-    b_diff = color_values[2] - median[2]
+    print('Color values should be', (r, g, b))
+    r_diff = r - median[0]
+    g_diff = g - median[1]
+    b_diff = b - median[2]
     print('r difference =', r_diff, '\tr_margin =', r_margin)
     print('g difference =', g_diff, '\tg_margin =', g_margin)
     print('b difference =', b_diff, '\tb_margin =', b_margin)
     if abs(r_diff) <= r_margin and abs(g_diff) <= g_margin and abs(b_diff <= b_margin):
         print('SUCCESS!!! Correct color detected!')
-        return {'success': True}
+        return {'success': True, 'data': None}
     else:
-        print(f'Looking for difference values less than {margin*100}%!')
-        return {'success': False}
+        print(f'Looking for difference values less than {margin_pct*100}%!')
+        return {'success': False, 'data': median}
 
-def validate_cct(voice_agent, cct):
+def validate_cct(voice_agent, color):
     print('Checking CCT...')
+    cct = color.get(voice_agent).get('color_values')
     if cct > 4500:
         margin = 150
     else:
@@ -233,13 +231,58 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
     # set_color(group_name, ['cool white'])
     # make_warm_cool(group_name, ['warmer', 'warmer', 'warmer', 'warmer', 'warmer', 'warmer'])
 
-color_list = []
-for x in range(5):
-    color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
-for color in color_list:
-    set_color(group_name, color['name'])
-    sleep(5)
-    validate_color(voice_agent, color)
+# color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'antique white'), None)
+# # color_list = []
+# # for x in range(5):
+# #     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+# for color in va.cct_color_list[color_index:]:
+#     success = False
+#     attempts = 0
+#     color_name = color['name']
+#     while not success and attempts < 3:
+#         print(f'Trying to validate {color_name}... Take {attempts + 1}...')
+#         set_color(group_name, color_name)
+#         sleep(5)
+#         check_color = validate_cct(voice_agent, color)
+#         if check_color['success']:
+#             success = True
+#             # attempts = 0
+#         else:
+#             attempts += 1
+#             sleep(5)
+#     if not success:
+#         print(f'Unable to validate {color_name}!')
+#         with open("color_failures.txt", "a") as out:
+#              out.write(color_name)
+#             #  out.write(str(check_color['data']) + '\n')
+#     print()
+
+color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'alice blue'), None)
+# color_list = []
+# for x in range(5):
+#     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+set_brightness(group_name, 100)
+sleep(3)
+for color in va.rgb_color_list[color_index:]:
+    success = False
+    attempts = 0
+    color_name = color['name']
+    while not success and attempts < 3:
+        print(f'Trying to validate {color_name}... Take {attempts + 1}...')
+        set_color(group_name, color_name)
+        sleep(5)
+        check_color = validate_color(voice_agent, color)
+        if check_color['success']:
+            success = True
+            # attempts = 0
+        else:
+            attempts += 1
+            sleep(5)
+    if not success:
+        print(f'Unable to validate {color_name}!')
+        # with open("color_failures.txt", "a") as out:
+            #  out.write(color_name)
+            #  out.write(str(check_color['data']) + '\n')
     print()
 
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'red'), None)
@@ -265,7 +308,7 @@ for color in color_list:
 #         sleep(3)
 #         median_brt = get_lux()
 #         brt_readings.append(round(median_brt))
-#         median_color = get_rgb()
+#         median_color = get_cct()
 #         color_readings.append(median_color)
 # for item in brt_readings:
 #     print(item)
@@ -331,6 +374,32 @@ for color in color_list:
 #     print(get_rgb())
 #     print()
 #     sleep(5)
+
+# color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'soft white'), None)
+# color = va.cct_color_list[color_index]
+# color_name = color['name']
+# set_color(group_name, color_name)
+# sleep(3)
+# for brightness in [12, 20, 24, 50, 6, 33]:
+#     success = False
+#     attempts = 0
+#     while not success and attempts < 3:
+#         print(f'Trying to validate brightness for {color_name} at {brightness}%... Take {attempts + 1}...')
+#         set_brightness(group_name, brightness)
+#         sleep(5)
+#         check_brightness = validate_brightness(voice_agent, brightness, color)
+#         if check_brightness['success']:
+#             success = True
+#             # attempts = 0
+#         else:
+#             attempts += 1
+#             sleep(5)
+#     if not success:
+#         print(f'Unable to validate brightness for {color_name} at {brightness}%!')
+#         with open("color_failures.txt", "a") as out:
+#              out.write(color_name)
+#             #  out.write(str(check_color['data']) + '\n')
+#     print()
 
 # print(get_cct())
 # print(get_lux())

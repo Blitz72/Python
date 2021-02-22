@@ -60,7 +60,7 @@ class Voice_agent:
             attempts = 0
             audio_content = False
             while attempts < 3 and not audio_content:
-                print('attempts =', attempts)
+                print('TTS attempts =', attempts)
                 try:
                     _response = self.client.synthesize_speech(
                         input=synthesis_input, voice=voice, audio_config=audio_config

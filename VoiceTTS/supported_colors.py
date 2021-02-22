@@ -15,7 +15,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (240, 248, 255),
             'tsl_brt_100': 16100,
-            'tcs_color_100': (31, 25, 31),
+            'tcs_color_100': (31, 22, 31),
             'b2_lux': None,
             'b1_lux': 164.67,
             'b0_lux': 2497
@@ -78,7 +78,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 62, 88),
+            'tcs_color_100': (0, 55, 90),
             'b2_lux': -0.7593,
             'b1_lux': 229.39,
             'b0_lux': 487.98
@@ -99,7 +99,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (127, 255, 212),
             'tsl_brt_100': 15600,
-            'tcs_color_100': (17, 39, 29),
+            'tcs_color_100': (17, 35, 29),
             'b2_lux': None,
             'b1_lux': 157.81,
             'b0_lux': 2640
@@ -120,7 +120,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 127, 255),
             'tsl_brt_100': 15300,
-            'tcs_color_100': (0, 52, 128),
+            'tcs_color_100': (0, 46, 128),
             'b2_lux': None,
             'b1_lux': 155,
             'b0_lux': 1925
@@ -225,7 +225,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 0, 255),
             'tsl_brt_100': 15400,
-            'tcs_color_100': (0, 34, 223),
+            'tcs_color_100': (0, 30, 215),
             'b2_lux': None,
             'b1_lux': 155,
             'b0_lux': 2000
@@ -330,7 +330,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (95, 158, 160),
             'tsl_brt_100': 15700,
-            'tcs_color_100': (18, 34, 37),
+            'tcs_color_100': (18, 32, 37),
             'b2_lux': None,
             'b1_lux': 170,
             'b0_lux': 1600
@@ -339,7 +339,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (95, 158, 160),
             'tsl_brt_100': 15700,
-            'tcs_color_100': (18, 34, 37),
+            'tcs_color_100': (18, 32, 37),
             'b2_lux': None,
             'b1_lux': 170,
             'b0_lux': 1600
@@ -456,7 +456,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (100, 149, 237),
             'tsl_brt_100': 15900,
-            'tcs_color_100': (18, 31, 79),
+            'tcs_color_100': (10, 28, 77),
             'b2_lux': None,
             'b1_lux': 165,
             'b0_lux': 1600
@@ -477,7 +477,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (100, 149, 237),
             'tsl_brt_100': 15900,
-            'tcs_color_100': (18, 31, 79),
+            'tcs_color_100': (12, 29, 77),
             'b2_lux': None,
             'b1_lux': 165,
             'b0_lux': 1600
@@ -540,7 +540,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 62, 88),
+            'tcs_color_100': (0, 55, 90),
             'b2_lux': None,
             'b1_lux': 144.95,
             'b0_lux': 2623
@@ -561,7 +561,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 0, 139),
             'tsl_brt_100': 15600,
-            'tcs_color_100': (0, 34, 223),
+            'tcs_color_100': (0, 30, 215),
             'b2_lux': None,
             'b1_lux': 155,
             'b0_lux': 2000
@@ -570,7 +570,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 0, 139),
             'tsl_brt_100': 15600,
-            'tcs_color_100': (0, 29, 214),
+            'tcs_color_100': (0, 30, 214),
             'b2_lux': None,
             'b1_lux': 155,
             'b0_lux': 2000
@@ -582,7 +582,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 139, 139),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 62, 88),
+            'tcs_color_100': (0, 55, 90),
             'b2_lux': None,
             'b1_lux': 144.95,
             'b0_lux': 2623
@@ -624,7 +624,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (169, 169, 169),
             'tsl_brt_100': 16200,
-            'tcs_color_100': (34, 24, 29),
+            'tcs_color_100': (34, 22, 29),
             'b2_lux': None,
             'b1_lux': 175,
             'b0_lux': 1450
@@ -645,7 +645,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (1, 50, 32),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (12, 47, 27),
+            'tcs_color_100': (12, 44, 27),
             'b2_lux': None,
             'b1_lux': 160,
             'b0_lux': 1750
@@ -729,7 +729,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (255, 140, 0),
             'tsl_brt_100': 16700,
-            'tcs_color_100': (183, 10, 5),
+            'tcs_color_100': (103, 10, 5),
             'b2_lux': None,
             'b1_lux': 185,
             'b0_lux': 1150
@@ -855,7 +855,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (47, 79, 79),
             'tsl_brt_100': 15800,
-            'tcs_color_100': (19, 33, 36),
+            'tcs_color_100': (19, 31, 36),
             'b2_lux': None,
             'b1_lux': 165,
             'b0_lux': 1600
@@ -876,7 +876,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 206, 209),
             'tsl_brt_100': 14900,
-            'tcs_color_100': (0, 62, 80),
+            'tcs_color_100': (0, 55, 90),
             'b2_lux': None,
             'b1_lux': 150,
             'b0_lux': 1950
@@ -897,7 +897,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (148, 0, 211),
             'tsl_brt_100': 16500,
-            'tcs_color_100': (9, 21, 144),
+            'tcs_color_100': (22, 12, 98),
             'b2_lux': None,
             'b1_lux': 170,
             'b0_lux': 1600
@@ -1002,7 +1002,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (30, 144, 255),
             'tsl_brt_100': 15700,
-            'tcs_color_100': (5, 34, 103),
+            'tcs_color_100': (5, 30, 103),
             'b2_lux': None,
             'b1_lux': 165,
             'b0_lux': 1650
@@ -1254,7 +1254,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (173, 255, 47),
             'tsl_brt_100': 15600,
-            'tcs_color_100': (31, 35, 8),
+            'tcs_color_100': (33, 31, 8),
             'b2_lux': None,
             'b1_lux': 170,
             'b0_lux': 1600
@@ -1275,7 +1275,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (240, 255, 240),
             'tsl_brt_100': 15900,
-            'tcs_color_100': (32, 27, 28),
+            'tcs_color_100': (32, 24, 28),
             'b2_lux': None,
             'b1_lux': 175,
             'b0_lux': 1500
@@ -1359,7 +1359,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (75, 0, 130),
             'tsl_brt_100': 16200,
-            'tcs_color_100': (16, 17, 122),
+            'tcs_color_100': (16, 17, 120),
             'b2_lux': None,
             'b1_lux': 175,
             'b0_lux': 1450
@@ -2216,15 +2216,15 @@ supported_colors_list = [
     },
     {
         'name': 'old lace',          # Google uses cct for this color
-        'google': {
-            'is_rgb': False,
-            'color_values': 6100,
-            'tsl_brt_100': 70600,
-            'tcs_color_100': 4640,
-            'b2_lux': None,
-            'b1_lux': None,
-            'b0_lux': None
-        },
+        # 'google': {
+        #     'is_rgb': False,
+        #     'color_values': 6100,
+        #     'tsl_brt_100': 70600,
+        #     'tcs_color_100': 4640,
+        #     'b2_lux': None,
+        #     'b1_lux': None,
+        #     'b0_lux': None
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (253, 245, 230),
@@ -2766,7 +2766,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (46, 139, 87),
             'tsl_brt_100': 15400,
-            'tcs_color_100': (17, 14, 21),
+            'tcs_color_100': (17, 38, 21),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -2871,7 +2871,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (135, 206, 235),
             'tsl_brt_100': 17100,
-            'tcs_color_100': (15, 35, 47),
+            'tcs_color_100': (15, 31, 47),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -2998,9 +2998,9 @@ supported_colors_list = [
             'color_values': 3000,
             'tsl_brt_100': 72600,
             'tcs_color_100': 2830,
-            'b2_lux': None,
-            'b1_lux': None,
-            'b0_lux': None
+            'b2_lux': -1.1178,
+            'b1_lux': 844.17,
+            'b0_lux': 55.35
         },
         'alexa': {
             'is_rgb': False,
@@ -3039,7 +3039,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (70, 130, 180),
             'tsl_brt_100': 16400,
-            'tcs_color_100': (11, 33, 65),
+            'tcs_color_100': (11, 30, 65),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -3081,7 +3081,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 128, 128),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 62, 88),
+            'tcs_color_100': (0, 55, 90),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -3144,7 +3144,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (64, 224, 208),
             'tsl_brt_100': 15700,
-            'tcs_color_100': (12, 41, 37),
+            'tcs_color_100': (12, 39, 37),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -3472,8 +3472,9 @@ if __name__ == '__main__':
     #             color_list.append(color)
 
     for color in supported_colors_list:
-        if color.get(voice_agent).get('color_values'):
-            print(color['name'], color[voice_agent]['color_values'])
+        if color.get(voice_agent):
+            if color.get(voice_agent).get('color_values'):
+                print(color['name'], color[voice_agent]['color_values'])
         # print(color['name'], color[voice_agent]['color_values'])
 
     # print('color_list length: ', len(color_list))
