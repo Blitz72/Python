@@ -42,18 +42,19 @@ def set_brightness(group, value):
 
 def set_color(group, name):
     # color names that need to have 'to the color' added when using va.speak
-    weird_names = ['gainsboro', 'old lace', 'tan', 'wheat']
+    weird_names = ['bisque', 'cornsilk', 'deep pink', 'deep sky blue',  'gainsboro', 'honeydew', 
+                    'old lace', 'peru', 'plum', 'spring green', 'tan', 'wheat']
     # print('light' in name)
     if name in weird_names:
-        added_str = ''
+        added_str = 'to the color'
         emphasis_level = 'strong'
     elif 'light' in name:
-        added_str = 'the color '
+        added_str = 'to the color '
         emphasis_level = "moderate"
     else:
         added_str = ''
         emphasis_level = "moderate"
-    success = va.speak(f'turn the {group} to {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
+    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
     # print(success)
     return success
     # sleep(15)
@@ -182,7 +183,7 @@ def validate_cct(voice_agent, color):
         return {'success': False}
 
 
-voice_agent = 'google'  # 'alexa' or 'google'
+voice_agent = 'alexa'  # 'alexa' or 'google'
 
 dir_name = voice_agent.capitalize()
 # print(dir_name)
@@ -257,33 +258,33 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #             #  out.write(str(check_color['data']) + '\n')
 #     print()
 
-color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'alice blue'), None)
-# color_list = []
-# for x in range(5):
-#     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
-set_brightness(group_name, 100)
-sleep(3)
-for color in va.rgb_color_list[color_index:]:
-    success = False
-    attempts = 0
-    color_name = color['name']
-    while not success and attempts < 3:
-        print(f'Trying to validate {color_name}... Take {attempts + 1}...')
-        set_color(group_name, color_name)
-        sleep(5)
-        check_color = validate_color(voice_agent, color)
-        if check_color['success']:
-            success = True
-            # attempts = 0
-        else:
-            attempts += 1
-            sleep(5)
-    if not success:
-        print(f'Unable to validate {color_name}!')
-        # with open("color_failures.txt", "a") as out:
-            #  out.write(color_name)
-            #  out.write(str(check_color['data']) + '\n')
-    print()
+# color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'tan'), None)
+# # color_list = []
+# # for x in range(5):
+# #     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+# set_brightness(group_name, 100)
+# sleep(3)
+# for color in va.rgb_color_list[color_index:]:
+#     success = False
+#     attempts = 0
+#     color_name = color['name']
+#     while not success and attempts < 3:
+#         print(f'Trying to validate {color_name}... Take {attempts + 1}...')
+#         set_color(group_name, color_name)
+#         sleep(5)
+#         check_color = validate_color(voice_agent, color)
+#         if check_color['success']:
+#             success = True
+#             # attempts = 0
+#         else:
+#             attempts += 1
+#             sleep(5)
+#     if not success:
+#         print(f'Unable to validate {color_name}!')
+#         with open("color_failures.txt", "a") as out:
+#              out.write(color_name + ' ')
+#              out.write(str(check_color['data']) + '\n')
+#     print()
 
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'red'), None)
 # print(color_index)
@@ -402,8 +403,8 @@ for color in va.rgb_color_list[color_index:]:
 #     print()
 
 # print(get_cct())
-# print(get_lux())
-# print(get_rgb())
+print(get_lux())
+print(get_rgb())
 
 
 #  DONE: need to redo tcs_color with tcs.gain at 60

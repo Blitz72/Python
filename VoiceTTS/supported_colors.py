@@ -78,7 +78,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 55, 90),
+            'tcs_color_100': (0, 57, 90),
             'b2_lux': -0.7593,
             'b1_lux': 229.39,
             'b0_lux': 487.98
@@ -87,7 +87,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 54, 90),
+            'tcs_color_100': (0, 57, 90),
             'b2_lux': -0.7593,
             'b1_lux': 229.39,
             'b0_lux': 487.98
@@ -170,7 +170,7 @@ supported_colors_list = [
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 228, 196),
-            'tsl_brt_100': 17500,
+            'tsl_brt_100': 16200,
             'tcs_color_100': (33, 19, 38),
             'b2_lux': None,
             'b1_lux': None,
@@ -540,7 +540,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 55, 90),
+            'tcs_color_100': (0, 57, 90),
             'b2_lux': None,
             'b1_lux': 144.95,
             'b0_lux': 2623
@@ -549,7 +549,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 255, 255),
             'tsl_brt_100': 15200,
-            'tcs_color_100': (0, 54, 91),
+            'tcs_color_100': (0, 54, 91),  # (0, 60, 90)
             'b2_lux': None,
             'b1_lux': 144.95,
             'b0_lux': 2623
@@ -969,7 +969,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (0, 191, 255),
             'tsl_brt_100': 15000,
-            'tcs_color_100': (0, 50, 108),
+            'tcs_color_100': (0, 53, 105),
             'b2_lux': None,
             'b1_lux': 155,
             'b0_lux': 1900
@@ -1103,15 +1103,15 @@ supported_colors_list = [
     },
     {
         'name': 'gainsboro',         # Google uses cct for this color
-        'google': {
-            'is_rgb': True,
-            'color_values': (220, 220, 220),
-            'tsl_brt_100': 17000,
-            'tcs_color_100': (34, 24, 29),
-            'b2_lux': None,
-            'b1_lux': 175,
-            'b0_lux': 1450
-        },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (220, 220, 220),
+        #     'tsl_brt_100': 17000,
+        #     'tcs_color_100': (34, 24, 29),
+        #     'b2_lux': None,
+        #     'b1_lux': 175,
+        #     'b0_lux': 1450
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (220, 220, 220),
@@ -1157,8 +1157,8 @@ supported_colors_list = [
         'alexa': {                   # Need to tell Alexa to set a Full Color bulb 'to the color dark slate gray'
             'is_rgb': True,
             'color_values': (248, 248, 255),
-            'tsl_brt_100': None,
-            'tcs_color_100': None,
+            'tsl_brt_100': 16300,
+            'tcs_color_100': (24, 23, 27),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -1452,7 +1452,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (255, 240, 245),
             'tsl_brt_100': 16500,
-            'tcs_color_100': (27, 28, 43),
+            'tcs_color_100': (27, 24, 45),
             'b2_lux': None,
             'b1_lux': 175,
             'b0_lux': 1500
@@ -1515,7 +1515,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (191, 239, 255),
             'tsl_brt_100': 16300,
-            'tcs_color_100': (28, 25, 36),
+            'tcs_color_100': (24, 26, 36),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -2214,27 +2214,27 @@ supported_colors_list = [
             'b0_lux': None
         }
     },
-    {
-        'name': 'old lace',          # Google uses cct for this color
-        # 'google': {
-        #     'is_rgb': False,
-        #     'color_values': 6100,
-        #     'tsl_brt_100': 70600,
-        #     'tcs_color_100': 4640,
-        #     'b2_lux': None,
-        #     'b1_lux': None,
-        #     'b0_lux': None
-        # },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (253, 245, 230),
-            'tsl_brt_100': 16600,
-            'tcs_color_100': (27, 21, 42),
-            'b2_lux': None,
-            'b1_lux': None,
-            'b0_lux': None
-        }
-    },
+    # {
+    #     'name': 'old lace',          # Google uses cct for this color
+    #     # 'google': {
+    #     #     'is_rgb': False,
+    #     #     'color_values': 6100,
+    #     #     'tsl_brt_100': 70600,
+    #     #     'tcs_color_100': 4640,
+    #     #     'b2_lux': None,
+    #     #     'b1_lux': None,
+    #     #     'b0_lux': None
+    #     # },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (253, 245, 230),
+    #         'tsl_brt_100': 16600,
+    #         'tcs_color_100': (27, 21, 42),
+    #         'b2_lux': None,
+    #         'b1_lux': None,
+    #         'b0_lux': None
+    #     }
+    # },
     {
         'name': 'olive',
         'google': {
@@ -2501,7 +2501,7 @@ supported_colors_list = [
         'alexa': {
             'is_rgb': True,
             'color_values': (205, 133, 63),
-            'tsl_brt_100': 17100,
+            'tsl_brt_100': 16800,
             'tcs_color_100': (98, 9, 6),
             'b2_lux': None,
             'b1_lux': None,
@@ -2838,7 +2838,7 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (192, 192, 192),
             'tsl_brt_100': 16400,
-            'tcs_color_100': (36, 29, 27),
+            'tcs_color_100': (35, 23, 28),
             'b2_lux': None,
             'b1_lux': None,
             'b0_lux': None
@@ -3056,20 +3056,20 @@ supported_colors_list = [
     },
     # {
     #     'name': 'tan',
-    #     'google': {
-    #         'is_rgb': True,
-    #         'color_values': (210, 180, 140),
-    #         'tsl_brt_100': 17000,
-    #         'tcs_color_100': (52, 19, 17),
-    #         'b2_lux': None,
-    #         'b1_lux': None,
-    #         'b0_lux': None
-    #     },
+    #     # 'google': {
+    #     #     'is_rgb': True,
+    #     #     'color_values': (210, 180, 140),
+    #     #     'tsl_brt_100': 17000,
+    #     #     'tcs_color_100': (52, 19, 17),
+    #     #     'b2_lux': None,
+    #     #     'b1_lux': None,
+    #     #     'b0_lux': None
+    #     # },
     #     'alexa': {                           # Need to tell Alexa turn bulb 'to the color tan'
     #         'is_rgb': True,
     #         'color_values': (210, 180, 140),
     #         'tsl_brt_100': 17000,
-    #         'tcs_color_100': (52, 19, 17),  #
+    #         'tcs_color_100': (52, 19, 17),
     #         'b2_lux': None,
     #         'b1_lux': None,
     #         'b0_lux': None
@@ -3348,27 +3348,27 @@ supported_colors_list = [
             'b0_lux': None
         }
     },
-    {
-        'name': 'wheat',
-        'google': {
-            'is_rgb': True,
-            'color_values': (245, 222, 179),
-            'tsl_brt_100': 16200,
-            'tcs_color_100': (48, 19, 18),
-            'b2_lux': None,
-            'b1_lux': None,
-            'b0_lux': None
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (245, 222, 179),
-            'tsl_brt_100': 16700,
-            'tcs_color_100': (51, 17, 17),
-            'b2_lux': None,
-            'b1_lux': None,
-            'b0_lux': None
-        }
-    },
+    # {
+    #     'name': 'wheat',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (245, 222, 179),
+    #         'tsl_brt_100': 16200,
+    #         'tcs_color_100': (48, 19, 18),
+    #         'b2_lux': None,
+    #         'b1_lux': None,
+    #         'b0_lux': None
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (245, 222, 179),
+    #         'tsl_brt_100': 16700,
+    #         'tcs_color_100': (51, 17, 17),
+    #         'b2_lux': None,
+    #         'b1_lux': None,
+    #         'b0_lux': None
+    #     }
+    # },
     {
         'name': 'white',                   # Google uses cct for this color
         'google': {
@@ -3465,19 +3465,19 @@ if __name__ == '__main__':
 #             pass
 
     voice_agent = 'alexa'
-    # color_list = []
-    # for color in supported_colors_list:
-    #     if color.get(voice_agent):
-    #         if color.get(voice_agent).get('is_rgb'):
-    #             color_list.append(color)
-
+    color_list = []
     for color in supported_colors_list:
         if color.get(voice_agent):
-            if color.get(voice_agent).get('color_values'):
-                print(color['name'], color[voice_agent]['color_values'])
+            if color.get(voice_agent).get('is_rgb'):
+                color_list.append(color)
+
+    # for color in supported_colors_list:
+    #     if color.get(voice_agent):
+    #         if color.get(voice_agent).get('color_values'):
+    #             print(color['name'], color[voice_agent]['color_values'])
         # print(color['name'], color[voice_agent]['color_values'])
 
-    # print('color_list length: ', len(color_list))
+    print('color_list length: ', len(color_list))
 
 else:
     print('Successfully imported supported colors.py')
