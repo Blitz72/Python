@@ -43,7 +43,7 @@ def set_brightness(group, value):
 def set_color(group, name):
     # color names that need to have 'to the color' added when using va.speak
     weird_names = ['bisque', 'cornsilk', 'deep pink', 'deep sky blue',  'gainsboro', 'honeydew', 
-                    'old lace', 'peru', 'plum', 'spring green', 'tan', 'wheat']
+                    'old lace', 'peru', 'plum', 'rosy brown', 'slate blue', 'spring green', 'tan', 'wheat']
     # print('light' in name)
     if name in weird_names:
         added_str = 'to the color'
@@ -119,9 +119,7 @@ def validate_brightness(voice_agent, brightness, color):
     margin = 2000
     median = get_lux()
     print('median =', median)
-    b2 = color.get(voice_agent).get('b2_lux')
-    b1 = color.get(voice_agent).get('b1_lux')
-    b0 = color.get(voice_agent).get('b0_lux')
+    (b0, b1, b2) = color.get(voice_agent).get('lux_coeff')
     prediction = round(brightness*brightness*b2 + brightness*b1 + b0)
     print('prediction =', prediction)
     print('difference =', prediction - median)
@@ -155,7 +153,7 @@ def validate_color(voice_agent, color):
     print('r difference =', r_diff, '\tr_margin =', r_margin)
     print('g difference =', g_diff, '\tg_margin =', g_margin)
     print('b difference =', b_diff, '\tb_margin =', b_margin)
-    if abs(r_diff) <= r_margin and abs(g_diff) <= g_margin and abs(b_diff <= b_margin):
+    if abs(r_diff) <= r_margin and abs(g_diff) <= g_margin and abs(b_diff) <= b_margin:
         print('SUCCESS!!! Correct color detected!')
         return {'success': True, 'data': None}
     else:
@@ -232,6 +230,7 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
     # set_color(group_name, ['cool white'])
     # make_warm_cool(group_name, ['warmer', 'warmer', 'warmer', 'warmer', 'warmer', 'warmer'])
 
+
 # color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'antique white'), None)
 # # color_list = []
 # # for x in range(5):
@@ -258,33 +257,35 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #             #  out.write(str(check_color['data']) + '\n')
 #     print()
 
+
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'tan'), None)
-# # color_list = []
-# # for x in range(5):
-# #     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
-# set_brightness(group_name, 100)
-# sleep(3)
-# for color in va.rgb_color_list[color_index:]:
-#     success = False
-#     attempts = 0
-#     color_name = color['name']
-#     while not success and attempts < 3:
-#         print(f'Trying to validate {color_name}... Take {attempts + 1}...')
-#         set_color(group_name, color_name)
-#         sleep(5)
-#         check_color = validate_color(voice_agent, color)
-#         if check_color['success']:
-#             success = True
-#             # attempts = 0
-#         else:
-#             attempts += 1
-#             sleep(5)
-#     if not success:
-#         print(f'Unable to validate {color_name}!')
-#         with open("color_failures.txt", "a") as out:
-#              out.write(color_name + ' ')
-#              out.write(str(check_color['data']) + '\n')
-#     print()
+color_list = []
+for x in range(10):
+    color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+set_brightness(group_name, 100)
+sleep(5)
+for color in color_list:
+    success = False
+    attempts = 0
+    color_name = color['name']
+    while not success and attempts < 3:
+        print(f'Trying to validate {color_name}... Take {attempts + 1}...')
+        set_color(group_name, color_name)
+        sleep(5)
+        check_color = validate_color(voice_agent, color)
+        if check_color['success']:
+            success = True
+            # attempts = 0
+        else:
+            attempts += 1
+            sleep(5)
+    if not success:
+        print(f'Unable to validate {color_name}!')
+        # with open("color_failures.txt", "a") as out:
+        #      out.write(color_name + ' ')
+        #      out.write(str(check_color['data']) + '\n')
+    print()
+
 
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'red'), None)
 # print(color_index)
@@ -323,6 +324,7 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 # supported_colors_list[color_index][voice_agent].update({'offset': offset})
 # print('b             =', offset)
 
+
 # for color in va.rgb_color_list:
 #     set_color(group_name, color['name'])
 #     sleep(5)
@@ -346,11 +348,12 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #         # model = LinearRegression().fit(x_, y)
 #         # print('coefficients:', model.coef_)
 
+
 # # sensor_values = {}
 # for color in va.cct_color_list:
 #     success = set_color(group_name, color['name'])
 #     if success['success']:
-#         sleep(3)
+#         sleep(5)
 #         # color_name = color['name']
 #         cct_value = color.get(voice_agent).get('color_values')
 #         # cct_value = get_cct()
@@ -360,28 +363,60 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #         print()
 # # print(sensor_values)
 
+
 # for cct in [2000, 2800, 3100]:
 #     set_cct(group_name, cct)
-#     sleep(3)
+#     sleep(5)
 #     validate_cct(voice_agent, cct)
 #     print()
+
 
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'yellow green'), None)
 # for color in va.rgb_color_list[color_index:]:
 # for color in va.rgb_color_list:
 #     set_color(group_name, color['name'])
-#     sleep(3)
+#     sleep(5)
 #     print(get_lux())
 #     print(get_rgb())
 #     print()
 #     sleep(5)
 
+
+
 # color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'soft white'), None)
 # color = va.cct_color_list[color_index]
 # color_name = color['name']
 # set_color(group_name, color_name)
-# sleep(3)
-# for brightness in [12, 20, 24, 50, 6, 33]:
+# sleep(5)
+# set_brightness(group_name, 100)
+# sleep(5)
+# success = validate_cct(voice_agent, color)
+# if success['success']:
+#     x_values = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+#     # x_values = [80, 90, 100]
+#     y_values = []
+#     # x = np.array(values).reshape((-1, 1))
+#     for value in x_values:
+#         set_brightness(group_name, [f'{value}'])
+#         sleep(5)
+#         new_y_value = get_lux()
+#         y_values.append(new_y_value)
+#     # y = np.array(y_values)
+#     with open("brightness_config.txt", "a") as out:
+#         out.write(color['name'] + '\n')
+#         for value in y_values:
+#             out.write(str(value) + '\n')
+    # x_ = PolynomialFeatures(degree=2, include_bias=False).fit_transform(x)
+    # model = LinearRegression().fit(x_, y)
+    # print('coefficients:', model.coef_)
+
+
+# color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'soft white'), None)
+# color = va.cct_color_list[color_index]
+# color_name = color['name']
+# set_color(group_name, color_name)
+# sleep(5)
+# for brightness in [12, 20, 24, 50, 6, 33, 100, 5]:
 #     success = False
 #     attempts = 0
 #     while not success and attempts < 3:
@@ -397,14 +432,14 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #             sleep(5)
 #     if not success:
 #         print(f'Unable to validate brightness for {color_name} at {brightness}%!')
-#         with open("color_failures.txt", "a") as out:
+#         with open("brightness_failures.txt", "a") as out:
 #              out.write(color_name)
 #             #  out.write(str(check_color['data']) + '\n')
 #     print()
 
 # print(get_cct())
-print(get_lux())
-print(get_rgb())
+# print(get_lux())
+# print(get_rgb())
 
 
 #  DONE: need to redo tcs_color with tcs.gain at 60
