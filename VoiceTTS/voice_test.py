@@ -42,19 +42,25 @@ def set_brightness(group, value):
 
 def set_color(group, name):
     # color names that need to have 'to the color' added when using va.speak
-    weird_names = ['bisque', 'cornsilk', 'deep pink', 'deep sky blue',  'gainsboro', 'honeydew', 
+    weird_names = ['bisque', 'cornsilk', 'deep pink', 'deep sky blue', 'gainsboro', 'honeydew', 'hot pink', 'khaki',
                     'old lace', 'peru', 'plum', 'rosy brown', 'slate blue', 'spring green', 'tan', 'wheat']
+    modifiers = ['light', 'dark', 'pale', 'web']
+    modifier_found = False
+    for modifier in modifiers:
+        if modifier in name:
+            # print(modifier, 'in', name)
+            modifier_found = True
     # print('light' in name)
     if name in weird_names:
         added_str = 'to the color'
         emphasis_level = 'strong'
-    elif 'light' in name:
+    elif modifier_found:
         added_str = 'to the color '
         emphasis_level = "moderate"
     else:
         added_str = ''
         emphasis_level = "moderate"
-    success = va.speak(f'turn the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
+    success = va.speak(f'set the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
     # print(success)
     return success
     # sleep(15)
@@ -76,6 +82,7 @@ def make_warm_cool(group, value):
 
 def median(readings):
     readings.sort()
+    print(readings)
     indexer = int(len(readings)/2)
     median = readings[indexer]
     return median
@@ -87,8 +94,6 @@ def get_cct():
     while len(readings) <= 10:
         readings.append(round(tcs.color_temperature))
         sleep(0.25)
-    readings.sort()
-    print(readings)
     cct_value = median(readings)
     return cct_value
 
@@ -97,8 +102,6 @@ def get_lux():
     while len(readings) <= 10:
         readings.append(round(tsl.lux))
         sleep(0.25)
-    readings.sort()
-    print(readings)
     lux_value = median(readings)
     return lux_value
 
@@ -109,8 +112,6 @@ def get_rgb():
     while len(readings) <= 10:
         readings.append(tcs.color_rgb_bytes)
         sleep(0.25)
-    readings.sort()
-    print(readings)
     rgb_value = median(readings)
     return rgb_value
 

@@ -2809,7 +2809,7 @@ if __name__ == '__main__':
 #         except Exception as ex:
 #             pass
 
-    voice_agent = 'alexa'
+    voice_agent = 'google'
     color_list = []
     for color in supported_colors_list:
         if color.get(voice_agent):
