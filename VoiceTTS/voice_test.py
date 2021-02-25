@@ -6,7 +6,10 @@ import busio
 import adafruit_tsl2591
 import adafruit_tcs34725
 import adafruit_tca9548a
+import subprocess
+import json
 from time import sleep
+
 
 # source ./linear_regression/bin/activate
 # import numpy as np
@@ -19,11 +22,98 @@ from time import sleep
 #     Alexa,     set     <device_name>/<group_name>    to   red.
 # | wake word | launch |      invocation name       | utterance (the intent of the command)
 
+
+# voice agent name
+voice_agent = 'alexa'  # 'alexa' or 'google'
+
+dir_name = voice_agent.capitalize()
+# print(dir_name)
+
+# path to store generated voice files
+path = f'/home/pi/Python/VoiceTTS/{dir_name}/voice_files/'
+
+va = Voice_agent(voice_agent, path)
+
+# print(board.SCL)
+i2c = busio.I2C(board.SCL, board.SDA)
+tca = adafruit_tca9548a.TCA9548A(i2c)
+# print(tca[0].tca.__dict__.values)
+
+tcs = adafruit_tcs34725.TCS34725(tca[0])
+tcs.integration_time = 100
+
+tsl = adafruit_tsl2591.TSL2591(tca[1])
+tsl.gain = adafruit_tsl2591.GAIN_LOW
+tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
+
+# either single control with specific bulb name or group control
+group_name = 'color bulb'  # 'color bulb' or 'office lights'
+
+# Bluetooth MAC address
+mac = 'f4:bc:da:34:1d:5f'
+mesh_name = 'EF7CB2B03EE2'  #'D72800380264' = QA Lab
+mesh_pass = '176962'  #'750469'       = QA Lab
+
+def check_success_BLE(results):
+    success = False
+    results_list = []
+    for line in results.stdout.readlines():
+        decoded_line = line.decode('utf-8')
+        results_list.append(decoded_line[0:-1])
+        print(decoded_line)
+    for l in results_list:
+        if 'Generated' in l:
+            success = True
+    print('RESULTS LIST: ', results_list)
+    return success, results_list
+
+def set_power_BLE(mac, on_or_off, meshname, meshpass):
+    results_list = []
+    attempts = 0
+    success = False
+    while not success and attempts < 3:
+        if meshname != '':
+            results = subprocess.Popen(['sudo', '/home/pi/ble-backend', f'-mac={mac}', f'-addr={mac}', f'-meshname={meshname}', f'-meshpass={meshpass}', f'-command={on_or_off}'], stdout=subprocess.PIPE)
+        else:
+            results = subprocess.Popen(['sudo', '/home/pi/ble-backend', f'-mac={mac}', f'-addr={mac}', f'-command={on_or_off}'], stdout=subprocess.PIPE)
+        success, results = check_success_BLE(results)
+        attempts += 1
+        sleep(0.5)
+    return {'success': success, 'data': None}
+
+def set_rgb_BLE(mac, rVal, gVal, bVal, meshname, meshpass):
+    results_list = []
+    attempts = 0
+    success = False
+    while not success and attempts < 3:
+        if meshname != '':
+            results = subprocess.Popen(['sudo', '/home/pi/ble-backend', f'-mac={mac}', f'-addr={mac}', f'-meshname={meshname}', f'-meshpass={meshpass}', f'-command=rgb', f'-rVal={rVal}', f'-gVal={gVal}', f'-bVal={bVal}'], stdout=subprocess.PIPE)
+        else:
+            results = subprocess.Popen(['sudo', '/home/pi/ble-backend', f'-mac={mac}', f'-addr={mac}', f'-command=rgb', f'-rVal={rVal}', f'-gVal={gVal}', f'-bVal={bVal}'], stdout=subprocess.PIPE)
+        success, results = check_success_BLE(results)
+        attempts += 1
+        sleep(0.5)
+    return {'success': success, 'data': None}
+
+def set_cct_BLE(mac, cctVal, meshname, meshpass):
+    results_list = []
+    attempts = 0
+    success = False
+    while not success and attempts < 3:
+        if meshname != '':
+            results = subprocess.Popen(['sudo', '/home/pi/ble-backend', f'-mac={mac}', f'-addr={mac}', f'-meshname={meshname}', f'-meshpass={meshpass}', f'-command=cct', f'-cctVal={cctVal}'], stdout=subprocess.PIPE)
+        else:
+            results = subprocess.Popen(['sudo', '/home/pi/ble-backend', f'-mac={mac}', f'-addr={mac}', f'-command=cct', f'-cctVal={cctVal}'], stdout=subprocess.PIPE)
+        success, results = check_success_BLE(results)
+        attempts += 1
+        sleep(0.5)
+    return {'success': success, 'data': None}
+
 def set_power(group, value):
     emphasis_level = 'moderate'
     success = va.speak(f'turn <emphasis level="{emphasis_level}"> {value} </emphasis> the {group}, <break time="1s"/>')
     # print(success)
-    return success
+    return {'success': success, 'data': None}
     # sleep(15)
 
 def set_brightness(group, value):
@@ -37,14 +127,14 @@ def set_brightness(group, value):
         emphasis_level = 'none'
     success = va.speak(f'<emphasis level="{emphasis_level}"> {launch_word} </emphasis> the {group} {added_str}, <break time="1s"/>')
     # print(success)
-    return success
+    return {'success': success, 'data': None}
     # sleep(15)
 
-def set_color(group, name):
+def set_color(voice_agent, group, name):
     # color names that need to have 'to the color' added when using va.speak
     weird_names = ['bisque', 'cornsilk', 'deep pink', 'deep sky blue', 'gainsboro', 'honeydew', 'hot pink', 'khaki',
                     'old lace', 'peru', 'plum', 'rosy brown', 'slate blue', 'spring green', 'tan', 'wheat']
-    modifiers = ['light', 'dark', 'pale', 'web']
+    modifiers = ['pale', 'web']
     modifier_found = False
     for modifier in modifiers:
         if modifier in name:
@@ -52,24 +142,34 @@ def set_color(group, name):
             modifier_found = True
     # print('light' in name)
     if name in weird_names:
-        added_str = 'to the color'
+        # added_str = 'to the color '
+        launch_word = 'set'
+        added_str = ''
         emphasis_level = 'strong'
     elif modifier_found:
-        added_str = 'to the color '
-        emphasis_level = "moderate"
-    else:
+        # added_str = 'to the color '
+        launch_word = 'turn'
         added_str = ''
         emphasis_level = "moderate"
-    success = va.speak(f'set the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
+    elif 'light' in name:
+        # added_str = 'to the color '
+        launch_word = 'turn'
+        added_str = 'to '
+        emphasis_level = "moderate"
+    else:
+        launch_word = 'set'
+        added_str = ''
+        emphasis_level = "moderate"
+    success = va.speak(f'{launch_word} the {group} {added_str}<emphasis level="{emphasis_level}"> {name} </emphasis>, <break time="1s"/>')
     # print(success)
-    return success
+    return {'success': success, 'data': None}
     # sleep(15)
 
 def set_cct(group, cct):
     emphasis_level = "moderate"
     success = va.speak(f'set the {group} to <emphasis level="{emphasis_level}"> {cct} </emphasis> degrees Kelvin, <break time="1s"/>')
     # print(success)
-    return success
+    return {'success': success, 'data': None}
     # sleep(15)
 
 def make_warm_cool(group, value):
@@ -77,12 +177,12 @@ def make_warm_cool(group, value):
     print(color_name)
     success = va.speak(f'make {group} <emphasis level="{emphasis_level}"> {value} </emphasis>, <break time="1s"/>')
     # print(success)
-    return success
+    return {'success': success, 'data': None}
     # sleep(15)
 
 def median(readings):
     readings.sort()
-    print(readings)
+    # print(readings)
     indexer = int(len(readings)/2)
     median = readings[indexer]
     return median
@@ -106,6 +206,7 @@ def get_lux():
     return lux_value
 
 def get_rgb():
+    # tcs.gain = 16
     tcs.gain = 60
     # tcs.integration_time = 100
     readings = []
@@ -127,15 +228,15 @@ def validate_brightness(voice_agent, brightness, color):
     diff = prediction - median
     if abs(diff) <= margin:
         print('SUCCESS!!! Coreect brightness detected!')
-        return {'success': True}
+        return {'success': True, 'data': None}
     else:
         print('Brightness (lux) =', median)
         print('Looking for:', prediction, f'+/- {margin}')
-        return {'success': False}
+        return {'success': False, 'data': None}
 
 def validate_color(voice_agent, color):
     print('Checking color...')
-    margin_pct = 0.1
+    margin_pct = 0.2
     margin_min = 3
     margin_max = 25
     (r, g, b) = color.get(voice_agent).get('tcs_color_100')
@@ -176,44 +277,52 @@ def validate_cct(voice_agent, color):
     print('difference =', cct_diff)
     if abs(cct_diff) <= margin:
         print('SUCCESS!!! Coreect CCT detected!')
-        return {'success': True}
+        return {'success': True, 'data': None}
     else:
         print(f'Looking for a difference less than {margin}!')
-        return {'success': False}
+        return {'success': False, 'data': None}
 
 
-voice_agent = 'alexa'  # 'alexa' or 'google'
-
-dir_name = voice_agent.capitalize()
-# print(dir_name)
-
-# path to store generated voice files
-path = f'/home/pi/Python/VoiceTTS/{dir_name}/voice_files/'
-
-va = Voice_agent(voice_agent, path)
 
 
-# print(board.SCL)
-i2c = busio.I2C(board.SCL, board.SDA)
-tca = adafruit_tca9548a.TCA9548A(i2c)
-# print(tca[0].tca.__dict__.values)
 
-tcs = adafruit_tcs34725.TCS34725(tca[0])
-tcs.integration_time = 100
+#############################################################################################################################
+#                                                                                                                           #
+#                                                   DAVEY'S PLAYGROUND                                                      #
+#                                                                                                                           #
+#############################################################################################################################
 
-tsl = adafruit_tsl2591.TSL2591(tca[1])
-tsl.gain = adafruit_tsl2591.GAIN_LOW
-tsl.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS
+# data = {
+#     'firstname': 'David',
+#     'lastname': 'Bauer'
+# }
+
+# with open('config.json', 'w') as outfile:
+#     json.dump(data, outfile)
+
+# with open('config.json', 'r') as infile:
+#     data = json.load(infile)
+
+# print(data)
+# print(data['firstname'])
+
+# set_power_BLE(mac, 'on', '', '')
+# set_cct_BLE(mac, 50, '', '')
+# set_cct_BLE(mac, 14, '', '')  # -cctVal=14 will equal Google's or Alexa's cct for "incandescent"
+
+# for color in va.rgb_color_list:
+#     print(color)
+#     (r, g, b) = color[voice_agent]['color_values']
+#     set_rgb_BLE(mac, r, g, b, '', '')
+#     sleep(5)
 
 # print(va.wake_word)
 # for color in va.cct_color_list:
 #     print(color['name'])
 
-group_name = 'color bulb'  # 'color bulb' or 'office lights'
-
 # set_power(group_name, ['off', 'on', 'off', 'on'])
 
-# set_brightness(group_name, ['72%', '0%', '3%', '125%', ])
+# set_brightness(group_name, ['72%', '0%', '3%', '125%'])
 
 # set_brightness(group_name, ['0%', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten'])
 # set_brightness(group_name, ['9%', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten', 'brighten'])
@@ -226,9 +335,9 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 
 
 # if voice_agent == 'alexa':
-#     set_color(group_name, ['candlelight'])
+#     set_color(voice_agent, group_name, ['candlelight'])
 #     make_warm_cool(group_name, ['cooler', 'cooler', 'cooler', 'cooler', 'cooler', 'cooler'])
-    # set_color(group_name, ['cool white'])
+    # set_color(voice_agent, group_name, ['cool white'])
     # make_warm_cool(group_name, ['warmer', 'warmer', 'warmer', 'warmer', 'warmer', 'warmer'])
 
 
@@ -242,7 +351,7 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #     color_name = color['name']
 #     while not success and attempts < 3:
 #         print(f'Trying to validate {color_name}... Take {attempts + 1}...')
-#         set_color(group_name, color_name)
+#         set_color(voice_agent, group_name, color_name)
 #         sleep(5)
 #         check_color = validate_cct(voice_agent, color)
 #         if check_color['success']:
@@ -259,40 +368,41 @@ group_name = 'color bulb'  # 'color bulb' or 'office lights'
 #     print()
 
 
-# color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'tan'), None)
-color_list = []
-for x in range(10):
-    color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
-set_brightness(group_name, 100)
-sleep(5)
-for color in color_list:
-    success = False
-    attempts = 0
-    color_name = color['name']
-    while not success and attempts < 3:
-        print(f'Trying to validate {color_name}... Take {attempts + 1}...')
-        set_color(group_name, color_name)
-        sleep(5)
-        check_color = validate_color(voice_agent, color)
-        if check_color['success']:
-            success = True
-            # attempts = 0
-        else:
-            attempts += 1
-            sleep(5)
-    if not success:
-        print(f'Unable to validate {color_name}!')
-        # with open("color_failures.txt", "a") as out:
-        #      out.write(color_name + ' ')
-        #      out.write(str(check_color['data']) + '\n')
-    print()
+# color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'moccasin'), None)
+# color_list = va.rgb_color_list
+# color_list = []
+# for x in range(10):
+#     color_list.append(va.rgb_color_list[random.randint(0, len(va.rgb_color_list) - 1)])
+# set_brightness(group_name, 100)
+# sleep(5)
+# for color in color_list[color_index:]:
+#     success = False
+#     attempts = 0
+#     color_name = color['name']
+#     while not success and attempts < 3:
+#         print(f'Trying to validate {color_name}... Take {attempts + 1}...')
+#         set_color(voice_agent, group_name, color_name)
+#         sleep(5)
+#         check_color = validate_color(voice_agent, color)
+#         if check_color['success']:
+#             success = True
+#             # attempts = 0
+#         else:
+#             attempts += 1
+#             sleep(5)
+#     if not success:
+#         print(f'Unable to validate {color_name}!')
+#         with open("color_failures.txt", "a") as out:
+#              out.write(color_name + ' ')
+#              out.write(str(check_color['data']) + '\n')
+#     print()
 
 
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'red'), None)
 # print(color_index)
 # color = va.rgb_color_list[color_index]
 # print(color)
-# set_color(group_name, color['name'])
+# set_color(voice_agent, group_name, color['name'])
 # sleep(5)
 # print('tsl_brt_100   =', get_lux())
 # print('tcs_color_100 =', get_rgb())
@@ -327,7 +437,7 @@ for color in color_list:
 
 
 # for color in va.rgb_color_list:
-#     set_color(group_name, color['name'])
+#     set_color(voice_agent, group_name, color['name'])
 #     sleep(5)
 #     success = validate_color(voice_agent, color)
 #     if success['success']:
@@ -352,7 +462,7 @@ for color in color_list:
 
 # # sensor_values = {}
 # for color in va.cct_color_list:
-#     success = set_color(group_name, color['name'])
+#     success = set_color(voice_agent, group_name, color['name'])
 #     if success['success']:
 #         sleep(5)
 #         # color_name = color['name']
@@ -375,7 +485,7 @@ for color in color_list:
 # color_index = next((index for (index, d) in enumerate(va.rgb_color_list) if d['name'] == 'yellow green'), None)
 # for color in va.rgb_color_list[color_index:]:
 # for color in va.rgb_color_list:
-#     set_color(group_name, color['name'])
+#     set_color(voice_agent, group_name, color['name'])
 #     sleep(5)
 #     print(get_lux())
 #     print(get_rgb())
@@ -387,7 +497,7 @@ for color in color_list:
 # color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'soft white'), None)
 # color = va.cct_color_list[color_index]
 # color_name = color['name']
-# set_color(group_name, color_name)
+# set_color(voice_agent, group_name, color_name)
 # sleep(5)
 # set_brightness(group_name, 100)
 # sleep(5)
@@ -415,7 +525,7 @@ for color in color_list:
 # color_index = next((index for (index, d) in enumerate(va.cct_color_list) if d['name'] == 'soft white'), None)
 # color = va.cct_color_list[color_index]
 # color_name = color['name']
-# set_color(group_name, color_name)
+# set_color(voice_agent, group_name, color_name)
 # sleep(5)
 # for brightness in [12, 20, 24, 50, 6, 33, 100, 5]:
 #     success = False
@@ -438,9 +548,10 @@ for color in color_list:
 #             #  out.write(str(check_color['data']) + '\n')
 #     print()
 
-# print(get_cct())
-# print(get_lux())
-# print(get_rgb())
+# while True:
+#     print('cct =', get_cct())
+#     print('lux =', get_lux())
+#     print('rgb', get_rgb())
 
 
 #  DONE: need to redo tcs_color with tcs.gain at 60
