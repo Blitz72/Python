@@ -1,5 +1,6 @@
-numbers = [5, 2, 5, 2, 2]
+numbers = [6, 2, 5, 2, 2]
 
+print()
 for number in numbers:
   # print(number)
   for x in range(number):
@@ -15,8 +16,10 @@ matrix = [
   [26, 27, 28, 29, 30]
 ]
 
-# print(len(matrix))
-# print(len(matrix[0]))
+print()
+print('length of matrix', len(matrix))
+print('length of matrix[0]', len(matrix[0]))
+print()
 
 for y in range(len(matrix)):
   for x in range(len(matrix[y])):
@@ -26,3 +29,5 @@ for y in range(len(matrix)):
     #   endDelimiter = ''
     print(matrix[y][x], end = ', ' if x < len(matrix[y]) - 1 else '')
   print()
+
+print()
