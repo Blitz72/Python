@@ -2,6 +2,14 @@
 
 # RGB color values given in tuples are (R, G, B)
 
+# tcs34725 color temperature equation y = 0.6091(x) + 986.41, where x = CCT value spoken to the voice agent
+# and y = calculated sensor value to verify with (values around 5000 deg. K will be less than sensor reading).
+# TCS34725 sesnor gain is set at 4.
+
+# tcs_color_100 values are tcs.rgb_bytes values taken at 100% brightness and sensor gain set to 60.
+
+# lux_coeff are (b0, b1, b2) where f(brightness) = b2*x^2 + b1*x + b0
+
 supported_colors_list = [
     {
         'name': 'alice blue',
@@ -14,22 +22,22 @@ supported_colors_list = [
             'color_values': (240, 248, 255)
         }
     },
-#     {
-#         'name': 'almond',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (239, 222, 205)
-#         }
-# #         'alexa': {
-# #             'is_rgb': True,
-# #             'color_values': (0, 0, 0)
-# #         }
-#     },
+    # {
+    #     'name': 'almond',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (239, 222, 205)
+    #     },
+    #     # 'alexa': {
+    #     #     'is_rgb': True,
+    #     #     'color_values': (0, 0, 0)
+    #     # }
+    # },
     {
         'name': 'antique white',      # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 5500
         },
         'alexa': {
             'is_rgb': True,
@@ -40,22 +48,22 @@ supported_colors_list = [
         'name': 'aqua',
         'google': {
             'is_rgb': True,
-            'color_values': (0, 255, 255),
+            'color_values': (0, 255, 255)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (0, 255, 255),
+            'color_values': (0, 255, 255)
         }
     },
     {
         'name': 'aquamarine',
         'google': {
             'is_rgb': True,
-            'color_values': (127, 255, 212),
+            'color_values': (127, 255, 212)
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (127, 255, 212),
+            'color_values': (127, 255, 212)
         }
     },
     {
@@ -69,45 +77,45 @@ supported_colors_list = [
             'color_values': (240, 255, 255)
         }
     },
-    {
-        'name': 'beige',              # Google uses cct for this color
-        'google': {
-            'is_rgb': False,
-            'color_values': ''
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (245, 245, 220)
-        }
-    },
-    {
-        'name': 'bisque',             # Google uses cct for this color
-        'google': {
-            'is_rgb': False,
-            'color_values': ''
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (255, 228, 196)
-        }
-    },
-    {
-        'name': 'black',
-        'google': {
-            'is_rgb': True,
-            'color_values': (0, 0, 0)
-        },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-    },
+    # {
+    #     'name': 'beige',              # Google uses cct for this color
+    #     'google': {
+    #         'is_rgb': False,
+    #         'color_values': 5000
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (245, 245, 220)
+    #     }
+    # },
+    # {
+    #     'name': 'bisque',             # Google uses cct for this color
+    #     # 'google': {
+    #     #     'is_rgb': False,
+    #     #     'color_values': ''
+    #     # },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (255, 228, 196)
+    #     }
+    # },
+    # {
+    #     'name': 'black',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     }
+    # },
     {
         'name': 'blanched almond',    # Google uses cct for this color
-#         'google': {
-#             'is_rgb': False,
-#             'color_values': ''
-#         },
+        # 'google': {
+        #     'is_rgb': False,
+        #     'color_values': ''
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (255, 235, 205)
@@ -146,26 +154,27 @@ supported_colors_list = [
             'color_values': (165, 42, 42)
         }
     },
-#     {
-#         'name': 'burlywood',         # Google uses cct for this color
-#         'google': {
-#             'is_rgb': False,
-#             'color_values': ''
-#         },
-#         'alexa': {
-#             'is_rgb': False,
-#             'color_values': ''
-#         }
-#     },
+    # {
+    #     'name': 'burlywood',         # Google uses cct for this color
+    #     'google': {
+    #         'is_rgb': False,
+    #         'color_values': ''
+    #     },
+    #     'alexa': {
+    #         'is_rgb': False,
+    #         'color_values': '',
+    #         'tsl_brt_100': None
+    #     }
+    # },
     {
         'name': 'candlelight',       # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '2000'
+            'color_values': 2000
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '2200'
+            'color_values': 2200
         }
     },
     {
@@ -203,35 +212,35 @@ supported_colors_list = [
     },
     {
         'name': 'cool',                # Google uses cct for this color
-#         'google': {
-#             'is_rgb': False,
-#             'color_values': ''
-#         },
+        # 'google': {
+        #     'is_rgb': False,
+        #     'color_values': ''
+        # },
         'alexa': {
             'is_rgb': False,
-            'color_values': '7000'
+            'color_values': 7000  # might be 6800
         }
     },
     {
         'name': 'cool white',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '4000'
+            'color_values': 4000
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '7000'
+            'color_values': 7000
         }
     },
     {
         'name': 'coral',
         'google': {
             'is_rgb': True,
-            'color_values': (255, 127, 80)
+            'color_values': (255, 127, 80)  # need to recheck color_values
         },
         'alexa': {
             'is_rgb': True,
-            'color_values': (255, 127, 80)
+            'color_values': (255, 127, 80)  # need to recheck color_values
         }
     },
     {
@@ -240,10 +249,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (100, 149, 237)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
     {
         'name': 'cornflower blue',           # Need to test for Alexa
@@ -251,22 +260,22 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (100, 149, 237)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
-    {
-        'name': 'cornsilk',
-        'google': {
-            'is_rgb': False,
-            'color_values': '6500'
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (255, 248, 220)
-        }
-    },
+    # {
+    #     'name': 'cornsilk',
+    #     # 'google': {
+    #     #     'is_rgb': False,
+    #     #     'color_values': 6500
+    #     # },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (255, 248, 220)
+    #     }
+    # },
     {
         'name': 'crimson',
         'google': {
@@ -368,10 +377,10 @@ supported_colors_list = [
     },
     {
         'name': 'dark olive green',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (86, 103, 51)
@@ -423,10 +432,10 @@ supported_colors_list = [
     },
     {
         'name': 'dark sea green',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (143, 188, 143)
@@ -434,10 +443,10 @@ supported_colors_list = [
     },
     {
         'name': 'dark slate blue',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (72, 61, 139)
@@ -480,11 +489,11 @@ supported_colors_list = [
         'name': 'daylight',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '5000'
+            'color_values': 5000
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '5500'
+            'color_values': 5500
         }
     },
     {
@@ -546,7 +555,7 @@ supported_colors_list = [
         'name': 'floral white',      # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 6100
         },
         'alexa': {
             'is_rgb': True,
@@ -575,33 +584,33 @@ supported_colors_list = [
             'color_values': (255, 0, 255)
         }
     },
-    {
-        'name': 'gainsboro',         # Google uses cct for this color
-        'google': {
-            'is_rgb': True,
-            'color_values': (220, 220, 220)
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (220, 220, 220)
-        }
-    },
-#     {
-#         'name': 'garnet',
-# #         'google': {
-# #             'is_rgb': True,
-# #             'color_values': (0, 0, 0)
-# #         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+    # {
+    #     'name': 'gainsboro',         # Google uses cct for this color
+    #     # 'google': {
+    #     #     'is_rgb': True,
+    #     #     'color_values': (220, 220, 220)
+    #     # },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (220, 220, 220)
+    #     }
+    # },
+    # {
+    #     'name': 'garnet',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     }
+    # },
     {
         'name': 'ghost white',       # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 7000
         },
         'alexa': {                   # Need to tell Alexa to set a Full Color bulb 'to the color dark slate gray'
             'is_rgb': True,
@@ -689,11 +698,11 @@ supported_colors_list = [
         'name': 'incandescent',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '2700'
+            'color_values': 2700
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '2700'
+            'color_values': 2700,
         }
     },
     {
@@ -722,7 +731,7 @@ supported_colors_list = [
         'name': 'ivory',               # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '6100'
+            'color_values': 6100
         },
         'alexa': {
             'is_rgb': True,
@@ -922,10 +931,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (175, 228, 222)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
     {
         'name': 'light yellow',         # The rgb values shown here come from "hey google turn the lights to the color light yellow.'
@@ -964,7 +973,7 @@ supported_colors_list = [
         'name': 'linen',             # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 6100
         },
         'alexa': {
             'is_rgb': True,
@@ -1017,10 +1026,10 @@ supported_colors_list = [
     },
     {
         'name': 'medium orchid',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (186, 85, 211)
@@ -1050,10 +1059,10 @@ supported_colors_list = [
     },
     {
         'name': 'medium slate blue',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (123, 104, 238)
@@ -1083,10 +1092,10 @@ supported_colors_list = [
     },
     {
         'name': 'medium violet red',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (199, 21, 133)
@@ -1125,22 +1134,22 @@ supported_colors_list = [
             'color_values': (255, 228, 225)
         }
     },
-    {
-        'name': 'moccasin',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
-        'alexa': {                   # Need to tell Alexa to set bulb 'to the color moccasin'
-            'is_rgb': True,
-            'color_values': (255, 228, 181)
-        }
-    },
+    # {
+    #     'name': 'moccasin',
+    #     # 'google': {
+    #     #     'is_rgb': True,
+    #     #     'color_values': (0, 0, 0)
+    #     # },
+    #     'alexa': {                   # Need to tell Alexa to set bulb 'to the color moccasin'
+    #         'is_rgb': True,
+    #         'color_values': (255, 228, 181)
+    #     }
+    # },
     {
         'name': 'navajo white',      # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 5000
         },
         'alexa': {
             'is_rgb': True,
@@ -1158,17 +1167,17 @@ supported_colors_list = [
             'color_values': (0, 0, 128)
         }
     },
-    {
-        'name': 'old lace',          # Google uses cct for this color
-        'google': {
-            'is_rgb': False,
-            'color_values': ''
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (253, 245, 230)
-        }
-    },
+    # {
+    #     'name': 'old lace',          # Google uses cct for this color
+    #     # 'google': {
+    #     #     'is_rgb': False,
+    #     #     'color_values': 6100
+    #     # },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (253, 245, 230)
+    #     }
+    # },
     {
         'name': 'olive',
         'google': {
@@ -1191,17 +1200,17 @@ supported_colors_list = [
             'color_values': (107, 142, 35)
         }
     },
-#     {
-#         'name': 'olive green',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+    # {
+    #     'name': 'olive green',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     }
+    # },
     {
         'name': 'orange',
         'google': {
@@ -1237,10 +1246,10 @@ supported_colors_list = [
     },
     {
         'name': 'pale goldenrod',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (238, 232, 170)
@@ -1248,10 +1257,10 @@ supported_colors_list = [
     },
     {
         'name': 'pale green',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (152, 251, 152)
@@ -1259,10 +1268,10 @@ supported_colors_list = [
     },
     {
         'name': 'pale turquoise',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (180, 255, 255)
@@ -1270,10 +1279,10 @@ supported_colors_list = [
     },
     {
         'name': 'pale violet red',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (219, 112, 147)
@@ -1351,10 +1360,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (255, 117, 24)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
     {
         'name': 'purple',
@@ -1369,10 +1378,10 @@ supported_colors_list = [
     },
     {
         'name': 'rebecca purple',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (102, 51, 153)
@@ -1413,10 +1422,10 @@ supported_colors_list = [
     },
     {
         'name': 'saddle brown',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (139, 69, 19)
@@ -1459,7 +1468,7 @@ supported_colors_list = [
         'name': 'seashell',          # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 6100
         },
         'alexa': {
             'is_rgb': True,
@@ -1488,17 +1497,17 @@ supported_colors_list = [
             'color_values': (192, 192, 192)
         }
     },
-#     {
-#         'name': 'sky',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+    # {
+    #     'name': 'sky',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     }
+    # },
     {
         'name': 'sky blue',
         'google': {
@@ -1510,17 +1519,17 @@ supported_colors_list = [
             'color_values': (135, 206, 235)
         }
     },
-#     {
-#         'name': 'slate',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
-#     },
+    # {
+    #     'name': 'slate',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (0, 0, 0)
+    #     }
+    # },
     {
         'name': 'slate blue',
         'google': {
@@ -1549,16 +1558,16 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (200, 65, 134)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
     {
         'name': 'snow',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '6500'
+            'color_values': 6500
         },
         'alexa': {
             'is_rgb': True,
@@ -1569,11 +1578,11 @@ supported_colors_list = [
         'name': 'soft white',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '3000'
+            'color_values': 3000
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '2700'
+            'color_values': 2700
         }
     },
     {
@@ -1598,17 +1607,17 @@ supported_colors_list = [
             'color_values': (70, 130, 180)
         }
     },
-    {
-        'name': 'tan',
-        'google': {
-            'is_rgb': True,
-            'color_values': (210, 180, 140)
-        },
-        'alexa': {                           # Need to tell Alexa turn bulb 'to the color tan'
-            'is_rgb': True,
-            'color_values': (210, 180, 140)
-        }
-    },
+    # {
+    #     'name': 'tan',
+    #     # 'google': {
+    #     #     'is_rgb': True,
+    #     #     'color_values': (210, 180, 140)
+    #     # },
+    #     'alexa': {                           # Need to tell Alexa turn bulb 'to the color tan'
+    #         'is_rgb': True,
+    #         'color_values': (210, 180, 140)
+    #     }
+    # },
     {
         'name': 'teal',
         'google': {
@@ -1659,10 +1668,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (18, 10, 143)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
     {
         'name': 'vermillion',                # Need to test for Alexa
@@ -1670,10 +1679,10 @@ supported_colors_list = [
             'is_rgb': True,
             'color_values': (217, 56, 30)
         },
-#         'alexa': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         }
+        # 'alexa': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # }
     },
     {
         'name': 'violet',
@@ -1688,32 +1697,32 @@ supported_colors_list = [
     },
     {
         'name': 'warm',                # Google uses cct for this color
-#         'google': {
-#             'is_rgb': False,
-#             'color_values': ''
-#         },
+        # 'google': {
+        #     'is_rgb': False,
+        #     'color_values': ''
+        # },
         'alexa': {
             'is_rgb': False,
-            'color_values': '2200'
+            'color_values': 2200
         }
     },
     {
         'name': 'warm white',                # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '3000'
+            'color_values': 3000
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '2200'
+            'color_values': 2200
         }
     },
     {
         'name': 'web gray',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (128, 128, 128)
@@ -1721,10 +1730,10 @@ supported_colors_list = [
     },
     {
         'name': 'web green',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (0, 0, 0)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (0, 0, 0)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (0, 128, 0)
@@ -1732,10 +1741,10 @@ supported_colors_list = [
     },
     {
         'name': 'web maroon',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (128, 0, 0)
-#         },
+        'google': {
+            'is_rgb': True,
+            'color_values': (128, 0, 0)
+        },
         'alexa': {
             'is_rgb': True,
             'color_values': (178, 48, 96)
@@ -1743,42 +1752,42 @@ supported_colors_list = [
     },
     {
         'name': 'web purple',
-#         'google': {
-#             'is_rgb': True,
-#             'color_values': (128, 0, 128)
-#         },
+        # 'google': {
+        #     'is_rgb': True,
+        #     'color_values': (128, 0, 128)
+        # },
         'alexa': {
             'is_rgb': True,
             'color_values': (128, 0, 128)
         }
     },
-    {
-        'name': 'wheat',
-        'google': {
-            'is_rgb': True,
-            'color_values': (245, 222, 179)
-        },
-        'alexa': {
-            'is_rgb': True,
-            'color_values': (245, 222, 179)
-        }
-    },
+    # {
+    #     'name': 'wheat',
+    #     'google': {
+    #         'is_rgb': True,
+    #         'color_values': (245, 222, 179)
+    #     },
+    #     'alexa': {
+    #         'is_rgb': True,
+    #         'color_values': (245, 222, 179)
+    #     }
+    # },
     {
         'name': 'white',                   # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': '5000'
+            'color_values': 5000
         },
         'alexa': {
             'is_rgb': False,
-            'color_values': '4000'
+            'color_values': 4000
         }
     },
     {
         'name': 'white smoke',             # Google uses cct for this color
         'google': {
             'is_rgb': False,
-            'color_values': ''
+            'color_values': 7000
         },
         'alexa': {
             'is_rgb': True,
@@ -1824,13 +1833,15 @@ if __name__ == '__main__':
         if color.get(voice_agent):
             if not color.get(voice_agent).get('is_rgb'):
                 color_list.append(color)
+                print(color['name'], color[voice_agent]['color_values'])
 
-    for color in color_list:
-        print(color['name'], color[voice_agent]['color_values'])
+    # for color in supported_colors_list:
+    #     if color.get(voice_agent):
+    #         if color.get(voice_agent).get('color_values'):
+    #             print(color['name'], color[voice_agent]['color_values'])
+        # print(color['name'], color[voice_agent]['color_values'])
 
     print('color_list length: ', len(color_list))
 
 else:
     print('Successfully imported supported colors.py')
-
-

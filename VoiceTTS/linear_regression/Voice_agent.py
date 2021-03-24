@@ -1,25 +1,4 @@
-# Google Cloud Text-to-speech Standard Voices
-# en-US-Standard-B  MALE    Fairly decent performance
-# en-US-Standard-C  FEMALE  X
-# en-US-Standard-D  MALE    X
-# en-US-Standard-E  FEMALE  So far so good
-# en-US-Standard-G  FEMALE
-# en-US-Standard-H  FEMALE
-# en-US-Standard-I  MALE
-# en-US-Standard-J  MALE
-
-# Google Cloud Text-to-speech Wavenet Voices
-# en-US-Wavenet-A  MALE
-# en-US-Wavenet-B  MALE
-# en-US-Wavenet-C  FEMALE
-# en-US-Wavenet-D  MALE
-# en-US-Wavenet-E  FEMALE
-# en-US-Wavenet-G  FEMALE
-# en-US-Wavenet-H  FEMALE
-# en-US-Wavenet-I  MALE
-# en-US-Wavenet-J  MALE
-
-from supported_colors import supported_colors_list
+pipfrom supported_colors import supported_colors_list
 import os
 import subprocess
 import pathlib
@@ -70,9 +49,8 @@ class Voice_agent:
             synthesis_input = texttospeech.SynthesisInput(ssml=ssml_text)
             voice = texttospeech.VoiceSelectionParams(
                 language_code="en-US",
-                name="en-US-Wavenet-C",
-                # ssml_gender=texttospeech.SsmlVoiceGender.MALE
-                ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+                name="en-US-Standard-B",
+                ssml_gender=texttospeech.SsmlVoiceGender.MALE
             )
             audio_config = texttospeech.AudioConfig(
                 audio_encoding=texttospeech.AudioEncoding.MP3
@@ -82,7 +60,7 @@ class Voice_agent:
             attempts = 0
             audio_content = False
             while attempts < 3 and not audio_content:
-                print('TTS attempts =', attempts)
+                print(attempts)
                 try:
                     _response = self.client.synthesize_speech(
                         input=synthesis_input, voice=voice, audio_config=audio_config
