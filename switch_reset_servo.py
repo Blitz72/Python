@@ -5,7 +5,7 @@ kit = ServoKit(channels=16)
 
 start_angle = 90
 reset_angle = 0
-
+ 
 def reset(start_angle, reset_angle, delay):
     '''Reset a Cync switch using a servo!  What could go wrong!
 
@@ -27,4 +27,4 @@ def reset(start_angle, reset_angle, delay):
     time.sleep(1)
 
 
-reset(start_angle, reset_angle, 5)
+reset(start_angle, reset_angle, 13)

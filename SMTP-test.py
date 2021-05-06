@@ -4,7 +4,7 @@ import getpass
 smtp_server = 'smtp.mail.yahoo.com'
 port = 587
 sender_email = 'bauer.david@att.net'
-receiver_email = 'mathew.sommers@ge.com'
+receiver_email = 'firstname.lastname@example.com'
 password = getpass.getpass(prompt='Type password and press enter: ', stream=None)
 message = """\
 Subject: Hulllooo!
