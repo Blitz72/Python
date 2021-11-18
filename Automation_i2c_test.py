@@ -13,8 +13,6 @@ IO_IODIRB = 0x01    # address of I/O direction register for PORT B
 IO_GPIOA = 0x12     # address of GPIO PORT A register 
 IO_GPIOB = 0x13     # address of GPIO PORT B register
 
-# time_delay = 0.5  # used for cycle_outputs()
-
 
 # assign configuration varaibles based on relay number
 def get_config(relay_num):
@@ -55,34 +53,34 @@ def all_outputs_on():
 
 
 # for early testing of MCP23017 boards, not to be used when testing individual 120VAC loads
-# def cycle_outputs():
-#     
-#     for y in range(10):
-#         for x in range(8):
-#             bus.write_byte_data(IO_ADDRESS1, IO_GPIOA, 1<<x)
-#             sleep(time_delay)
-#         bus.write_byte_data(IO_ADDRESS1, IO_GPIOA, 0)
-#         for x in range(8):
-#             bus.write_byte_data(IO_ADDRESS1, IO_GPIOB, 1<<x)
-#             sleep(time_delay)
-#         bus.write_byte_data(IO_ADDRESS1, IO_GPIOB, 0)
-#         for x in range(8):
-#             bus.write_byte_data(IO_ADDRESS2, IO_GPIOA, 1<<x)
-#             sleep(time_delay)
-#         bus.write_byte_data(IO_ADDRESS2, IO_GPIOA, 0)
+def cycle_outputs(time_delay=10, iterations=1):
+    
+    for y in range(iterations):
+        for x in range(8):
+            bus.write_byte_data(IO_ADDRESS1, IO_GPIOA, 1<<x)
+            sleep(time_delay)
+        bus.write_byte_data(IO_ADDRESS1, IO_GPIOA, 0)
+        for x in range(8):
+            bus.write_byte_data(IO_ADDRESS1, IO_GPIOB, 1<<x)
+            sleep(time_delay)
+        bus.write_byte_data(IO_ADDRESS1, IO_GPIOB, 0)
+        for x in range(8):
+            bus.write_byte_data(IO_ADDRESS2, IO_GPIOA, 1<<x)
+            sleep(time_delay)
+        bus.write_byte_data(IO_ADDRESS2, IO_GPIOA, 0)
 
 
 # reset all devices in bay using V2 sequence
-# def reset_all():
-#     """Reset all devices in the bay using the C by GE V2 sequence."""
-#     clear_outputs()
-#     sleep(5)
-#     for x in range(5):
-#         all_outputs_on()
-#         sleep(8)
-#         clear_outputs()
-#         sleep(2)
-#     all_outputs_on()
+def reset_all():
+    """Reset all devices in the bay using the C by GE V2 sequence."""
+    clear_outputs()
+    sleep(5)
+    for x in range(5):
+        all_outputs_on()
+        sleep(8)
+        clear_outputs()
+        sleep(2)
+    all_outputs_on()
     
 
 # b = bus.read_byte_data(IO_ADDRESS2, IO_GPIOA)
@@ -228,4 +226,3 @@ except Exception as ex:
 # reset_all()
 # clear_outputs()
 # cycle_outputs()
-
