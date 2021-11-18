@@ -70,3 +70,50 @@
 # # t2 = time.time()
 
 # print("Completed in {} seconds".format(t2 - t1))
+
+###############################################################
+
+# Generators in Python || Python Tutorial || Learn Python Programming
+# Socratica
+
+# https://www.youtube.com/watch?v=gMompY5MyPg
+
+###############################################################
+
+# import string
+
+# def letters():
+#     for c in string.ascii_lowercase:
+#         yield c
+#     for c_upper in string.ascii_uppercase:
+#         yield c_upper
+
+# for letter in letters():
+#     print(letter)
+
+import itertools
+
+
+def prime_numbers():
+    yield 2
+    prime_cache = [2]
+
+    for n in itertools.count(3, 2):
+        is_prime = True
+        print('n =', n)
+
+        for p in prime_cache:
+            if n % p == 0:
+                is_prime = False
+                break
+
+        if is_prime:
+            prime_cache.append(n)
+            yield n
+        print('prime_cache =', prime_cache)
+
+
+for p in prime_numbers():
+    print('p =', p)
+    if p > 30:
+        break
