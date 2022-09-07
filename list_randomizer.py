@@ -12,7 +12,7 @@ import random
 # print(randomized_list)
 
 # constants = (0, 5, 15, 70, 100)
-constants = (10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+constants = (0, 10, 20, 30, 40, 50, 60, 70, 80, 90)
 
 my_list = [10, 20, 30, 40, 50]
 random.shuffle(my_list)
@@ -34,9 +34,12 @@ def randomize():
 
 previous_list = randomize()
 for x in range(3):
-    current = 0
     randomized_list = randomize()
-    while previous_list[-1] == randomized_list[0]:
+    while previous_list[-1] == randomized_list[0] and x < 2:
         randomized_list = randomize()
+    if x == 2:
+        randomized_list = randomize()
+        while previous_list[-1] == randomized_list[0] or randomized_list[-1] == 0:
+            randomized_list = randomize()
     previous_list = randomized_list
     print('randomized_list =', randomized_list)
