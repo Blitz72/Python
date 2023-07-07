@@ -157,6 +157,7 @@ def print_matrix(matrix):
         for x in range(len(row)):
             largest = largest_in_col(matrix, x)
             largest = largest if largest != 0 else 1
+            row[x] = round(row[x], 1) if round(row[x], 1) != 0.0 else abs(round(row[x], 1))
             value = row[x] if row[x] != 0 else 1    # log10(num), where num is not zero
             end = ' ' * (floor(log10(largest)) - floor(log10(value)) + 1) 
             print(row[x], end=end)
