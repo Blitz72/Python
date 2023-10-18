@@ -1,3 +1,5 @@
+# Sometimes I like to leave files like this in this repo to let me know I've improved!!!
+
 import random
 
 # seeds = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
