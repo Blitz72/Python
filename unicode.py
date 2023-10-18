@@ -7,3 +7,4 @@ args = parser.parse_args()
 char_num = int(args.char) if args.char else 0
 mystring = '  '.join(f"{chr(char_num + i)} {char_num + i}" for i in range(100))
 print(mystring)
+print(chr(0x03), chr(0x04), chr(0x05), chr(0x06))
