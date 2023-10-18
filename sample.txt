@@ -1,1 +1,0 @@
-In this Python Programming Tutorial, we will be learning how to use context managers to properly manage resources.
