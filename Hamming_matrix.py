@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # This Python program is inspired from implementing the logic behind matrix
 # multiplication as found on the Wikipedia site:
 # https://en.wikipedia.org/wiki/Matrix_multiplication#
