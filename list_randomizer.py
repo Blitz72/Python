@@ -20,7 +20,7 @@ random.shuffle(my_list)
 print(my_list)
 
 # print(random.seed(a=bytes('dave is cooler!', 'utf-8'), version=2))
-def randomize() -> list:
+def randomize() -> list[list[int]]:
     """
     Randoomizes a list of brightness values from a tuple of brightness value items.
 
