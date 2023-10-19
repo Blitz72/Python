@@ -1,14 +1,18 @@
 #!/usr/bin/python3
 
-# Rnadomize multiple successive lists so that the first value of the next list 
-# is different from the last value of the preceding list.
+"""
+list_randomizer.py:
+
+Rnadomize multiple successive lists so that the first value of the next list 
+is different from the last value of the preceding list.
+"""
 
 import random
 
 # Standard values for Cync Voice agent Automated Testing
 # constants = (0, 5, 15, 70, 100)
 
-constants = (0, 10, 20, 30, 40, 50, 60, 70, 80, 90)
+constants = (0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 
 # Python already has a great list randomizer!
 my_list = [10, 20, 30, 40, 50]
@@ -16,7 +20,15 @@ random.shuffle(my_list)
 print(my_list)
 
 # print(random.seed(a=bytes('dave is cooler!', 'utf-8'), version=2))
-def randomize():
+def randomize() -> list:
+    """
+    Randoomizes a list of brightness values from a tuple of brightness value items.
+
+    Args:
+        None:
+    Returns:
+        list: randomized values from a tuple.
+    """
     seeds = []
     for value in constants:
         seeds.append(value)
@@ -37,3 +49,5 @@ if __name__ == "__main__":
             print("re-randomizing")  # sometimes it re-randomizes
         previous_list = randomized_list
         print('randomized_list =', randomized_list)
+
+    print(randomize.__doc__)
