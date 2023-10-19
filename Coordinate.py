@@ -1,5 +1,19 @@
+#!/usr/bin/python3
+
 class Coordinate(object):
+	"""
+	A class for handling rectangular vector coordinates and basic vector math.
+	"""
 	def __init__(self, x, y):
+		"""
+		Initializes a rectangular coordinate.
+
+		Args:
+			x (int): The x value of the Coordinate.
+			y (int): The y value of the Coordinate.
+		Returns:
+			None:
+		"""
 		self.x = x
 		self.y = y
 
@@ -16,16 +30,42 @@ class Coordinate(object):
 		return Coordinate.vector_sub(a, b)
 
 	def distance_from(self, other):
+		"""
+		Calculates the distance from this Coordinate to another Coordinate.
+
+		Args:
+			other (Coordinate): The Coordinate from which distance is calculated.
+		Returns:
+			float: The distance between the two Coordinates.
+		"""
 		dist_x_sq = (self.x - other.x) ** 2
 		dist_y_sq = (self.y - other.y) ** 2
 		return (dist_x_sq + dist_y_sq) ** 0.5
 
 	def vector_add(self, other):
+		"""
+		Adds two Coordinate vectors together.
+
+		Args:
+			other (Coordinate): The Coordinate to be added to this Coordinate.
+		Returns:
+			Coordinate: The value of the summed Coordinates.
+		"""
 		new_x = self.x + other.x
 		new_y = self.y + other.y
 		return Coordinate(new_x, new_y)
 
 	def vector_sub(self, other):
+		"""
+		Subtracts two Coordinate vectors.
+
+		Args:
+			other (Coordinate): The Coordinate to be subtracted from this
+			                    Coordinate.
+		Returns:
+			Coordinate: The value of subtracting the two 
+			Coordinates.
+		"""
 		new_x = self.x - other.x
 		new_y = self.y - other.y
 		return Coordinate(new_x, new_y)
