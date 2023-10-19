@@ -50,7 +50,7 @@ def set_power(mac, on_or_off, meshname, meshpass):
     return {'success': success, 'data': None}
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     while True:
         gesture = apds.gesture()
         if gesture == 0x01:
