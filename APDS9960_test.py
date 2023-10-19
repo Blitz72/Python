@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from board import SCL, SDA
 import busio
 from adafruit_apds9960.apds9960 import APDS9960
@@ -48,17 +50,18 @@ def set_power(mac, on_or_off, meshname, meshpass):
     return {'success': success, 'data': None}
 
 
-while True:
-    gesture = apds.gesture()
-    if gesture == 0x01:
-        print("up")
-        set_power(MAC_ADDRESS, 'on', MESH_NAME, MESH_PASS)
-    elif gesture == 0x02:
-        print("down")
-        set_power(MAC_ADDRESS, 'off', MESH_NAME, MESH_PASS)
-    elif gesture == 0x03:
-        print("left")
-        set_power(MAC_ADDRESS, 'off', MESH_NAME, MESH_PASS)
-    elif gesture == 0x04:
-        print("right")
-        set_power(MAC_ADDRESS, 'on', MESH_NAME, MESH_PASS)
+if __name__ = '__main__':
+    while True:
+        gesture = apds.gesture()
+        if gesture == 0x01:
+            print("up")
+            set_power(MAC_ADDRESS, 'on', MESH_NAME, MESH_PASS)
+        elif gesture == 0x02:
+            print("down")
+            set_power(MAC_ADDRESS, 'off', MESH_NAME, MESH_PASS)
+        elif gesture == 0x03:
+            print("left")
+            set_power(MAC_ADDRESS, 'off', MESH_NAME, MESH_PASS)
+        elif gesture == 0x04:
+            print("right")
+            set_power(MAC_ADDRESS, 'on', MESH_NAME, MESH_PASS)
