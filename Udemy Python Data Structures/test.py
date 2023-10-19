@@ -24,7 +24,7 @@ class Student:
         print('Grades:', self.__marks)
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     S = Student('John', 101)
     S2 = Student('Dave', 102)
     
