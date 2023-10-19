@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 
-# This Python program is inspired from implementing the logic behind matrix
-# multiplication as found on the Wikipedia site:
-# https://en.wikipedia.org/wiki/Matrix_multiplication#
+"""
+This Python program is inspired from implementing the logic behind matrix
+multiplication as found on the Wikipedia site:
+https://en.wikipedia.org/wiki/Matrix_multiplication#
 
-# Then further expanded by implementing Hamming(7, 4) and Hamming(15, 11) codes
-# as found on the following site:
-# https://en.wikipedia.org/wiki/Hamming(7,4)#
-
+Then further expanded by implementing Hamming(7, 4) and Hamming(15, 11) codes
+as found on the following site:
+https://en.wikipedia.org/wiki/Hamming(7,4)#
+"""
 
 import random
 
