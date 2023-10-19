@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 matrix_A = [
     [1, 0, 1],
     [2, 1, 1],
@@ -41,18 +43,19 @@ def print_matrix(matrix):
         print('|')
     print()
 
-print_matrix(matrix_A)
-print_matrix(matrix_B)
-
-matrix_C = matrix_mult(matrix_A, matrix_B)
-print_matrix(matrix_C)
-
-matrix_D = [
-    [100],
-    [80],
-    [60]
-]
-print_matrix(matrix_D)
-
-matrix_E = matrix_mult(matrix_C, matrix_D)
-print_matrix(matrix_E)
+if __name__ == "__main__":
+    print_matrix(matrix_A)
+    print_matrix(matrix_B)
+    
+    matrix_C = matrix_mult(matrix_A, matrix_B)
+    print_matrix(matrix_C)
+    
+    matrix_D = [
+        [100],
+        [80],
+        [60]
+    ]
+    print_matrix(matrix_D)
+    
+    matrix_E = matrix_mult(matrix_C, matrix_D)
+    print_matrix(matrix_E)
