@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import random
 
 x_init = 1000
@@ -26,12 +28,6 @@ def init(x_init, a):
 def kalman(x_vals, z_vals):
     pass
 
-x_vals, z_vals = init(x_init, a)
-print(x_vals)
-print(z_vals)
-
-
-
 def predict(x_prev, p_prev):
     x_hat = a * x_prev
     p = a * p_prev * a
@@ -44,7 +40,13 @@ def update(p, z_prev, x_prev):
     p = (1 - g) * p
     return z, x_hat, g, p
 
-# for x in range(10):
-#     x_hat, p = predict(x_prev, p_prev)
-#     z, x_prev, g, p_prev = update(p, z_prev, x_hat)
-#     print('x=', x_hat, 'z=', z, 'p=', p_prev, 'g=', g)
+
+if __name__ = '__main__':
+    x_vals, z_vals = init(x_init, a)
+    print(x_vals)
+    print(z_vals)
+    
+    # for x in range(10):
+    #     x_hat, p = predict(x_prev, p_prev)
+    #     z, x_prev, g, p_prev = update(p, z_prev, x_hat)
+    #     print('x=', x_hat, 'z=', z, 'p=', p_prev, 'g=', g)
