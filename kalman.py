@@ -41,7 +41,7 @@ def update(p, z_prev, x_prev):
     return z, x_hat, g, p
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     x_vals, z_vals = init(x_init, a)
     print(x_vals)
     print(z_vals)
