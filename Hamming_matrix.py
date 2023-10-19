@@ -236,9 +236,37 @@ if __name__ == '__main__':
     for i in range(len(hamming_result_11_15[0])):
         hamming_result_11_15[0][i] %= 2
     print_matrix(data_11_15)
+    # print("hamming_result_11_15: ", hamming_result_11_15, end='')
+    print_matrix(hamming_result_11_15)
+
+    print("Let's a flip a random bit... ;)")
+    rand_int = random.randint(0, 14)
+    if hamming_result_11_15[0][rand_int] == 0:
+        hamming_result_11_15[0][rand_int] = 1
+    else:
+        hamming_result_11_15[0][rand_int] = 0
     print_matrix(hamming_result_11_15)
 
     hamming_parity_check_11_15 = matrix_mult(hamming_result_11_15, hamming_11_15_H)
-    for i in range(len(hamming_parity_check_11_15[0])):
+    row_length = len(hamming_parity_check_11_15[0])
+    # print(row_length)
+
+    for i in range(row_length):
         hamming_parity_check_11_15[0][i] %= 2
+    
+    hamming_parity_check_11_15[0].reverse()
     print_matrix(hamming_parity_check_11_15)
+
+
+    # matrix_a = [
+    #     [4, 7],
+    #     [2, 6]
+    # ]
+
+    # matrix_b = [
+    #     [0.6, -0.7],
+    #     [-0.2, 0.4]
+    # ]
+
+    # matrix_c = matrix_mult(matrix_a, matrix_b)
+    # print_matrix(matrix_c)
