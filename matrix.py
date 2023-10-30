@@ -22,24 +22,32 @@ def matrix_mult(matrix_a, matrix_b):
     return matrix_c
 
 def largest_in_col(matrix, col):
+    neg = False
     largest = 0
     for row in matrix:
-        if row[col] > largest:
-            largest = row[col]
-    return largest
+        if abs(row[col]) > largest:
+            largest = abs(row[col])
+        if row[col] < 0:
+            neg = True
+    return largest, neg
 
-def print_matrix(matrix):
+def print_matrix(matrix, places=0):
     from math import floor, log10
-    end = ' '
+    neg = False
     for row in matrix:
         print('|', end=' ')
         for x in range(len(row)):
-            largest = largest_in_col(matrix, x)
-            largest = largest if largest != 0 else 1
-            row[x] = round(row[x], 1) if round(row[x], 1) != 0.0 else abs(round(row[x], 1))
-            value = row[x] if row[x] != 0 else 1    # log10(num), where num is not zero
-            end = ' ' * (floor(log10(largest)) - floor(log10(value)) + 1) 
-            print(row[x], end=end)
+            largest, neg = largest_in_col(matrix, x)
+            if neg:
+                fmt_str = '{: .' +str(places) + 'f}'
+            else:
+                fmt_str = '{:.' +str(places) + 'f}'
+            largest = round(largest, places) if round(largest, places) != 0.0 else 1
+            row[x] = round(row[x], places) if round(row[x], places) != 0.0 else abs(round(row[x], places))
+            value = round(row[x], places) if round(row[x], places) != 0.0 else 1    # log10(num), where num is not zero
+            end = ' ' * (floor(log10(abs(largest))) - floor(log10(abs(value))) + 1)
+            num = fmt_str.format(row[x])
+            print(num, end=end)
         print('|')
     print()
 
