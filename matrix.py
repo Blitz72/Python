@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from math import floor, log10
 
 def matrix_mult(matrix_a, matrix_b):
     matrix_c = [ [0] * len(matrix_b[0]) for _ in range(len(matrix_a))]
@@ -21,7 +22,6 @@ def largest_in_col(matrix, col):
     return largest, neg
 
 def print_matrix(matrix, places=0):
-    from math import floor, log10
     neg = False
     for row in matrix:
         print('|', end=' ')
