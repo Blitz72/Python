@@ -1,16 +1,5 @@
 #!/usr/bin/python3
 
-matrix_A = [
-    [1, 0, 1],
-    [2, 1, 1],
-    [0, 1, 1],
-    [1, 1, 2],
-]
-matrix_B = [
-    [1, 2, 1],
-    [2, 3, 1],
-    [4, 2, 2]
-]
 
 def matrix_mult(matrix_a, matrix_b):
     matrix_c = [ [0] * len(matrix_b[0]) for _ in range(len(matrix_a))]
@@ -52,6 +41,17 @@ def print_matrix(matrix, places=0):
     print()
 
 if __name__ == "__main__":
+    matrix_A = [
+        [1, 0, 1],
+        [2, 1, 1],
+        [0, 1, 1],
+        [1, 1, 2],
+    ]
+    matrix_B = [
+        [1, 2, 1],
+        [2, 3, 1],
+        [4, 2, 2]
+    ]
     print_matrix(matrix_A)
     print_matrix(matrix_B)
     
