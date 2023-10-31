@@ -49,7 +49,7 @@ if __name__ == "__main__":
     ]
     matrix_B = [
         [1, 2, 1],
-        [2, 3, 1],
+        [2, -3, 1],
         [4, 2, 2]
     ]
     print_matrix(matrix_A)
@@ -67,3 +67,18 @@ if __name__ == "__main__":
     
     matrix_E = matrix_mult(matrix_C, matrix_D)
     print_matrix(matrix_E)
+
+
+    matrix_F = [
+        [4, 7],
+        [2, 6]
+    ]
+
+    matrix_G = [
+        [0.6, -0.7],
+        [-0.2, 0.4]
+    ]
+
+    matrix_H = matrix_mult(matrix_F, matrix_G)
+    print(matrix_H)
+    print_matrix(matrix_H)
