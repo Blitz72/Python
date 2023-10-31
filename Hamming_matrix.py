@@ -137,37 +137,6 @@ data_11_15 = [
     [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-# def matrix_mult(matrix_a, matrix_b):
-#     matrix_c = [ [0] * len(matrix_b[0]) for _ in range(len(matrix_a))]
-#     # print_matrix(matrix_c)
-#     for y in range(len(matrix_a)):
-#         for x in range(len(matrix_b[0])):
-#             for z in range(len(matrix_a[0])):
-#                 matrix_c[y][x] += matrix_a[y][z] * matrix_b[z][x]
-#     return matrix_c
-
-# def largest_in_col(matrix, col):
-#     largest = 0
-#     for row in matrix:
-#         if row[col] > largest:
-#             largest = row[col]
-#     return largest
-
-# def print_matrix(matrix):
-#     from math import floor, log10
-#     end = ' '
-#     for row in matrix:
-#         print('|', end=' ')
-#         for x in range(len(row)):
-#             largest = largest_in_col(matrix, x)
-#             largest = largest if largest != 0 else 1
-#             row[x] = round(row[x], 1) if round(row[x], 1) != 0.0 else abs(round(row[x], 1))
-#             value = row[x] if row[x] != 0 else 1    # log10(num), where num is not zero
-#             end = ' ' * (floor(log10(largest)) - floor(log10(value)) + 1) 
-#             print(row[x], end=end)
-#         print('|')
-#     print()
-
 
 if __name__ == '__main__':
     hamming_result_7_4 = mat.matrix_mult(hamming_7_4_G, data_7_4)
@@ -257,18 +226,3 @@ if __name__ == '__main__':
     
     hamming_parity_check_11_15[0].reverse()
     mat.print_matrix(hamming_parity_check_11_15)
-
-
-    matrix_a = [
-        [4, 7],
-        [2, 6]
-    ]
-
-    matrix_b = [
-        [0.6, -0.7],
-        [-0.2, 0.4]
-    ]
-
-    matrix_c = mat.matrix_mult(matrix_a, matrix_b)
-    print(matrix_c)
-    mat.print_matrix(matrix_c)
