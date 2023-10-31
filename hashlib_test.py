@@ -2,8 +2,8 @@ import hashlib
 from hmac import compare_digest
 
 m = hashlib.sha256()
-m.update(b'Davey smells,')
-m.update(b' really bad, dude!')  # same as m.update(b'Davey smells, really bad, dude!')
+m.update(b'Davey rocks,')
+m.update(b' he is a really cool dude!')  # same as m.update(b'Davey rocks, he is a really cool dude!')
 
 print(m.digest())
 print(m.hexdigest())
