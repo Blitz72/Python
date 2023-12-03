@@ -10,8 +10,8 @@ as found on the following site:
 https://en.wikipedia.org/wiki/Hamming(7,4)#
 """
 
-import random
 import matrix as mat
+import inquirer
 
 
 # Hamming(7, 4) Generator Matrix
@@ -112,35 +112,6 @@ hamming_11_15_H = [
     [1, 1, 1, 1]
 ]
 
-data_7_4 = [
-    [1],
-    [0],
-    [0],
-    [0]
-]
-
-data_4_7 = [
-    [0, 1, 1, 0]
-]
-
-data_15_11 = [
-    [1],
-    [0],
-    [1],
-    [1],
-    [0],
-    [0],
-    [1],
-    [0],
-    [1],
-    [1],
-    [1]
-]
-
-data_11_15 = [
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-]
-
 def parity_mod_2(_matrix):
     for element in _matrix:
         if isinstance(element, list):
@@ -152,94 +123,101 @@ def parity_mod_2(_matrix):
         else:
             element %= 2
 
+def Hamming_code(_options):
+    bit_depth = _options['bit_depth']
+    extra_parity = _options['extra_parity']
 
-if __name__ == '__main__':
-    hamming_result_7_4 = mat.matrix_mult(hamming_7_4_G, data_7_4)
-    parity_mod_2(hamming_result_7_4)
-
-    print(f"Hamming(7, 4) result of {data_7_4[0][0]}{data_7_4[1][0]}{data_7_4[2][0]}{data_7_4[3][0]}:")
-    mat.print_matrix(hamming_result_7_4)
-
-    hamming_parity_check = mat.matrix_mult(hamming_7_4_H, hamming_result_7_4)
-    parity_mod_2(hamming_parity_check)
-
-    print("Hamming parity check of previous result:")
-    mat.print_matrix(hamming_parity_check)
-
-    hamming_result_15_11 = mat.matrix_mult(hamming_15_11_G, data_15_11)
-    parity_mod_2(hamming_result_15_11)
-
-    print("Hamming(15, 11) result of ", end='')
-    for i in range (len(data_15_11) - 1):
-        print(f"{data_15_11[i][0]}", end='')
-    print(f"{data_15_11[len(data_15_11) - 1][0]}:")
-    mat.print_matrix(hamming_result_15_11)
-
-    # Flip a random bit in the data_11 sequence and print the matrix for comparison
-    rand_int = random.randint(0, 14)
-    if hamming_result_15_11[rand_int][0] == 0:
-        hamming_result_15_11[rand_int][0] = 1
+    if bit_depth == 4:
+        hamming_matrix = hamming_4_7_G
+        value = input('Enter a hexadecimal number betwween 0x0 and 0xf to encode:\n')
+        while int(value, 16) > 15 or int(value, 16) < 0:
+            value = input('Please enter a value between 0x0 and 0xf:\n')
     else:
-        hamming_result_15_11[rand_int][0] = 0
-
-    print("Let's a flip a random bit... ;)")
-    mat.print_matrix(hamming_result_15_11)
-
-    hamming_parity_check = mat.matrix_mult(hamming_15_11_H, hamming_result_15_11)
-    parity_mod_2(hamming_parity_check)
-
-    print("We'll use the parity check matrix to find out which bit was flipped!")
-    print("Hamming parity check of previous result:")
-    mat.print_matrix(hamming_parity_check)
-
-    index = 0
-    for i in range(len(hamming_parity_check)):
-        index += pow(2, i) * hamming_parity_check[i][0]
-    print(f"The bit in position {index} was flipped!!!")
-    print('-----------------------------\n')
-
-    hamming_result_4_7 = mat.matrix_mult(data_4_7, hamming_4_7_G)
-    parity_mod_2(hamming_result_4_7)
-    mat.print_matrix(data_4_7)
-    mat.print_matrix(hamming_result_4_7)
-
-    hamming_parity_check_4_7 = mat.matrix_mult(hamming_result_4_7, hamming_4_7_H)
-    parity_mod_2(hamming_parity_check_4_7)
-    mat.print_matrix(hamming_parity_check_4_7)
-
-    hamming_result_11_15 = mat.matrix_mult(data_11_15, hamming_11_15_G)
-    parity_mod_2(hamming_result_11_15)
-    mat.print_matrix(data_11_15)
-    mat.print_matrix(hamming_result_11_15)
-
-    print("Let's a flip a random bit... ;)")
-    rand_int = random.randint(0, 14)
-    if hamming_result_11_15[0][rand_int] == 0:
-        hamming_result_11_15[0][rand_int] = 1
-    else:
-        hamming_result_11_15[0][rand_int] = 0
-    mat.print_matrix(hamming_result_11_15)
-
-    hamming_parity_check_11_15 = mat.matrix_mult(hamming_result_11_15, hamming_11_15_H)
-    parity_mod_2(hamming_parity_check_11_15)
-    mat.print_matrix(hamming_parity_check_11_15)
-
-    value = input('Enter a hexadecimal number betwween 0x0 and 0x7ff to encode:\n')
-    while int(value, 16) > 2047 or int(value, 16) < 0:
-        value = input('Please enter a value between 0x0 and 0x7ff:\n')
+        hamming_matrix = hamming_11_15_G
+        value = input('Enter a hexadecimal number betwween 0x0 and 0x7ff to encode:\n')
+        while int(value, 16) > 2047 or int(value, 16) < 0:
+            value = input('Please enter a value between 0x0 and 0x7ff:\n')
     value = int(value, 16)
-    print(bin(value))
 
     encode_val = []
 
-    for x in range(11):
+    for x in range(bit_depth):
         if value & 2**x:
             encode_val.append(1)
         else:
             encode_val.append(0)
-    
-    print(encode_val)
 
-    hamming_11_15_input = []
-    hamming_11_15_input.append(encode_val)
-    print(hamming_11_15_input)
+    hamming_input = []
+    hamming_input.append(encode_val)
+
+    encoding = mat.matrix_mult(hamming_input, hamming_matrix)
+    parity_mod_2(encoding)
+
+    if extra_parity:
+        parity = 0
+        for element in encoding[0]:
+            parity += element
+        encoding[0].append(parity % 2)
+
+    mat.print_matrix(encoding)
+
+    encoding_int = 0
+    for i in range(len(encoding[0])):
+        encoding_int += 2**i * encoding[0][i]
+    
+    return hex(encoding_int)
+
+def prompt():
+    choice_list = [
+        'Hamming(7, 4)',
+        'Hamming(8, 4)',
+        'Hamming(15, 11)',
+        'Hamming(16, 11)'
+    ]
+
+    query = [
+        inquirer.List(
+            'hamming_type',
+            message='What type of Hamming code would you like to use to encode a value?',
+            choices=choice_list
+        )
+    ]
+
+    answer = inquirer.prompt(query)
+
+    options = {}
+    if answer['hamming_type'] == choice_list[0]:
+        options = {
+            'extra_parity': False,
+            'bit_depth': 4
+        }
+    elif answer['hamming_type'] == choice_list[1]:
+        options = {
+            'extra_parity': True,
+            'bit_depth': 4
+        }
+    elif answer['hamming_type'] == choice_list[2]:
+        options = {
+            'extra_parity': False,
+            'bit_depth': 11
+        }
+    elif answer['hamming_type'] == choice_list[3]:
+        options = {
+            'extra_parity': True,
+            'bit_depth': 11
+        }
+
+    encoded_value = Hamming_code(options)
+    print(encoded_value, '\n')
+
+    choice = inquirer.confirm(
+        'Encode amother value?',
+        default=False
+    )
+
+    if choice:
+        prompt()
+
+
+if __name__ == '__main__':
+    prompt()
