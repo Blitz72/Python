@@ -25,13 +25,6 @@ hamming_7_4_G = [
     [0, 0, 0, 1]
 ]
 
-hamming_4_7_G = [
-    [1, 1, 1, 0, 0, 0, 0],
-    [1, 0, 0, 1, 1, 0, 0],
-    [0, 1, 0, 1, 0, 1, 0],
-    [1, 1, 0, 1, 0, 0, 1]
-]
-
 # Hamming(7, 4) Parity Check Matrix
 hamming_7_4_H = [
     [1, 0, 1, 0, 1, 0, 1],
@@ -39,6 +32,15 @@ hamming_7_4_H = [
     [0, 0, 0, 1, 1, 1, 1]
 ]
 
+# Hamming(4, 7) Generator Matrix
+hamming_4_7_G = [
+    [1, 1, 1, 0, 0, 0, 0],
+    [1, 0, 0, 1, 1, 0, 0],
+    [0, 1, 0, 1, 0, 1, 0],
+    [1, 1, 0, 1, 0, 0, 1]
+]
+
+# Hamming(4, 7) Parity Check Matrix
 hamming_4_7_H = [
     [1, 0, 0],
     [0, 1, 0],
@@ -68,6 +70,15 @@ hamming_15_11_G = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
 ]
 
+# Hamming(15, 11) Parity Check Matrix
+hamming_15_11_H = [
+    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+    [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1],
+    [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+]
+
+# Hamming(11, 15) Generator Matrix
 hamming_11_15_G = [
     [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -82,14 +93,7 @@ hamming_11_15_G = [
     [1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1]
 ]
 
-# Hamming(15, 11) Parity Check Matrix
-hamming_15_11_H = [
-    [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-    [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1],
-    [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
-]
-
+# Hamming(11, 15) Parity Check Matrix
 hamming_11_15_H = [
     [1, 0, 0, 0],
     [0, 1, 0, 0],
@@ -137,25 +141,33 @@ data_11_15 = [
     [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+def parity_mod_2(_matrix):
+    for element in _matrix:
+        if isinstance(element, list):
+            if len(element) > 1:
+                for x in range(len(element)):
+                    element[x] %= 2
+            else:
+                element[0] %= 2
+        else:
+            element %= 2
+
 
 if __name__ == '__main__':
     hamming_result_7_4 = mat.matrix_mult(hamming_7_4_G, data_7_4)
-    for result in hamming_result_7_4:
-        result[0] %= 2
+    parity_mod_2(hamming_result_7_4)
 
     print(f"Hamming(7, 4) result of {data_7_4[0][0]}{data_7_4[1][0]}{data_7_4[2][0]}{data_7_4[3][0]}:")
     mat.print_matrix(hamming_result_7_4)
 
     hamming_parity_check = mat.matrix_mult(hamming_7_4_H, hamming_result_7_4)
-    for result in hamming_parity_check:
-        result[0] %= 2
+    parity_mod_2(hamming_parity_check)
 
     print("Hamming parity check of previous result:")
     mat.print_matrix(hamming_parity_check)
 
     hamming_result_15_11 = mat.matrix_mult(hamming_15_11_G, data_15_11)
-    for result in hamming_result_15_11:
-        result[0] %= 2
+    parity_mod_2(hamming_result_15_11)
 
     print("Hamming(15, 11) result of ", end='')
     for i in range (len(data_15_11) - 1):
@@ -174,8 +186,7 @@ if __name__ == '__main__':
     mat.print_matrix(hamming_result_15_11)
 
     hamming_parity_check = mat.matrix_mult(hamming_15_11_H, hamming_result_15_11)
-    for result in hamming_parity_check:
-        result[0] %= 2
+    parity_mod_2(hamming_parity_check)
 
     print("We'll use the parity check matrix to find out which bit was flipped!")
     print("Hamming parity check of previous result:")
@@ -188,25 +199,17 @@ if __name__ == '__main__':
     print('-----------------------------\n')
 
     hamming_result_4_7 = mat.matrix_mult(data_4_7, hamming_4_7_G)
-    for result in hamming_result_4_7[0]:
-        result %= 2
-    for i in range(len(hamming_result_4_7[0])):
-        hamming_result_4_7[0][i] %= 2
+    parity_mod_2(hamming_result_4_7)
     mat.print_matrix(data_4_7)
     mat.print_matrix(hamming_result_4_7)
 
     hamming_parity_check_4_7 = mat.matrix_mult(hamming_result_4_7, hamming_4_7_H)
-    for i in range(len(hamming_parity_check_4_7[0])):
-        hamming_parity_check_4_7[0][i] %= 2
+    parity_mod_2(hamming_parity_check_4_7)
     mat.print_matrix(hamming_parity_check_4_7)
 
     hamming_result_11_15 = mat.matrix_mult(data_11_15, hamming_11_15_G)
-    for result in hamming_result_11_15[0]:
-        result %= 2
-    for i in range(len(hamming_result_11_15[0])):
-        hamming_result_11_15[0][i] %= 2
+    parity_mod_2(hamming_result_11_15)
     mat.print_matrix(data_11_15)
-    # print("hamming_result_11_15: ", hamming_result_11_15, end='')
     mat.print_matrix(hamming_result_11_15)
 
     print("Let's a flip a random bit... ;)")
@@ -218,11 +221,25 @@ if __name__ == '__main__':
     mat.print_matrix(hamming_result_11_15)
 
     hamming_parity_check_11_15 = mat.matrix_mult(hamming_result_11_15, hamming_11_15_H)
-    row_length = len(hamming_parity_check_11_15[0])
-    # print(row_length)
-
-    for i in range(row_length):
-        hamming_parity_check_11_15[0][i] %= 2
-    
-    hamming_parity_check_11_15[0].reverse()
+    parity_mod_2(hamming_parity_check_11_15)
     mat.print_matrix(hamming_parity_check_11_15)
+
+    value = input('Enter a hexadecimal number betwween 0x0 and 0x7ff to encode:\n')
+    while int(value, 16) > 2047 or int(value, 16) < 0:
+        value = input('Please enter a value between 0x0 and 0x7ff:\n')
+    value = int(value, 16)
+    print(bin(value))
+
+    encode_val = []
+
+    for x in range(11):
+        if value & 2**x:
+            encode_val.append(1)
+        else:
+            encode_val.append(0)
+    
+    print(encode_val)
+
+    hamming_11_15_input = []
+    hamming_11_15_input.append(encode_val)
+    print(hamming_11_15_input)
