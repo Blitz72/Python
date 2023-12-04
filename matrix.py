@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+This Python program is inspired from implementing the logic behind matrix
+multiplication as found on the Wikipedia site:
+https://en.wikipedia.org/wiki/Matrix_multiplication#
+"""
+
 from math import floor, log10
 
 def matrix_mult(matrix_a, matrix_b):
