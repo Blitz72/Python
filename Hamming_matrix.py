@@ -29,25 +29,6 @@ hamming_7_4_H = [
     [0, 0, 0, 1, 1, 1, 1]
 ]
 
-# Hamming(4, 7) Generator Matrix
-hamming_4_7_G = [
-    [1, 1, 1, 0, 0, 0, 0],
-    [1, 0, 0, 1, 1, 0, 0],
-    [0, 1, 0, 1, 0, 1, 0],
-    [1, 1, 0, 1, 0, 0, 1]
-]
-
-# Hamming(4, 7) Parity Check Matrix
-hamming_4_7_H = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [1, 1, 0],
-    [0, 0, 1],
-    [1, 0, 1],
-    [0, 1, 1],
-    [1, 1, 1]
-]
-
 # Hamming(15, 11) Generator Matrix
 hamming_15_11_G = [
     [1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1],
@@ -75,40 +56,6 @@ hamming_15_11_H = [
     [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-# Hamming(11, 15) Generator Matrix
-hamming_11_15_G = [
-    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-    [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
-    [1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1]
-]
-
-# Hamming(11, 15) Parity Check Matrix
-hamming_11_15_H = [
-    [1, 0, 0, 0],
-    [0, 1, 0, 0],
-    [1, 1, 0, 0],
-    [0, 0, 1, 0],
-    [1, 0, 1, 0],
-    [0, 1, 1, 0],
-    [1, 1, 1, 0],
-    [0, 0, 0, 1],
-    [1, 0, 0, 1],
-    [0, 1, 0, 1],
-    [1, 1, 0, 1],
-    [0, 0, 1, 1],
-    [1, 0, 1, 1],
-    [0, 1, 1, 1],
-    [1, 1, 1, 1]
-]
-
 def parity_mod_2(_matrix):
     for element in _matrix:
         if isinstance(element, list):
@@ -125,42 +72,46 @@ def Hamming_code(_options):
     extra_parity = _options['extra_parity']
 
     if bit_depth == 4:
-        hamming_matrix = hamming_4_7_G
+        hamming_matrix = hamming_7_4_G
+        parity_check_matrix = hamming_7_4_H
         value = input('Enter a hexadecimal number betwween 0x0 and 0xf to encode:\n')
         while int(value, 16) > 15 or int(value, 16) < 0:
             value = input('Please enter a value between 0x0 and 0xf:\n')
     else:
-        hamming_matrix = hamming_11_15_G
+        hamming_matrix = hamming_15_11_G
+        parity_check_matrix = hamming_15_11_H
         value = input('Enter a hexadecimal number betwween 0x0 and 0x7ff to encode:\n')
         while int(value, 16) > 2047 or int(value, 16) < 0:
             value = input('Please enter a value between 0x0 and 0x7ff:\n')
     value = int(value, 16)
 
-    encode_val = []
+    value_to_encode = []
 
     for x in range(bit_depth):
         if value & 2**x:
-            encode_val.append(1)
+            value_to_encode.append([1])
         else:
-            encode_val.append(0)
+            value_to_encode.append([0])
 
-    hamming_input = []
-    hamming_input.append(encode_val)
-
-    encoding = mat.matrix_mult(hamming_input, hamming_matrix)
+    encoding = mat.matrix_mult(hamming_matrix, value_to_encode)
     parity_mod_2(encoding)
 
     if extra_parity:
         parity = 0
-        for element in encoding[0]:
-            parity += element
-        encoding[0].append(parity % 2)
+        for element in encoding:
+            parity += element[0]
+        encoding.append([parity % 2])
 
-    mat.print_matrix(encoding)
+    mat.print_matrix(mat.transpose_matrix(encoding))
+    '.;-.πæ[]'
+    parity_check = mat.matrix_mult(parity_check_matrix, encoding)
+    parity_mod_2(parity_check)
+    print('Parity check:')
+    mat.print_matrix(mat.transpose_matrix(parity_check))
 
     encoding_int = 0
-    for i in range(len(encoding[0])):
-        encoding_int += 2**i * encoding[0][i]
+    for i in range(len(encoding)):
+        encoding_int += 2**i * encoding[i][0]
     
     return hex(encoding_int)
 
@@ -205,6 +156,7 @@ def prompt():
         }
 
     encoded_value = Hamming_code(options)
+    print('Hamming encoded vale:')
     print(encoded_value, '\n')
 
     choice = inquirer.confirm(

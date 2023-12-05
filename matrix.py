@@ -8,31 +8,31 @@ https://en.wikipedia.org/wiki/Matrix_multiplication#
 
 from math import floor, log10
 
-def matrix_mult(matrix_a, matrix_b):
-    matrix_c = [ [0] * len(matrix_b[0]) for _ in range(len(matrix_a))]
+def matrix_mult(_matrix_a, _matrix_b) -> list:
+    matrix_c = [ [0] * len(_matrix_b[0]) for _ in range(len(_matrix_a))]
     # print_matrix(matrix_c)
-    for y in range(len(matrix_a)):
-        for x in range(len(matrix_b[0])):
-            for z in range(len(matrix_a[0])):
-                matrix_c[y][x] += matrix_a[y][z] * matrix_b[z][x]
+    for y in range(len(_matrix_a)):
+        for x in range(len(_matrix_b[0])):
+            for z in range(len(_matrix_a[0])):
+                matrix_c[y][x] += _matrix_a[y][z] * _matrix_b[z][x]
     return matrix_c
 
-def largest_in_col(matrix, col):
+def largest_in_col(_matrix, _col):
     neg = False
     largest = 0
-    for row in matrix:
-        if abs(row[col]) > largest:
-            largest = abs(row[col])
-        if row[col] < 0:
+    for row in _matrix:
+        if abs(row[_col]) > largest:
+            largest = abs(row[_col])
+        if row[_col] < 0:
             neg = True
     return largest, neg
 
-def print_matrix(matrix, places=0):
+def print_matrix(_matrix, places=0):
     neg = False
-    for row in matrix:
+    for row in _matrix:
         print('|', end=' ')
         for x in range(len(row)):
-            largest, neg = largest_in_col(matrix, x)
+            largest, neg = largest_in_col(_matrix, x)
             if neg:
                 fmt_str = '{: .' +str(places) + 'f}'
             else:
@@ -44,7 +44,13 @@ def print_matrix(matrix, places=0):
             num = fmt_str.format(row[x])
             print(num, end=end)
         print('|')
-    print()
+
+def transpose_matrix(_matrix) -> list:
+    matrix_transposed = [[0 for _ in range(len(_matrix))] for _ in range(len(_matrix[0]))]
+    for j in range(len(_matrix)):
+        for i in range(len(_matrix[0])):
+            matrix_transposed[i][j] = _matrix[j][i]
+    return matrix_transposed
 
 if __name__ == "__main__":
     matrix_A = [
@@ -86,5 +92,9 @@ if __name__ == "__main__":
     ]
 
     matrix_H = matrix_mult(matrix_F, matrix_G)
-    print(matrix_H)
+    # print(matrix_H)
     print_matrix(matrix_H)
+
+    matrix_A_trsnsposed = transpose_matrix(matrix_A)
+    print_matrix(matrix_A)
+    print_matrix(matrix_A_trsnsposed)
