@@ -160,7 +160,7 @@ def prompt():
     print(encoded_value, '\n')
 
     choice = inquirer.confirm(
-        'Encode amother value?',
+        'Encode another value?',
         default=False
     )
 
