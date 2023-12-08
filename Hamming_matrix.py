@@ -78,15 +78,15 @@ def Hamming_code(_options):
     if bit_depth == 4:
         hamming_matrix = hamming_7_4_G
         parity_check_matrix = hamming_7_4_H
-        value = input('Enter a hexadecimal number betwween 0x0 and 0xf to encode:\n')
+        value = input('Enter a hexadecimal number betwween 0x0 and 0xf inclusive to encode:\n')
         while int(value, 16) > 15 or int(value, 16) < 0:
-            value = input('Please enter a value between 0x0 and 0xf:\n')
+            value = input('Please enter a value between 0x0 and 0xf inclusive:\n')
     else:
         hamming_matrix = hamming_15_11_G
         parity_check_matrix = hamming_15_11_H
-        value = input('Enter a hexadecimal number betwween 0x0 and 0x7ff to encode:\n')
+        value = input('Enter a hexadecimal number betwween 0x0 and 0x7ff inclusive to encode:\n')
         while int(value, 16) > 2047 or int(value, 16) < 0:
-            value = input('Please enter a value between 0x0 and 0x7ff:\n')
+            value = input('Please enter a value between 0x0 and 0x7ff inclusive:\n')
     value = int(value, 16)
 
     value_to_encode = []
