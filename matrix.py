@@ -29,11 +29,11 @@ def print_matrix(_matrix, _places=0):
             largest = largest_dict[col]['largest']
             neg = largest_dict[col]['neg']
             largest = round(largest, _places) if round(largest, _places) != 0.0 else 1
-            row[col] = round(row[col], _places) if round(row[col], _places) != 0.0 else abs(round(row[col], _places))
-            value = round(row[col], _places) if round(row[col], _places) != 0.0 else 1    # log10(num), where num is not zero
-            end = ' ' * (floor(log10(abs(largest))) - floor(log10(abs(value))) + 1) if isinstance(value, int) else ' '
+            value_to_print = round(row[col], _places) if round(row[col], _places) != 0.0 else abs(round(row[col], _places))
+            value_for_end = round(row[col], _places) if round(row[col], _places) != 0.0 else 1    # log10(num), where num is not zero
+            end = ' ' * (floor(log10(abs(largest))) - floor(log10(abs(value_for_end))) + 1) if isinstance(value_for_end, int) else ' '
             fmt_str = '{: .' +str(_places) + 'f}' if neg else '{:.' +str(_places) + 'f}'
-            num = fmt_str.format(row[col])
+            num = fmt_str.format(value_to_print)
             print(num, end=end)
         print('|')
 
@@ -102,8 +102,11 @@ if __name__ == "__main__":
     ]
 
     matrix_I = mult_matrix(matrix_F, matrix_G)
-    # print(matrix_I)
+    print(matrix_I)
     print_matrix(matrix_I, _places=20)
+    print()
+    print_matrix(matrix_I, _places=0)
+    print(matrix_I)
     print()
 
     matrix_J = mult_matrix(matrix_G, matrix_H)
