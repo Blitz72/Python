@@ -93,7 +93,7 @@ def Hamming_code(_options):
         else:
             value_to_encode.append([0])
 
-    encoding = mat.matrix_mult(hamming_matrix, value_to_encode)
+    encoding = mat.mult_matrix(hamming_matrix, value_to_encode)
     parity_mod_2(encoding)
 
     if extra_parity:
@@ -104,7 +104,7 @@ def Hamming_code(_options):
 
     mat.print_matrix(mat.transpose_matrix(encoding))
     '.;-.πæ[]'
-    parity_check = mat.matrix_mult(parity_check_matrix, encoding)
+    parity_check = mat.mult_matrix(parity_check_matrix, encoding)
     parity_mod_2(parity_check)
     print('Parity check:')
     mat.print_matrix(mat.transpose_matrix(parity_check))
