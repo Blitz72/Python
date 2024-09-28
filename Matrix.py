@@ -15,6 +15,28 @@ class Matrix:
         _rows: int,
         _data=None
     ) -> None:
+        """
+        ------------------------------------------------------------------------
+        Initializes the Matrix object.
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+            _cols (int): The number of columns in the matrix.
+            _rows (int): The number of rows in the matrix.
+
+        Keyword arguments:
+            _data: The internal data of the _cols x _rows matrix in the form of
+                a list of lists (default: None). For example:
+                    self.data = [
+                        [1, 2, 3],
+                        [4, 5, 6],
+                        [7, 8, 9]
+                    ]
+        
+        Returns:
+            None
+        ------------------------------------------------------------------------
+        """
         self.cols = _cols
         self.rows = _rows
         if _data is None:
@@ -29,6 +51,21 @@ class Matrix:
         _col: int,
         _places: int
     ):
+        """
+        ------------------------------------------------------------------------
+        Determines the largest value in the column and whether a negative value
+        exists in the column to assist in printing.
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+            _col (int): The column to check in the matrix.
+            _places (int): The number of places to round float values to.
+
+        Returns:
+            largest: The largest value in the specific column of the matrix.
+            neg (bool): Whether or not a negative number exists in the column.
+        ------------------------------------------------------------------------
+        """
         neg = False
         largest = 0
         for row in self.data:
@@ -42,6 +79,18 @@ class Matrix:
         self,
         _matrix: Self
     ) -> Self:
+        """
+        ------------------------------------------------------------------------
+        Adds the values of the natrix that is passed in to this matrix.
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+            _matrix (Matrix): The matrix to add to this matrix.
+
+        Returns:
+            A new matrix with the values of _matrix added to this matrix.
+        ------------------------------------------------------------------------
+        """
         assert(self.cols == _matrix.cols and self.rows == _matrix.rows)
         new_matrix = Matrix(self.cols, self.rows)
         for y in range(self.rows):
@@ -53,6 +102,18 @@ class Matrix:
         self,
         _matrix: Self
     ) -> Self:
+        """
+        ------------------------------------------------------------------------
+        Multiplies this matrix by the _matrix that is passed in.
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+            _matrix (Matrix): The matrix to multiply this matrix by.
+
+        Returns:
+            A new matrix containing the result of the matrix multiplication.
+        ------------------------------------------------------------------------
+        """
         assert(self.cols == _matrix.rows)
         new_matrix = Matrix(_matrix.cols, self.rows)
         for y in range(self.rows):
@@ -65,6 +126,24 @@ class Matrix:
         self,
         _places: int = 0
     ) -> None:
+        """
+        ------------------------------------------------------------------------
+        Prints the matrix in a readable format such as:
+            | 1 2 3 |
+            | 4 5 6 |
+            | 7 8 9 |
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+
+        Keyword arguments:
+            _places (int): The number of places to use when printing floats
+                (default: 0).
+        
+        Returns:
+            None.
+        ------------------------------------------------------------------------
+        """
         largest_dict = {}
         print()
         for col in range(len(self.data[0])):
@@ -94,6 +173,18 @@ class Matrix:
         self,
         _matrix: Self
     ) -> Self:
+        """
+        ------------------------------------------------------------------------
+        Subtracts the values of the natrix that is passed in from this matrix.
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+            _matrix (Matrix): The matrix to subtract from this matrix.
+
+        Returns:
+            A new matrix with the values of _matrix subtracted from this matrix.
+        ------------------------------------------------------------------------
+        """
         assert(self.cols == _matrix.cols and self.rows == _matrix.rows)
         new_matrix = Matrix(self.cols, self.rows)
         for y in range(self.rows):
@@ -104,6 +195,20 @@ class Matrix:
     def transpose(
         self
     ) -> None:
+        """
+        ------------------------------------------------------------------------
+        Transposes this matrix. For example:
+            | 1 2 3 |  -->  | 1 4 |
+            | 4 5 6 |       | 2 5 |
+                            | 3 6 |
+
+        Arguments:
+            self (Matrix): The reference to this instance of the Matrix class.
+
+        Returns:
+            None.
+        ------------------------------------------------------------------------
+        """
         matrix_transposed = Matrix(self.rows, self.cols)
         for j in range(self.rows):
             for i in range(self.cols):
@@ -198,6 +303,10 @@ if __name__ == "__main__":
 
     matrix_j.transpose()
     matrix_j.print(_places=4)
+
+    matrix_a.print()
+    matrix_a.transpose()
+    matrix_a.print()
 
     matrix_k = Matrix(
         3,
