@@ -6,7 +6,7 @@ multiplication as found on the Wikipedia site:
 https://en.wikipedia.org/wiki/Matrix_multiplication#
 """
 from math import floor, log10
-from typing_extensions import Self
+from typing import Self
 
 class Matrix:
     def __init__(
@@ -31,12 +31,9 @@ class Matrix:
     ):
         neg = False
         largest = 0
-        fmt_str = '{:.' +str(_places) + 'f}'
         for row in self.data:
-            value = round(abs(row[_col]), _places)
-            length = len(fmt_str.format(value))
-            if length > largest:
-                largest = length
+            if abs(row[_col]) > largest:
+                largest = abs(row[_col])
             if round(row[_col], _places) < 0:
                 neg = True
         return largest, neg
@@ -50,20 +47,19 @@ class Matrix:
         for col in range(len(self.data[0])):
             largest_dict[col] = {}
             largest_dict[col]['largest'], largest_dict[col]['neg'] = self._largest_in_col(col, _places)
-        print('largest_dict:', largest_dict)
+        # print(largest_dict)
         for row in self.data:
             print('|', end=' ')
             for col in range(len(row)):
-                fmt_str = '{:.' +str(_places) + 'f}'
                 largest = largest_dict[col]['largest']
                 neg = largest_dict[col]['neg']
-                end_spaces = ' ' * (largest - len(fmt_str.format(round(row[col], _places))) + 1)
-                # print('end_spaces:', len(end_spaces))
-                # largest = round(largest, _places) if round(largest, _places) != 0.0 else 1
-                value_to_print = round(row[col], _places) if round(row[col], _places) != 0.0 else abs(round(row[col], _places))
-                # value_for_end = round(row[col], _places) if round(row[col], _places) != 0.0 else 1    # log10(num), where num is not zero
-                # print('value_for_end:', value_for_end)
-                # end_spaces = ' ' * (floor(log10(abs(largest))) - floor(log10(abs(value_for_end))) + 1) if isinstance(value_for_end, int) else ' '
+                largest = round(largest, _places) if round(largest, _places) != 0.0 else 1  # log10(num), where num is not zero
+                value_to_print = round(row[col], _places) if round(row[col], _places) != 0.0 else abs(round(row[col], _places)) # Do not print -0.0, print 0.0
+                value_for_end = round(row[col], _places) if round(row[col], _places) != 0.0 else 1    # log10(num), where num is not zero
+                if isinstance(value_for_end, int):
+                    end_spaces = ' ' * (floor(log10(largest)) - floor(log10(abs(value_for_end))) + 1)
+                else:
+                    end_spaces = ' ' * (floor(log10(largest)) - floor(log10(abs(value_for_end))) + 1) if floor(log10(abs(value_for_end))) >= 0 else ' '
                 fmt_str = '{: .' +str(_places) + 'f}' if neg else '{:.' +str(_places) + 'f}'
                 print(fmt_str.format(value_to_print), end=end_spaces)
             print('|')
@@ -72,12 +68,12 @@ class Matrix:
         self,
         _matrix
     ) -> Self:
-        matrix_c = Matrix(_matrix.cols, self.rows)
+        new_matrix = Matrix(_matrix.cols, self.rows)
         for y in range(self.rows):
             for x in range(len(_matrix.data[0])):
                 for z in range(len(self.data[0])):
-                    matrix_c.data[y][x] += self.data[y][z] * _matrix.data[z][x]
-        return matrix_c
+                    new_matrix.data[y][x] += self.data[y][z] * _matrix.data[z][x]
+        return new_matrix
 
     def transpose(
         self
@@ -97,7 +93,7 @@ if __name__ == "__main__":
     )
     matrix_a.data = [
         [1, 0, 1],
-        [2, -1, 1],
+        [2, 1, 1],
         [0, 1, 1],
         [1, 1, 2],
     ]
@@ -159,7 +155,7 @@ if __name__ == "__main__":
         2,
         [
             [1.23, 4.56],
-            [7.89, 111.12]
+            [7.89, 10.11]
         ]
     )
     matrix_h.print()
