@@ -94,19 +94,11 @@ class Matrix:
         self,
         _matrix: Self
     ) -> Self:
-<<<<<<< HEAD
         assert(self.cols == _matrix.cols and self.rows == _matrix.rows)
         new_matrix = Matrix(self.cols, self.rows)
         for y in range(self.rows):
             for x in range(self.cols):
                 new_matrix.data[x][y] = self.data[x][y] - _matrix.data[x][y]
-=======
-        new_matrix = Matrix(_matrix.cols, self.rows)
-        for y in range(self.rows):
-            for x in range(len(_matrix.data[0])):
-                for z in range(len(self.data[0])):
-                    new_matrix.data[y][x] += self.data[y][z] * _matrix.data[z][x]
->>>>>>> c75b7f4c877ec6e8e3f30fb7be8d233d15087651
         return new_matrix
 
     def transpose(
@@ -216,12 +208,9 @@ if __name__ == "__main__":
             [7, 8, 9]
         ]
     )
-<<<<<<< HEAD
 
     matrix_b.print()
     matrix_k.print()
     matrix_l = matrix_b.add(matrix_a).print()
     matrix_m = matrix_b.subtract(matrix_k).print()
     # matrix_l.print()
-=======
->>>>>>> c75b7f4c877ec6e8e3f30fb7be8d233d15087651
