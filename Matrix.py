@@ -11,8 +11,8 @@ from typing import Self
 class Matrix:
     def __init__(
         self,
-        _cols,
-        _rows,
+        _cols: int,
+        _rows: int,
         _data=None
     ) -> None:
         self.cols = _cols
@@ -26,8 +26,8 @@ class Matrix:
 
     def _largest_in_col(
         self,
-        _col,
-        _places
+        _col: int,
+        _places: int
     ):
         neg = False
         largest = 0
@@ -38,39 +38,68 @@ class Matrix:
                 neg = True
         return largest, neg
 
+    def add(
+        self,
+        _matrix: Self
+    ) -> Self:
+        assert(self.cols == _matrix.cols and self.rows == _matrix.rows)
+        new_matrix = Matrix(self.cols, self.rows)
+        for y in range(self.rows):
+            for x in range(self.cols):
+                new_matrix.data[x][y] = self.data[x][y] + _matrix.data[x][y]
+        return new_matrix
+
+    def multiply(
+        self,
+        _matrix: Self
+    ) -> Self:
+        assert(self.cols == _matrix.rows)
+        new_matrix = Matrix(_matrix.cols, self.rows)
+        for y in range(self.rows):
+            for x in range(len(_matrix.data[0])):
+                for z in range(len(self.data[0])):
+                    new_matrix.data[y][x] += self.data[y][z] * _matrix.data[z][x]
+        return new_matrix
+
     def print(
         self,
-        _places=0
+        _places: int = 0
     ) -> None:
         largest_dict = {}
         print()
         for col in range(len(self.data[0])):
             largest_dict[col] = {}
             largest_dict[col]['largest'], largest_dict[col]['neg'] = self._largest_in_col(col, _places)
+        # print(largest_dict)
         for row in self.data:
+            # TODO: Refactor so the mathematical processes involved don't take
+            # down the power grid for the Eastern seaboard for a matrix larger
+            # than 4x4!!!
             print('|', end=' ')
             for col in range(len(row)):
                 largest = largest_dict[col]['largest']
                 neg = largest_dict[col]['neg']
-                largest = round(largest, _places) if round(largest, _places) != 0.0 else 1
-                value_to_print = round(row[col], _places) if round(row[col], _places) != 0.0 else abs(round(row[col], _places))
+                largest = round(largest, _places) if round(largest, _places) != 0.0 else 1  # log10(num), where num is not zero
+                value_to_print = round(row[col], _places) if round(row[col], _places) != 0.0 else abs(round(row[col], _places)) # Do not print -0.0, print 0.0
                 value_for_end = round(row[col], _places) if round(row[col], _places) != 0.0 else 1    # log10(num), where num is not zero
-                end_spaces = ' ' * (floor(log10(abs(largest))) - floor(log10(abs(value_for_end))) + 1) if isinstance(value_for_end, int) else ' '
+                if isinstance(value_for_end, int):
+                    end_spaces = ' ' * (floor(log10(largest)) - floor(log10(abs(value_for_end))) + 1)
+                else:
+                    end_spaces = ' ' * (floor(log10(largest)) - floor(log10(abs(value_for_end))) + 1) if floor(log10(abs(value_for_end))) >= 0 else ' '
                 fmt_str = '{: .' +str(_places) + 'f}' if neg else '{:.' +str(_places) + 'f}'
                 print(fmt_str.format(value_to_print), end=end_spaces)
             print('|')
 
-    def multiply(
+    def subtract(
         self,
-        _matrix
+        _matrix: Self
     ) -> Self:
-        matrix_c = Matrix(_matrix.cols, self.rows)
-        print(matrix_c.data)
+        assert(self.cols == _matrix.cols and self.rows == _matrix.rows)
+        new_matrix = Matrix(self.cols, self.rows)
         for y in range(self.rows):
-            for x in range(len(_matrix.data[0])):
-                for z in range(len(self.data[0])):
-                    matrix_c.data[y][x] += self.data[y][z] * _matrix.data[z][x]
-        return matrix_c
+            for x in range(self.cols):
+                new_matrix.data[x][y] = self.data[x][y] - _matrix.data[x][y]
+        return new_matrix
 
     def transpose(
         self
@@ -136,6 +165,7 @@ if __name__ == "__main__":
         ]
     )
     matrix_f.print()
+    # matrix_f.multiply(matrix_a)
 
     matrix_g = Matrix(
         2,
@@ -174,7 +204,13 @@ if __name__ == "__main__":
         3,
         [
             [1, 2, 3],
-            # [4, 5, 6],
+            [4, 5, 6],
             [7, 8, 9]
         ]
     )
+
+    matrix_b.print()
+    matrix_k.print()
+    matrix_l = matrix_b.add(matrix_a).print()
+    matrix_m = matrix_b.subtract(matrix_k).print()
+    # matrix_l.print()
