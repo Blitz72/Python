@@ -1,0 +1,2 @@
+Run the following in the terminal to add the ssh key:
+ssh-add ~/.ssh/id_rsa
