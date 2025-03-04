@@ -7,7 +7,7 @@ value. An explanation of the Hamming(7, 4) code is found on the following site:
 https://en.wikipedia.org/wiki/Hamming(7,4)#
 """
 
-import matrix as mat
+from Matrix import Matrix as mat
 import inquirer
 
 
@@ -89,15 +89,16 @@ def Hamming_code(_options):
             value = input('Please enter a value between 0x0 and 0x7ff inclusive:\n')
     value = int(value, 16)
 
-    value_to_encode = []
+    value_to_encode = mat(4, 1)
 
     for x in range(bit_depth):
         if value & 2**x:
-            value_to_encode.append([1])
+            value_to_encode.data.append([1])
         else:
-            value_to_encode.append([0])
+            value_to_encode.data.append([0])
 
-    encoding = mat.mult_matrix(hamming_matrix, value_to_encode)
+    value_to_encode.print()
+    encoding = mat.multiply(hamming_matrix, value_to_encode)
     parity_mod_2(encoding)
 
     if extra_parity:
@@ -106,12 +107,13 @@ def Hamming_code(_options):
             parity += element[0]
         encoding.append([parity % 2])
 
-    mat.print_matrix(mat.transpose_matrix(encoding))
-    '.;-.πæ[]'
-    parity_check = mat.mult_matrix(parity_check_matrix, encoding)
+    mat.print(mat.transpose(encoding))
+
+    parity_check = mat.multiply(parity_check_matrix, encoding)
     parity_mod_2(parity_check)
     print('Parity check:')
-    mat.print_matrix(mat.transpose_matrix(parity_check))
+    mat.print_matrix(mat.transpose
+    (parity_check))
 
     encoding_int = 0
     for i in range(len(encoding)):

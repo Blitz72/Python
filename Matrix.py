@@ -320,6 +320,6 @@ if __name__ == "__main__":
 
     matrix_b.print()
     matrix_k.print()
-    matrix_l = matrix_b.add(matrix_a).print()
+    matrix_l = matrix_b.add(matrix_k).print()
     matrix_m = matrix_b.subtract(matrix_k).print()
     # matrix_l.print()
