@@ -145,7 +145,6 @@ class Matrix:
         ------------------------------------------------------------------------
         """
         largest_dict = {}
-        print()
         for col in range(len(self.data[0])):
             largest_dict[col] = {}
             largest_dict[col]['largest'], largest_dict[col]['neg'] = self._largest_in_col(col, _places)
@@ -168,6 +167,7 @@ class Matrix:
                 fmt_str = '{: .' +str(_places) + 'f}' if neg else '{:.' +str(_places) + 'f}'
                 print(fmt_str.format(value_to_print), end=end_spaces)
             print('|')
+        print()
 
     def subtract(
         self,
