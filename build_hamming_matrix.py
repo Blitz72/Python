@@ -56,7 +56,7 @@ if __name__ == '__main__':
     # from Hamming_matrix import hamming_15_11_G
 
     # Valid values 2^n - 1, i.e.: 7, 15, 31, 63...
-    hamming_bit_depth = 31
+    hamming_bit_depth = 63
 
     generator_matrix, parity_check_matrix = build_hamming_matrices(hamming_bit_depth)
 

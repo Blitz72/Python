@@ -7,7 +7,7 @@ value. An explanation of the Hamming(7, 4) code is found on the following site:
 https://en.wikipedia.org/wiki/Hamming(7,4)#
 """
 
-from Matrix import Matrix as mat
+from Matrix import Matrix
 import inquirer
 
 
@@ -76,8 +76,10 @@ def Hamming_code(_options):
     extra_parity = _options['extra_parity']
 
     if bit_depth == 4:
-        hamming_matrix = hamming_7_4_G
-        parity_check_matrix = hamming_7_4_H
+        hamming_matrix = Matrix(len(hamming_7_4_G[0]), len(hamming_7_4_G))
+        hamming_matrix.data = hamming_7_4_G
+        parity_check_matrix = Matrix(len(hamming_7_4_H[0]), len(hamming_7_4_H))
+        parity_check_matrix.data = hamming_7_4_H
         value = input('Enter a hexadecimal number betwween 0x0 and 0xf inclusive to encode:\n')
         while int(value, 16) > 15 or int(value, 16) < 0:
             value = input('Please enter a value between 0x0 and 0xf inclusive:\n')
@@ -89,35 +91,40 @@ def Hamming_code(_options):
             value = input('Please enter a value between 0x0 and 0x7ff inclusive:\n')
     value = int(value, 16)
 
-    value_to_encode = mat(4, 1)
+    value_to_encode = Matrix(1, bit_depth)
 
     for x in range(bit_depth):
         if value & 2**x:
-            value_to_encode.data.append([1])
+            value_to_encode.data[x][0] = 1
         else:
-            value_to_encode.data.append([0])
-
+            value_to_encode.data[x][0] = 0
     value_to_encode.print()
-    encoding = mat.multiply(hamming_matrix, value_to_encode)
-    parity_mod_2(encoding)
+
+    encoding = Matrix(hamming_matrix.rows, 1)
+    # encoding = mat.multiply(hamming_matrix, value_to_encode)
+    encoding = hamming_matrix.multiply(value_to_encode)
+    parity_mod_2(encoding.data)
 
     if extra_parity:
         parity = 0
-        for element in encoding:
+        for element in encoding.data:
             parity += element[0]
-        encoding.append([parity % 2])
+        encoding.data.append([parity % 2])
 
-    mat.print(mat.transpose(encoding))
+    # mat.print(mat.transpose(encoding))
+    encoding.print()
 
-    parity_check = mat.multiply(parity_check_matrix, encoding)
-    parity_mod_2(parity_check)
+    # parity_check = mat.multiply(parity_check_matrix, encoding)
+    parity_check = parity_check_matrix.multiply(encoding)
+    parity_mod_2(parity_check.data)
     print('Parity check:')
-    mat.print_matrix(mat.transpose
-    (parity_check))
+    # mat.print_matrix(mat.transpose(parity_check))
+    parity_check.transpose()
+    parity_check.print()
 
     encoding_int = 0
-    for i in range(len(encoding)):
-        encoding_int += 2**i * encoding[i][0]
+    for i in range(len(encoding.data)):
+        encoding_int += 2**i * encoding.data[i][0]
     
     return hex(encoding_int)
 
