@@ -12,13 +12,13 @@ import inquirer
 
 
 # Hamming(7, 4) Generator Matrix
-# | p1 p2 d3 p4 d5 d6 d7 |
-# | d3 d5 d6 d7 |
+# | p1 p2 d1 p3 d2 d3 d4 |
+# | d1 d2 d3 d4 |
 hamming_7_4_G = [
-    [1, 1, 0, 1], # d3, d5, d7 - starting with p1 (check 1, skip 1), XOR bits at 1, 0, 1, 0, 1, 0, 1
-    [1, 0, 1, 1], # d3, d6, d7 - starting with p2 (check 2, skip 2), XOR bits at 0, 1, 1, 0, 0, 1, 1
+    [1, 1, 0, 1], # d1, d2, d4 - starting with p1 (check 1, skip 1), XOR bits at 1, 0, 1, 0, 1, 0, 1
+    [1, 0, 1, 1], # d1, d3, d4 - starting with p2 (check 2, skip 2), XOR bits at 0, 1, 1, 0, 0, 1, 1
     [1, 0, 0, 0],
-    [0, 1, 1, 1], # d5, d6, d7 - statring with p4 (check 4, skip 4), XOR bits at 0, 0, 0, 1, 1, 1, 1
+    [0, 1, 1, 1], # d2, d3, d4 - statring with p4 (check 4, skip 4), XOR bits at 0, 0, 0, 1, 1, 1, 1
     [0, 1, 0, 0],
     [0, 0, 1, 0],
     [0, 0, 0, 1],
@@ -32,17 +32,17 @@ hamming_7_4_H = [
 ]
 
 # Hamming(15, 11) Generator Matrix
-# | p1 p2 d3 p4 d5 d6 d7 p8 d9 d10 d11 d12 d13 d14 d15 |
-# | d3 d5 d6 d7 d9 d10 d11 d12 d13 d14 d15 |
+# | p1 p2 d1 p3 d2 d3 d4 p4 d5 d6 d7 d8 d9 d10 d11 |
+# | d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 |
 hamming_15_11_G = [
-    [1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1], # d3, d5, d7, d9, d11, d13, d15    - starting with p1 (check 1, skip 1), XOR bits at 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], # d3, d6, d7, d10, , d11, d14, d15 - starting with p2 (check 2, skip 2), XOR bits at 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1
+    [1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1], # d1, d2, d4, d5, d7, d9, d11    - starting with p1 (check 1, skip 1), XOR bits at 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1
+    [1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], # d1, d3, d4, d6, d7, d10, d11 - starting with p2 (check 2, skip 2), XOR bits at 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1], # d5, d6, d7, d12, d13, d14, d15S  - starting with p4 (check 4, skip 4), XOR bits at 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1
+    [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1], # d2, d3, d4, d8, d9, d10, d11  - starting with p3 (check 4, skip 4), XOR bits at 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1
     [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1], # d9, d10, d11, d12, d13, d14, d15 - starting with p5 (check 8, skip 8), XOR bits at 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1
+    [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1], # d5, d6, d7, d8, d9, d10, d11 - starting with p4 (check 8, skip 8), XOR bits at 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1
     [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
