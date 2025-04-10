@@ -4,7 +4,7 @@
 This program generates a Hamming(7, 4) or a Hamming(15, 11) code. The codes can
 be extended to (8, 4) and (16, 11) for an added parity check over the entire
 value. An explanation of the Hamming(7, 4) code is found on the following site:
-https://en.wikipedia.org/wiki/Hamming(7,4)#
+https://en.wikipedia.org/wiki/Hamming(7,4)
 """
 
 from Matrix import Matrix
