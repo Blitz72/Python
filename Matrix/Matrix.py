@@ -3,7 +3,7 @@
 """
 This Python program is inspired from implementing the logic behind matrix
 multiplication as found on the Wikipedia site:
-https://en.wikipedia.org/wiki/Matrix_multiplication#
+https://en.wikipedia.org/wiki/Matrix_multiplication
 """
 from math import floor, log10
 from typing import Self
